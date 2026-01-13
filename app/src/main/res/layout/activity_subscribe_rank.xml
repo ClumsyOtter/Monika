@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rank_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_rank_list_back"
+        android:layout_width="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:src="@drawable/monika_custom_nav_bar_back_icon"
+        app:layout_constraintBottom_toBottomOf="@id/rank_tab_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rank_tab_layout" />
+
+    <!-- Tab 布局 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rank_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:paddingStart="@dimen/dimen_10dp"
+        android:paddingTop="@dimen/dimen_10dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_rank_list_back"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.otto.monika.common.views.MonikaTabItem
+            android:id="@+id/tab_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tab_month"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mm_indicator_drawable="@drawable/monika_custom_btn_black_short"
+            app:mm_indicator_drawable_height="@dimen/dp_4"
+            app:mm_subTitle="周榜"
+            app:mm_subTitle_selected_text_size="18sp"
+            app:mm_subTitle_text_selected_color="@color/black"
+            app:mm_subTitle_text_size="18sp"
+            app:mm_subTitle_text_unselected_color="@color/dark_gray" />
+
+        <com.otto.monika.common.views.MonikaTabItem
+            android:id="@+id/tab_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tab_history"
+            app:layout_constraintStart_toEndOf="@id/tab_week"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mm_indicator_drawable="@drawable/monika_custom_btn_black_short"
+            app:mm_indicator_drawable_height="@dimen/dp_4"
+            app:mm_subTitle="月榜"
+            app:mm_subTitle_selected_text_size="18sp"
+            app:mm_subTitle_text_selected_color="@color/black"
+            app:mm_subTitle_text_size="18sp"
+            app:mm_subTitle_text_unselected_color="@color/dark_gray" />
+
+        <com.otto.monika.common.views.MonikaTabItem
+            android:id="@+id/tab_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tab_month"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mm_indicator_drawable="@drawable/monika_custom_btn_black_short"
+            app:mm_indicator_drawable_height="@dimen/dp_4"
+            app:mm_subTitle="历史"
+            app:mm_subTitle_selected_text_size="18sp"
+            app:mm_subTitle_text_selected_color="@color/black"
+            app:mm_subTitle_text_size="18sp"
+            app:mm_subTitle_text_unselected_color="@color/dark_gray" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ViewPager 用于滑动切换 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rank_tab_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

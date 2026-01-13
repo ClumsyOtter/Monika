@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 第一行：用户协议 -->
+        <LinearLayout
+            android:id="@+id/ll_setting_user_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_15dp">
+
+            <ImageView
+                android:id="@+id/iv_setting_user_agreement_icon"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_25dp"
+                android:src="@drawable/monika_setting_yhxy_icon"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_setting_user_agreement"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_weight="1"
+                android:text="用户协议"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_setting_user_agreement_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/monika_custom_icon_arrow"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+
+        <!-- 第二行：隐私条款 -->
+        <LinearLayout
+            android:id="@+id/ll_setting_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_15dp">
+
+            <ImageView
+                android:id="@+id/iv_setting_privacy_policy_icon"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_25dp"
+                android:src="@drawable/monika_setting_ystk_icon"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_setting_privacy_policy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_weight="1"
+                android:text="隐私条款"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_setting_privacy_policy_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/monika_custom_icon_arrow"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+
+        <!-- 第三行：检测更新 -->
+        <LinearLayout
+            android:id="@+id/ll_setting_check_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_15dp">
+
+            <ImageView
+                android:id="@+id/iv_setting_check_update_icon"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_25dp"
+                android:src="@drawable/monika_setting_jcgx_icon"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_setting_check_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_weight="1"
+                android:text="检测更新"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_setting_check_update_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/monika_custom_icon_arrow"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 提交按钮 -->
+    <com.otto.monika.common.views.MonikaCustomButton
+        android:id="@+id/cycb_setting_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:layout_marginBottom="@dimen/dimen_15dp"
+        app:monikaImage="@drawable/monika_custom_btn_empty_gray"
+        app:monikaTitle="退出登录"
+        app:monikaTitleFontSize="14sp"
+        app:monikaTitleTextColor="@color/text_333333"
+        app:layout_constraintBottom_toTopOf="@id/tv_app_version"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:whRatio="5.9433962264" />
+
+    <TextView
+        android:id="@+id/tv_app_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:gravity="center"
+        android:text="当前版本: V1.0.0"
+        android:textColor="@color/color_B3B3B3"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

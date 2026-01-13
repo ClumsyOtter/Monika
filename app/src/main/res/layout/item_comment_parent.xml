@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dimen_5dp"
+    android:paddingBottom="@dimen/dimen_5dp">
+
+    <!-- 评论项内容 View -->
+    <com.otto.monika.post.detail.views.CommentItemView
+        android:id="@+id/view_comment_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 子评论列表 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_comment_replies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginStart="45dp"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/view_comment_item"
+        app:layout_constraintTop_toBottomOf="@+id/view_comment_item"
+        tools:listitem="@layout/item_comment_child" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

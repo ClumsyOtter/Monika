@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_top_round"
+    android:orientation="vertical">
+
+    <!-- 顶部标题栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dimen_15dp"
+        android:paddingTop="@dimen/dimen_15dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_10dp">
+
+        <!-- 关闭按钮 -->
+        <ImageView
+            android:id="@+id/iv_common_sheet_close_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="@dimen/dp_4"
+            android:scaleType="fitXY"
+            android:src="@drawable/monika_alert_close_icon"
+            tools:ignore="ContentDescription" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_common_sheet_title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="选择日期"
+            android:textColor="@color/text_000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- 占位，保持标题居中 -->
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+    </LinearLayout>
+
+    <!-- 说明文字 -->
+    <TextView
+        android:id="@+id/iv_common_sheet_description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:gravity="center"
+        android:text="请选择要查看的日期范围"
+        android:textColor="@color/text_808080"
+        android:textSize="14sp" />
+
+    <!-- 日期列表 -->
+    <com.otto.monika.common.dialog.views.MaxHeightRecycleView
+        android:id="@+id/iv_common_sheet_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:background="@drawable/bg_gray_round_recycler"
+        android:fadeScrollbars="false"
+        android:paddingStart="@dimen/dimen_5dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_common_sheet_view" />
+
+
+    <!-- 游客登录 -->
+    <com.otto.monika.common.views.MonikaCustomButton
+        android:id="@+id/iv_common_sheet_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_20dp"
+        app:monikaImage="@drawable/monika_custom_btn_empty_black"
+        app:monikaTitle="确定"
+        app:monikaTitleFontSize="14sp"
+        app:monikaTitleTextColor="@color/text_c4ff05"
+        app:whRatio="5.9433962264" />
+
+</LinearLayout>
+

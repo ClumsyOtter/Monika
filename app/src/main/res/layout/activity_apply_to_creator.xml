@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/dimen_15dp"
+    android:paddingTop="@dimen/dimen_20dp"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:paddingBottom="@dimen/dimen_20dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nest_iv_apply_creator_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/cycb_apply_creator_submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 第一行：icon + 申请成为申请者内容 -->
+            <ImageView
+                android:id="@+id/iv_apply_creator_icon"
+                android:layout_width="@dimen/dimen_35dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:src="@drawable/monika_simple_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_apply_creator_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/monika_apply_creator_top_text_icon"
+                app:layout_constraintBottom_toBottomOf="@id/iv_apply_creator_icon"
+                app:layout_constraintStart_toEndOf="@id/iv_apply_creator_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_apply_creator_icon"
+                tools:src="@drawable/monika_apply_creator_top_text_icon" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_apply_creator_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="iv_apply_creator_icon,iv_apply_creator_title" />
+
+            <!-- 第二行：申请成为创作者，开启在次芽的创作之旅吧内容 -->
+            <TextView
+                android:id="@+id/tv_apply_creator_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:text="申请成为创作者，开启在次芽的创作之旅吧"
+                android:textColor="@color/text_808080"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier_apply_creator_title"
+                tools:text="申请成为创作者，开启在次芽的创作之旅吧" />
+
+            <!-- 第三行：红色*号 + 擅长领域文字 -->
+            <LinearLayout
+                android:id="@+id/ll_apply_creator_field_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_apply_creator_desc">
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_field_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/font_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_field_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="擅长领域"
+                    android:textColor="@color/text_666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 第四行：擅长领域列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_apply_creator_fields"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_apply_creator_field_label"
+                tools:listitem="@layout/item_apply_creator_tag" />
+
+            <!-- 第五行：红色*号 + 自我标签文字 -->
+            <LinearLayout
+                android:id="@+id/ll_apply_creator_tags_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_apply_creator_fields">
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_tags_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/font_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_tags_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="自我标签"
+                    android:textColor="@color/text_666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 第六行：自我标签列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_apply_creator_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_apply_creator_tags_label"
+                tools:listitem="@layout/item_apply_creator_tag" />
+            <!-- 第七行：红色*号 + 社交媒体验证文字 -->
+            <LinearLayout
+                android:id="@+id/ll_apply_creator_social_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_apply_creator_tags">
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_social_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/font_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_social_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社交媒体验证"
+                    android:textColor="@color/text_666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 第八行：社交媒体验证列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_apply_creator_socials"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_apply_creator_social_label"
+                tools:listitem="@layout/item_apply_creator_tag" />
+
+            <!-- 第九行：灰色圆角输入框，提示语"请输入社交媒体主页地址" -->
+            <EditText
+                android:id="@+id/et_apply_creator_social_url"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/monika_corner_15_gray_bg"
+                android:hint="请输入社交媒体主页地址"
+                android:inputType="textUri"
+                android:padding="@dimen/dimen_15dp"
+                android:textColor="@color/text_000000"
+                android:textColorHint="@color/color_B3B3B3"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_apply_creator_socials"
+                tools:hint="请输入社交媒体主页地址" />
+
+            <!-- 第十行：红色*号 + 个人身份验证文字 -->
+            <LinearLayout
+                android:id="@+id/ll_apply_creator_identity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_apply_creator_social_url">
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_identity_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/font_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_apply_creator_identity_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="个人身份验证"
+                    android:textColor="@color/text_666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 第十一行：灰色圆角输入框，提示语"请输入您的姓名" -->
+            <EditText
+                android:id="@+id/et_apply_creator_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/monika_corner_15_gray_bg"
+                android:hint="请输入您的姓名"
+                android:inputType="textPersonName"
+                android:padding="@dimen/dimen_15dp"
+                android:textColor="@color/text_000000"
+                android:textColorHint="@color/color_B3B3B3"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_apply_creator_identity_label"
+                tools:hint="请输入您的姓名" />
+
+            <!-- 第十二行：灰色圆角输入框，提示语"请输入您的联系方式" -->
+            <EditText
+                android:id="@+id/et_apply_creator_contact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/monika_corner_15_gray_bg"
+                android:hint="请输入您的联系方式"
+                android:inputType="phone"
+                android:padding="@dimen/dimen_15dp"
+                android:textColor="@color/text_000000"
+                android:textColorHint="@color/color_B3B3B3"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_apply_creator_name"
+                tools:hint="请输入您的联系方式" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 提交按钮 -->
+    <com.otto.monika.common.views.MonikaCustomButton
+        android:id="@+id/cycb_apply_creator_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        app:monikaImage="@drawable/monika_custom_btn_empty_gray"
+        app:monikaTitle="✧ω✧ 提交"
+        app:monikaTitleFontSize="16sp"
+        app:monikaTitleTextColor="@color/text_999999"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nest_iv_apply_creator_container"
+        app:whRatio="5.9433962264" />
+</androidx.constraintlayout.widget.ConstraintLayout>

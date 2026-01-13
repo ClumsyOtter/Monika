@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Tab布局（动态显示/隐藏） -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_subscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        app:tabBackground="@null"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="scrollable"
+        app:tabPaddingBottom="0dp"
+        app:tabPaddingEnd="0dp"
+        app:tabPaddingStart="0dp"
+        app:tabPaddingTop="0dp"
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="@color/text_000000"
+        app:tabTextColor="@color/text_808080"
+        tools:visibility="visible" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- 支付方式和订阅期限区域 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingTop="@dimen/dimen_20dp"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:paddingBottom="@dimen/dimen_10dp">
+
+            <!-- ViewPager -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_subscription_plans"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/dimen_20dp"
+                android:layout_weight="1" />
+
+            <!-- 支付方式标题 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:text="支付方式"
+                android:textColor="@color/dark_gray"
+                android:textSize="14sp" />
+
+            <!-- 支付方式列表（网格布局，两列） -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_payment_methods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_payment_method" />
+
+            <!-- 订阅期限标题 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:text="选择你的订阅期限"
+                android:textColor="@color/dark_gray"
+                android:textSize="14sp" />
+
+            <!-- 订阅期限列表（网格布局，两列） -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_subscription_periods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_subscription_period" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <!-- 底部支付按钮 -->
+    <TextView
+        android:id="@+id/btn_subscription_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginBottom="@dimen/dimen_15dp"
+        android:background="@drawable/monika_custom_btn_empty_black"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_15dp"
+        android:text="立即支付"
+        android:textColor="@color/text_c4ff05"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+

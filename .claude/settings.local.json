@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(where python python3 py)",
+      "Bash(powershell.exe:*)",
+      "Bash(xargs rm:*)",
+      "Bash(bash:*)"
+    ]
+  }
+}

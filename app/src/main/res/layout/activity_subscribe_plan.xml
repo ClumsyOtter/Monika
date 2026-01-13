@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/padding_15">
+
+    <!-- 标题 -->
+    <ImageView
+        android:id="@+id/iv_subscribe_plan_title_icon"
+        android:layout_width="@dimen/dimen_35dp"
+        android:layout_height="@dimen/dimen_35dp"
+        android:layout_marginStart="@dimen/dimen_2dp"
+        android:src="@drawable/monika_add_subscribe_title_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_subscribe_plan_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/monika_add_subscribe_title"
+        app:layout_constraintBottom_toBottomOf="@id/iv_subscribe_plan_title_icon"
+        app:layout_constraintStart_toEndOf="@id/iv_subscribe_plan_title_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_subscribe_plan_title_icon" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_subscribe_plan_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="iv_subscribe_plan_title,iv_subscribe_plan_title_icon" />
+
+    <TextView
+        android:id="@+id/tv_subscribe_plan_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_8"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:gravity="start|center_vertical"
+        android:text="按月付费的会员制"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier_subscribe_plan_title" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_subscribe_plan_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/padding_8"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_marginEnd="@dimen/padding_8"
+        android:layout_marginBottom="@dimen/padding_8"
+        app:layout_constraintBottom_toTopOf="@id/cycb_subscribe_plan_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subscribe_plan_desc"
+        tools:listitem="@layout/item_subscribe_plan" />
+
+    <!-- 登录按钮 -->
+    <com.otto.monika.common.views.MonikaCustomButton
+        android:id="@+id/cycb_subscribe_plan_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginEnd="@dimen/dimen_8dp"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        app:monikaImage="@drawable/monika_custom_btn_empty_gray"
+        app:monikaTitle="✧ω✧ 保存"
+        app:monikaTitleFontSize="14sp"
+        app:monikaTitleTextColor="@color/text_999999"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:whRatio="5.9433962264" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

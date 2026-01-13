@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/monika_corner_15_white_bg"
+    android:padding="@dimen/dimen_15dp">
+
+    <!-- 第一行：左边订阅标题，右边删除图标，如果方案超过一个，删除图标左边显示"方案x" -->
+    <TextView
+        android:id="@+id/tv_plan_item_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="订阅标题"
+        android:textColor="@color/text_000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tv_plan_item_number"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="订阅标题" />
+
+    <TextView
+        android:id="@+id/tv_plan_item_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_5dp"
+        android:background="@drawable/monika_tag_gray_bg"
+        android:paddingStart="@dimen/dimen_8dp"
+        android:paddingTop="@dimen/dimen_2dp"
+        android:paddingEnd="@dimen/dimen_8dp"
+        android:paddingBottom="@dimen/dimen_2dp"
+        android:textColor="@color/text_808080"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/tv_plan_item_title"
+        app:layout_constraintEnd_toStartOf="@id/iv_plan_item_delete"
+        app:layout_constraintTop_toTopOf="@id/tv_plan_item_title"
+        tools:text="方案1" />
+
+    <ImageView
+        android:id="@+id/iv_plan_item_delete"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/monika_list_alert_delete_icon"
+        app:layout_constraintBottom_toBottomOf="@id/tv_plan_item_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_plan_item_title" />
+
+    <!-- 第二行：圆角灰色背景文本输入框，提示语"请输入描述订阅的标题" -->
+    <EditText
+        android:id="@+id/et_plan_item_title_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@drawable/monika_corner_15_gray_bg"
+        android:hint="请输入描述订阅的标题"
+        android:inputType="text"
+        android:padding="@dimen/dimen_15dp"
+        android:textColor="@color/text_000000"
+        android:textColorHint="@color/color_B3B3B3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_plan_item_title" />
+
+    <!-- 第三行：左边红色*号+订阅价格，右边红色提示语"*价格不得低于¥5" -->
+    <LinearLayout
+        android:id="@+id/ll_plan_item_price_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_plan_item_title_input">
+
+        <TextView
+            android:id="@+id/tv_plan_item_price_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/font_red"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_plan_item_price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订阅价格"
+            android:textColor="@color/text_000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_plan_item_price_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*价格不得低于¥5"
+        android:textColor="@color/font_red"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ll_plan_item_price_label" />
+
+    <!-- 第四行：圆角背景，从左到右分别是¥符号、金额输入框、/月、提示语(最低¥ 5) -->
+    <LinearLayout
+        android:id="@+id/ll_plan_item_price_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@drawable/monika_corner_15_gray_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_plan_item_price_label">
+
+        <TextView
+            android:id="@+id/tv_plan_item_price_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textColor="@color/text_999999"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_plan_item_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="0.0"
+            android:inputType="numberDecimal"
+            android:textColor="@color/text_000000"
+            android:textColorHint="@color/text_999999"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_plan_item_price_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:text="/月"
+            android:textColor="@color/text_000000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_plan_item_price_min_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:text="(最低¥ 5)"
+            android:textColor="@color/text_999999"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- 第五行：左边红色*号+权益描述内容 -->
+    <LinearLayout
+        android:id="@+id/ll_plan_item_rights_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_plan_item_price_input">
+
+        <TextView
+            android:id="@+id/tv_plan_item_rights_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/font_red"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_plan_item_rights_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="权益描述内容"
+            android:textColor="@color/text_000000"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- 第六行：灰色圆角背景，多行输入框，最多500字，超出输入无效 -->
+    <EditText
+        android:id="@+id/et_plan_item_rights_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@drawable/monika_corner_15_gray_bg"
+        android:gravity="top"
+        android:hint="请输入权益描述内容"
+        android:inputType="textMultiLine"
+        android:maxLength="500"
+        android:minLines="3"
+        android:padding="@dimen/dimen_15dp"
+        android:textColor="@color/text_000000"
+        android:textColorHint="@color/color_B3B3B3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_plan_item_rights_label" />
+
+    <!-- 第七行：灰色圆角背景，+号icon+文字"增加权益"，内容居中显示 -->
+    <LinearLayout
+        android:id="@+id/ll_plan_item_add_rights"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@drawable/monika_corner_15_gray_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_plan_item_rights_desc">
+
+        <ImageView
+            android:id="@+id/iv_plan_item_add_rights_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/monika_add_subscribe_add_icon"
+            app:tint="@color/text_666666" />
+
+        <TextView
+            android:id="@+id/tv_plan_item_add_rights_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_2dp"
+            android:text="增加权益"
+            android:textColor="@color/text_666666"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- 第八行：灰色分割线 -->
+    <View
+        android:id="@+id/v_plan_item_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@drawable/bg_divider_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_plan_item_add_rights" />
+
+    <!-- 第九行：左边"订阅折扣"文字，右边开关 -->
+    <TextView
+        android:id="@+id/tv_plan_item_discount_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="订阅折扣"
+        android:textColor="@color/text_000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/switch_plan_item_discount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_plan_item_divider" />
+
+    <Switch
+        android:id="@+id/switch_plan_item_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_plan_item_discount_label" />
+
+    <!-- 第十行：当开关打开时显示，列表显示折扣规则 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_plan_item_discount_rules"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_plan_item_discount_label"
+        tools:listitem="@layout/item_subscribe_plan_discount_rule" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

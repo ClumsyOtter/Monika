@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_top_round"
+    android:paddingStart="@dimen/dimen_15dp"
+    android:paddingTop="@dimen/dimen_20dp"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:paddingBottom="@dimen/dimen_20dp">
+
+    <!-- 第一行：左上角关闭icon -->
+    <ImageView
+        android:id="@+id/iv_dialog_nike_name_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="@dimen/dp_4"
+        android:scaleType="fitXY"
+        android:src="@drawable/monika_alert_close_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <!-- 第二行：icon + 编辑昵称文字 -->
+    <LinearLayout
+        android:id="@+id/ll_dialog_nike_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_dialog_nike_name_close">
+
+        <ImageView
+            android:id="@+id/iv_dialog_nike_name_edit_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/monika_edit_name_icon"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_dialog_nike_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:text="编辑昵称"
+            android:textColor="@color/black"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            tools:text="编辑昵称" />
+    </LinearLayout>
+
+    <!-- 第三行：最多输入15个字符哦 -->
+    <TextView
+        android:id="@+id/tv_dialog_nike_name_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        android:text="最多输入15个字符哦"
+        android:textColor="@color/text_808080"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_dialog_nike_name_title"
+        tools:text="最多输入15个字符哦" />
+
+    <!-- 第四行：圆角灰色背景的输入框 -->
+    <EditText
+        android:id="@+id/et_dialog_nike_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:background="@drawable/monika_corner_15_gray_bg"
+        android:gravity="center"
+        android:hint="请输入昵称"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLength="15"
+        android:maxLines="1"
+        android:padding="@dimen/dimen_16dp"
+        android:singleLine="true"
+        android:textColor="@color/text_222222"
+        android:textColorHint="@color/text_808080"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_nike_name_hint"
+        tools:text="开到茶花" />
+
+    <!-- 第五行：>ᴗ< 确定按钮 -->
+    <com.otto.monika.common.views.MonikaCustomButton
+        android:id="@+id/cycb_dialog_nike_name_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        app:monikaImage="@drawable/monika_custom_btn_empty_black"
+        app:monikaTitle="@string/monika_nike_name_input_confirm_btn"
+        app:monikaTitleFontSize="14sp"
+        app:monikaTitleTextColor="@color/text_c4ff05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_dialog_nike_name_input"
+        app:whRatio="5.9433962264" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

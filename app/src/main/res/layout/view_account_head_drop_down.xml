@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/monika_account_drag_down_icon"
+    android:paddingStart="@dimen/dimen_25dp"
+    android:paddingTop="@dimen/dimen_10dp"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:paddingBottom="@dimen/dimen_10dp">
+
+
+    <!-- 上面：xxx + 次收藏 -->
+    <TextView
+        android:id="@+id/tv_top_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_80A113"
+        android:textSize="25sp"
+        android:text="236"
+        app:layout_constraintBottom_toTopOf="@id/tv_bottom_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="236" />
+
+    <TextView
+        android:id="@+id/tv_top_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:textColor="@color/color_80A113"
+        android:textSize="@dimen/sp_12"
+        android:text="次收藏"
+        app:layout_constraintBottom_toBottomOf="@id/tv_top_count"
+        app:layout_constraintStart_toEndOf="@id/tv_top_count"
+        app:layout_constraintTop_toTopOf="@id/tv_top_count"
+        tools:text="次收藏" />
+
+    <!-- 下面：这是你来到次芽的第236天 -->
+    <TextView
+        android:id="@+id/tv_bottom_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:textColor="@color/text_000000"
+        android:textSize="@dimen/sp_13"
+        android:text="这是你来到次芽的第236天"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_top_count"
+        tools:text="这是你来到次芽的第236天" />
+
+
+    <!-- 右边icon -->
+    <ImageView
+        android:id="@+id/iv_right_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/monika_account_drop_down_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/monika_account_drop_down_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

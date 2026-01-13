@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_top_round"
+    android:orientation="vertical">
+
+    <!-- 顶部标题栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dimen_15dp"
+        android:paddingTop="@dimen/dimen_15dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_10dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_comment_action_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="操作"
+            android:textColor="@color/text_000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- 动态生成的操作组容器 -->
+    <LinearLayout
+        android:id="@+id/ll_action_groups_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <!-- 取消选项 -->
+    <TextView
+        android:id="@+id/tv_comment_action_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginBottom="@dimen/dimen_15dp"
+        android:background="@drawable/monika_custom_btn_empty_gray"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:paddingStart="@dimen/dimen_15dp"
+        android:paddingTop="@dimen/dimen_15dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_15dp"
+        android:text="取消"
+        android:textColor="@color/text_000000"
+        android:textSize="16sp"
+        tools:text="取消" />
+
+</LinearLayout>
+

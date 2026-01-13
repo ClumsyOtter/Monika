@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dimen_8dp">
+
+    <!-- 返回键 -->
+    <ImageView
+        android:id="@+id/iv_action_bar_back"
+        android:layout_width="@dimen/dimen_15dp"
+        android:layout_height="@dimen/dimen_15dp"
+        android:contentDescription="返回"
+        android:src="@drawable/monika_post_detail_back_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_action_bar_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_action_bar_avatar" />
+
+    <!-- 圆形头像 -->
+    <ImageView
+        android:id="@+id/iv_action_bar_avatar"
+        android:layout_width="@dimen/dimen_35dp"
+        android:layout_height="@dimen/dimen_35dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_action_bar_back"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/generic_avatar_default" />
+
+    <!-- 名称 -->
+    <TextView
+        android:id="@+id/tv_action_bar_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="用户名"
+        android:textColor="@color/text_000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_action_bar_avatar"
+        app:layout_constraintEnd_toStartOf="@+id/btn_action_bar_subscribe"
+        app:layout_constraintStart_toEndOf="@+id/iv_action_bar_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_action_bar_avatar"
+        tools:text="张三" />
+
+    <!-- 订阅按钮 -->
+    <TextView
+        android:id="@+id/btn_action_bar_subscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/monika_tag_black_bg"
+        android:paddingStart="@dimen/dimen_15dp"
+        android:paddingTop="@dimen/dimen_8dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_8dp"
+        android:text="订阅"
+        android:textColor="@color/text_c4ff05"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_action_bar_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_action_bar_avatar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

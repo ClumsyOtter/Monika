@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg_top_round"
+    android:paddingStart="@dimen/dimen_15dp"
+    android:paddingTop="@dimen/dimen_10dp"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:paddingBottom="@dimen/dimen_10dp">
+
+    <!-- 多行输入框（高度为两行文字，但可以输入多行） -->
+    <EditText
+        android:id="@+id/et_dialog_comment_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:background="@drawable/monika_comment_input_bg"
+        android:gravity="top"
+        android:hint="一起聊聊(ゝ∀･)..."
+        android:inputType="textMultiLine"
+        android:maxLength="200"
+        android:minLines="2"
+        android:paddingStart="@dimen/dimen_10dp"
+        android:paddingTop="@dimen/padding_8"
+        android:paddingEnd="@dimen/dimen_10dp"
+        android:paddingBottom="@dimen/padding_8"
+        android:scrollbars="vertical"
+        android:textColor="@color/text_000000"
+        android:textColorHint="@color/text_808080"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_dialog_send"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 发送按钮 -->
+    <TextView
+        android:id="@+id/btn_dialog_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/monika_tag_gray_bg"
+        android:paddingStart="@dimen/dimen_15dp"
+        android:paddingTop="@dimen/dimen_8dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_8dp"
+        android:text="发送"
+        android:textColor="@color/color_B3B3B3"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="发送" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

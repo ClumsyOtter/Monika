@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_publish_submit"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_8">
+
+            <!-- 第一行：水平滑动的图片列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_publish_image_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_publish_image"
+                tools:visibility="gone" />
+
+            <!-- 第二行：标题输入框 -->
+            <EditText
+                android:id="@+id/et_publish_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:background="@null"
+                android:hint="填写一个标题吧(ゝ∀･)"
+                android:inputType="text"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_B3B3B3"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_publish_image_list" />
+
+            <!-- 第三行：分割线 -->
+            <View
+                android:id="@+id/v_publish_divider1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="@color/bg_f5f5f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_publish_title" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_content_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierMargin="@dimen/dimen_20dp"
+                app:constraint_referenced_ids="v_publish_divider1" />
+
+            <!-- 第四行：标签流式布局容器 -->
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/fl_publish_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:alignItems="flex_start"
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier_content_top"
+                tools:ignore="MissingDefaultResource" />
+
+            <!-- 第五行：正文输入框 -->
+            <EditText
+                android:id="@+id/et_publish_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="添加正文"
+                android:inputType="textMultiLine"
+                android:maxLength="5000"
+                android:minLines="12"
+                android:scrollbars="vertical"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_B3B3B3"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fl_publish_tags" />
+
+            <!-- 第六行：添加标签按钮 -->
+            <com.otto.monika.common.views.MonikaCommonOptionView
+                android:id="@+id/btn_publish_add_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_18dp"
+                android:paddingTop="@dimen/dimen_10dp"
+                android:paddingEnd="@dimen/dimen_18dp"
+                android:paddingBottom="@dimen/dimen_10dp"
+                app:iconSelected="@drawable/monika_post_publish_talk_icon"
+                app:iconSize="@dimen/dimen_14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_publish_content"
+                app:optionText="标签"
+                app:optionTextColor="@color/black"
+                app:optionTextSize="@dimen/sp_14" />
+
+            <!-- 第七行：分割线 -->
+            <View
+                android:id="@+id/v_publish_divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:background="@color/bg_f5f5f5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_publish_add_tag" />
+
+            <!-- 第八行：可见性设置 -->
+            <LinearLayout
+                android:id="@+id/ll_publish_visibility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/dimen_5dp"
+                android:paddingBottom="@dimen/dimen_5dp"
+                android:layout_marginBottom="@dimen/dimen_20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_publish_divider2">
+
+                <ImageView
+                    android:id="@+id/iv_publish_visibility_icon"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:src="@drawable/monika_post_publish_lock_icon"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_publish_visibility_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:text="所有人可见"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:text="所有人可见" />
+
+                <ImageView
+                    android:id="@+id/iv_publish_visibility_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/monika_custom_icon_arrow"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 第九行：发布按钮 -->
+    <com.otto.monika.common.views.MonikaCustomButton
+        android:id="@+id/btn_publish_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        app:monikaImage="@drawable/monika_custom_btn_empty_gray"
+        app:monikaTitle="发布"
+        app:monikaTitleFontSize="14sp"
+        app:monikaTitleTextColor="@color/text_999999"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:whRatio="5.9433962264" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

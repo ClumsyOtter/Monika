@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.otto.monika.home.fragment.mine.views.AccountBackdropWallView
+        android:id="@+id/account_backdrop_wall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--  顶部操作栏-->
+        <com.otto.monika.home.fragment.mine.views.AccountActionBarView
+            android:id="@+id/monika_account_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/drop_frame_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/coordinator_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <!-- BottomSheet 容器 -->
+                <LinearLayout
+                    android:id="@+id/bottom_sheet"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_behavior="com.otto.monika.common.utils.MonikaBottomSheetBehavior">
+
+                    <!-- 内层 CoordinatorLayout -->
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/innerCoordinatorLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipChildren="false"
+                        android:clipToPadding="false">
+
+                        <!-- AppBarLayout 用于头部和Tab栏的滚动效果 -->
+                        <com.google.android.material.appbar.AppBarLayout
+                            android:id="@+id/appBarLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_transparent"
+                            android:orientation="vertical"
+                            app:elevation="0dp">
+
+                            <!-- Header 部分 -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/transparent"
+                                android:orientation="vertical"
+                                app:layout_scrollFlags="scroll">
+
+                                <TextView
+                                    android:id="@+id/trans_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                                <com.otto.monika.home.fragment.mine.views.AccountHeadView
+                                    android:id="@+id/view_account_head"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+                            <!-- tab 部分 -->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:paddingStart="@dimen/dimen_8dp"
+                                android:paddingEnd="@dimen/dimen_8dp">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_account_tabs_container"
+                                    android:layout_width="0dp"
+                                    android:layout_height="45dp"
+                                    android:orientation="horizontal"
+                                    app:layout_constraintEnd_toStartOf="@id/account_creator_option"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <LinearLayout
+                                    android:id="@+id/account_creator_option"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/dimen_5dp"
+                                    android:orientation="horizontal"
+                                    app:layout_constraintBottom_toBottomOf="@id/ll_account_tabs_container"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/ll_account_tabs_container">
+
+                                    <com.otto.monika.common.views.MonikaCommonOptionView
+                                        android:id="@+id/account_creator_option_setting"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:iconSelected="@drawable/monika_account_setting_icon"
+                                        app:optionText="设置" />
+
+                                    <com.otto.monika.common.views.MonikaCommonOptionView
+                                        android:id="@+id/account_creator_option_order"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/dimen_10dp"
+                                        android:layout_marginEnd="@dimen/dimen_8dp"
+                                        app:iconSelected="@drawable/monika_account_order_icon"
+                                        app:optionText="订单" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/color_f52b1c"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/ll_account_tabs_container" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </com.google.android.material.appbar.AppBarLayout>
+
+                        <androidx.core.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:fillViewport="true"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                            <androidx.viewpager2.widget.ViewPager2
+                                android:id="@+id/view_pager"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </androidx.core.widget.NestedScrollView>
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+                </LinearLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <ImageView
+                android:id="@+id/iv_account_add_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="@dimen/dimen_45dp"
+                android:src="@drawable/monika_account_add_post_icon" />
+        </FrameLayout>
+        <!-- 底部工具栏-->
+        <com.otto.monika.home.fragment.mine.views.AccountBottomActionView
+            android:id="@+id/monika_account_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/nav_bar_mask_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>

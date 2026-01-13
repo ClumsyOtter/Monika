@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!-- 左侧弧形图片 -->
+    <View
+        android:id="@+id/left_arc_view"
+        android:layout_width="@dimen/dimen_15dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:background="@drawable/monika_login_huohao_left_unselected" />
+
+    <!-- 国家代码输入框 -->
+    <EditText
+        android:id="@+id/country_code_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="4"
+        android:text="+86"
+        android:textColor="@color/text_000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- 分割线 -->
+    <TextView
+        android:id="@+id/divider_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:gravity="center"
+        android:text="　ﾟ 3ﾟ"
+        android:textColor="@color/color_B2B2B2"
+        android:textSize="16sp" />
+
+    <!-- 电话号码输入框 -->
+    <EditText
+        android:id="@+id/phone_number_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:gravity="center|right"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:textColor="@color/text_000000"
+        android:textColorHint="@color/text_000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- 右侧弧形图片 -->
+    <View
+        android:id="@+id/right_arc_view"
+        android:layout_width="@dimen/dimen_15dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:background="@drawable/monika_login_huohao_right_unselected" />
+
+</LinearLayout>
+

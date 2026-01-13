@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.otto.monika.common.views.recycleview.ParentRecyclerView
+        android:id="@+id/rv_post_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/ll_post_reply_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_comment_parent" />
+
+    <!-- 底部回复栏 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_post_reply_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:paddingStart="@dimen/dimen_15dp"
+        android:paddingTop="@dimen/dimen_10dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- 假输入框（点击后弹出 Dialog） -->
+        <com.otto.monika.post.detail.views.MonikaPostFakeInputView
+            android:id="@+id/cv_post_reply_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            app:iconSize="24dp"
+            app:iconTextSpacing="@dimen/dimen_5dp"
+            app:inputHint="说点什么..."
+            app:inputHintColor="@color/text_808080"
+            app:inputIcon="@drawable/monika_post_detail_textinput_icon"
+            app:inputTextColor="@color/gray_99"
+            app:inputTextSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ll_post_reply_actions"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 操作区域（收藏、点赞、回复） -->
+        <LinearLayout
+            android:id="@+id/ll_post_reply_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- 收藏 -->
+            <com.otto.monika.common.views.MonikaCommonOptionView
+                android:id="@+id/cv_post_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                app:optionTextColor="@color/text_808080"
+                app:optionTextSize="12sp"
+                app:iconCountSpacing="@dimen/dp_4"
+                app:iconSelected="@drawable/monika_post_detail_collect_icon"
+                app:iconSize="24dp"
+                app:iconUnselected="@drawable/monika_post_detail_collect_unselect_icon" />
+
+            <!-- 点赞 -->
+            <com.otto.monika.common.views.MonikaCommonOptionView
+                android:id="@+id/cv_post_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                app:optionTextColor="@color/text_808080"
+                app:optionTextSize="12sp"
+                app:iconCountSpacing="@dimen/dp_4"
+                app:iconSelected="@drawable/monika_post_detail_like_icon_selected"
+                app:iconSize="24dp"
+                app:iconUnselected="@drawable/monika_post_detail_like_unselected_icon" />
+
+            <!-- 回复 -->
+            <com.otto.monika.common.views.MonikaCommonOptionView
+                android:id="@+id/cv_post_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                app:optionTextColor="@color/text_808080"
+                app:optionTextSize="12sp"
+                app:iconCountSpacing="@dimen/dp_4"
+                app:iconSelected="@drawable/monika_post_detail_subcribe_icon"
+                app:iconSize="24dp"
+                app:iconUnselected="@drawable/monika_post_detail_subcribe_icon" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

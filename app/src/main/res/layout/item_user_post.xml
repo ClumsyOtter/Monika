@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/dimen_8dp"
+    android:paddingTop="@dimen/dimen_15dp"
+    android:paddingEnd="@dimen/dimen_8dp"
+    android:paddingBottom="@dimen/dimen_15dp">
+
+    <!-- 第一行：圆形头像 -->
+    <ImageView
+        android:id="@+id/iv_user_post_avatar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/generic_avatar_default" />
+
+    <!-- 第一行：标题（头像右边） -->
+    <TextView
+        android:id="@+id/tv_user_post_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="用户标题"
+        android:textColor="@color/text_000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tv_user_post_review_status"
+        app:layout_constraintStart_toEndOf="@id/iv_user_post_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_user_post_avatar"
+        tools:text="用户标题" />
+
+    <!-- 第一行：内容（title下面） -->
+    <TextView
+        android:id="@+id/tv_user_post_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="这是用户的内容"
+        android:textColor="@color/text_808080"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user_post_avatar"
+        app:layout_constraintEnd_toStartOf="@id/tv_user_post_review_status"
+        app:layout_constraintStart_toEndOf="@id/iv_user_post_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_post_title"
+        tools:text="这是用户的内容" />
+
+    <!-- 第一行：审核状态（最右边） -->
+
+    <TextView
+        android:id="@+id/tv_user_post_review_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingStart="@dimen/dimen_8dp"
+        android:paddingEnd="@dimen/dimen_8dp"
+        android:text="审核中"
+        android:textColor="@color/text_808080"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/tv_user_post_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="审核中" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_user_post_post_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:barrierMargin="@dimen/dimen_15dp"
+        app:constraint_referenced_ids="iv_user_post_avatar,tv_user_post_content" />
+
+    <TextView
+        android:id="@+id/tv_user_post_post_content_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="这是条标题"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier_user_post_post_head" />
+
+    <!-- 第二行：post内容 -->
+    <TextView
+        android:id="@+id/tv_user_post_post_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="4dp"
+        android:text="这是帖子的详细内容"
+        android:textColor="@color/text_000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_post_post_content_title"
+        tools:text="这是帖子的详细内容，可以包含多行文字描述" />
+
+    <!-- 第三行：图片列表（三列，圆角，间距5dp） -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_user_post_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:nestedScrollingEnabled="false"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_post_post_content"
+        tools:listitem="@layout/item_post_image_grid"
+        tools:visibility="gone" />
+
+    <!-- 第四行：标签列表 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_user_post_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:nestedScrollingEnabled="false"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_user_post_images"
+        tools:visibility="visible" />
+
+    <!-- 第五行：发表时间、删除按钮、收藏数量、回复数量 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_user_post_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_user_post_tags">
+
+        <!-- 发表时间 -->
+        <TextView
+            android:id="@+id/tv_user_post_publish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1小时前"
+            android:textColor="@color/text_808080"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1小时前" />
+
+        <View
+            android:id="@+id/tv_user_post_publish_divider"
+            android:layout_width="1dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:background="@color/color_D8D8D8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_user_post_publish_time"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 删除按钮（根据是否是本人显示） -->
+        <TextView
+            android:id="@+id/btn_user_post_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:background="@android:color/transparent"
+            android:text="删除"
+            android:textColor="@color/text_808080"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_user_post_publish_divider"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="删除"
+            tools:visibility="visible" />
+
+        <!-- 收藏数量 -->
+        <com.otto.monika.common.views.MonikaCommonOptionView
+            android:id="@+id/tv_user_post_favorite_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            app:iconSelected="@drawable/monika_post_detail_like_icon_selected"
+            app:iconUnselected="@drawable/monika_post_detail_like_icon_unselected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_user_post_reply_count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:optionText="99" />
+
+        <!-- 回复数量 -->
+        <com.otto.monika.common.views.MonikaCommonOptionView
+            android:id="@+id/tv_user_post_reply_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iconSelected="@drawable/monika_post_detail_subcribe_unselected_icon"
+            app:iconUnselected="@drawable/monika_post_detail_subcribe_unselected_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:optionText="99" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

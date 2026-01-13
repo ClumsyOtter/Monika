@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/nav_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dimen_12dp"
+        android:paddingEnd="@dimen/dimen_12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:paddingTop="@dimen/dimen_30dp">
+
+        <ImageView
+            android:id="@+id/home_search"
+            android:layout_width="@dimen/dimen_25dp"
+            android:layout_height="@dimen/dimen_25dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_home_search" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_tab_layout"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:paddingEnd="@dimen/dimen_10dp">
+
+            <com.otto.monika.common.views.MonikaTabItem
+                android:id="@+id/vt_tab_community"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vt_tab_ciya"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mm_subTitle="社区" />
+
+            <com.otto.monika.common.views.MonikaTabItem
+                android:id="@+id/vt_tab_ciya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/vt_tab_recommend"
+                app:layout_constraintStart_toEndOf="@id/vt_tab_community"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mm_subTitle="次芽" />
+
+            <com.otto.monika.common.views.MonikaTabItem
+                android:id="@+id/vt_tab_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/monika_tab_my"
+                app:layout_constraintStart_toEndOf="@id/vt_tab_ciya"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mm_subTitle="推荐" />
+
+            <com.otto.monika.common.views.MonikaTabItem
+                android:id="@+id/monika_tab_my"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/vt_tab_recommend"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mm_subTitle="我的" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/home_notification"
+            android:layout_width="@dimen/dimen_25dp"
+            android:layout_height="@dimen/dimen_25dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_home_notification" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_tag_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/monika_tag_gray_border"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/dimen_12dp"
+    android:paddingTop="@dimen/dp_4"
+    android:paddingEnd="@dimen/dimen_12dp"
+    android:paddingBottom="@dimen/dp_4">
+
+    <ImageView
+        android:id="@+id/iv_tag_icon"
+        android:layout_width="@dimen/dimen_15dp"
+        android:layout_height="@dimen/dimen_15dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/dimen_5dp"
+        android:src="@drawable/monika_tag_jinhao"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_tag_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/monika_tag_jinhao" />
+
+    <TextView
+        android:id="@+id/tv_tag_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/text_808080"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_tag_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="上海" />
+</androidx.constraintlayout.widget.ConstraintLayout>

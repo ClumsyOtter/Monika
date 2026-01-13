@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 左边：圆角图片 -->
+    <com.otto.monika.common.views.RoundedImageView
+        android:id="@+id/iv_user_artwork_image"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="10dp"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/generic_avatar_default" />
+
+    <!-- 右边上面：标题 -->
+    <TextView
+        android:id="@+id/tv_user_artwork_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="艺术品标题"
+        android:textColor="@color/text_000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_user_artwork_image"
+        app:layout_constraintTop_toTopOf="@id/iv_user_artwork_image"
+        tools:text="艺术品标题" />
+
+    <!-- 右边中间：内容 -->
+    <TextView
+        android:id="@+id/tv_user_artwork_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="这是艺术品的详细描述内容"
+        android:textColor="@color/text_808080"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_user_artwork_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_artwork_title"
+        tools:text="这是艺术品的详细描述内容，可以包含多行文字描述" />
+
+    <!-- 价格 -->
+    <com.otto.monika.subscribe.support.views.MonikaPriceView
+        android:id="@+id/tv_user_artwork_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user_artwork_image"
+        app:layout_constraintStart_toEndOf="@id/iv_user_artwork_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_artwork_content"
+        app:priceColor="@color/text_FA2B19"
+        app:priceSymbol="¥"
+        app:priceSymbolSize="14sp"
+        app:priceText="99"
+        app:priceTextSize="20sp" />
+
+    <!-- 折扣信息 -->
+    <TextView
+        android:id="@+id/tv_user_artwork_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:background="@drawable/monika_tag_gray_bg"
+        android:text="8折"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_user_artwork_price"
+        app:layout_constraintStart_toEndOf="@id/tv_user_artwork_price"
+        app:layout_constraintTop_toTopOf="@id/tv_user_artwork_price"
+        tools:text="8折" />
+
+    <!-- 最右边：按钮 -->
+    <TextView
+        android:id="@+id/btn_user_artwork_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:background="@drawable/monika_tag_black_bg"
+        android:paddingStart="@dimen/dimen_15dp"
+        android:paddingTop="@dimen/dimen_8dp"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingBottom="@dimen/dimen_8dp"
+        android:text="解锁"
+        android:textColor="@color/color_C2FE00"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_user_artwork_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_user_artwork_price"
+        tools:text="解锁" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

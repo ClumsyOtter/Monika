@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" tools:ignore="MissingTranslation">
+    <string name="app_name">小黑</string>
+    <string name="monika_login_privacy">我已阅读并同意《用户协议》和《隐私政策》</string>
+    <string name="monika_login_user_key">《用户协议》</string>
+    <string name="monika_login_privacy_key">《隐私政策》</string>
+    <string name="monika_nike_name_input_confirm_btn">&gt;ᴗ&lt; 确定</string>
+    <string name="monika_login_btn_text">本机号码一键登录</string>
+    <string name="monika_phone_login_confirm_btn">&gt;ᴗ&lt; 登录</string>
+    <string name="monika_phone_edit_confirm_btn">&gt;ᴗ&lt; 确定</string>
+    <string name="monika_phone_bind_phone_title">绑定手机</string>
+    <string name="monika_phone_bind_phone_content">请输入手机号和验证码进行绑定</string>
+    <string name="monika_phone_login_title">手机号登录</string>
+    <string name="monika_phone_login_content">未注册过的手机号将自动创建账号</string>
+    <string name="monika_phone_change_verify_title">验证原手机</string>
+    <string name="monika_phone_change_verify_content">换绑时需要验证您的原手机号码</string>
+    <string name="monika_phone_change_bind_title">绑定新手机</string>
+    <string name="monika_phone_change_bind_content">换绑后您的新手机将启用，原手机号无法登录</string>
+</resources>

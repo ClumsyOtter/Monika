@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MonikaCustomButton">
+        <attr name="monikaImageTint" format="color|reference" />
+        <attr name="whRatio" format="float" />
+        <attr name="whRatioEnable" format="boolean" />
+        <attr name="monikaTitle" format="string" />
+        <attr name="monikaTitleFontSize" format="dimension" />
+        <attr name="monikaTitleTextColor" format="color|reference" />
+        <attr name="monikaImage" format="reference" />
+        <attr name="monikaTitleLeftDrawable" format="reference" />
+        <attr name="monikaTitleDrawablePadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MonikaCommonActionView">
+        <attr name="actionTitle" format="string" />
+        <attr name="actionTitleColor" format="color|reference" />
+        <attr name="actionTitleSize" format="dimension" />
+        <attr name="actionBackIcon" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MonikaCommonOptionView">
+        <attr name="iconSelected" format="reference" />
+        <attr name="iconUnselected" format="reference" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="optionText" format="string" />
+        <attr name="optionTextColor" format="color|reference" />
+        <attr name="optionTextSize" format="dimension" />
+        <attr name="iconCountSpacing" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MonikaPostFakeInputView">
+        <attr name="inputIcon" format="reference" />
+        <attr name="inputHint" format="string" />
+        <attr name="inputText" format="string" />
+        <attr name="inputTextColor" format="color|reference" />
+        <attr name="inputHintColor" format="color|reference" />
+        <attr name="inputTextSize" format="dimension" />
+        <attr name="inputIconSize" format="dimension" />
+        <attr name="iconTextSpacing" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MonikaPriceView">
+        <attr name="priceSymbol" format="string" />
+        <attr name="priceSymbolSize" format="dimension" />
+        <attr name="priceText" format="string" />
+        <attr name="priceTextSize" format="dimension" />
+        <attr name="priceColor" format="color|reference" />
+        <attr name="priceSuffix" format="string" />
+        <attr name="priceSuffixVisible" format="boolean" />
+        <attr name="priceSuffixSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TagButtonView">
+        <attr name="tagText" format="string" />
+        <attr name="tagIcon" format="reference" />
+        <attr name="showHashTag" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="IncomeItemView">
+        <attr name="incomeItemIcon" format="reference" />
+        <attr name="incomeItemLabel" format="string" />
+        <attr name="incomeItemAmount" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="AmountWithUnitView">
+        <attr name="amountWithUnitAmount" format="string" />
+        <attr name="amountWithUnitWithdraw" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="MaxHeightRecycleView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
+</resources>
+    

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 用户头像 -->
+    <ImageView
+        android:id="@+id/iv_comment_item_avatar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/generic_avatar_default" />
+
+    <!-- 用户名称 -->
+    <TextView
+        android:id="@+id/tv_comment_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="用户名"
+        android:textColor="@color/gray_99"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_comment_item_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_comment_item_avatar"
+        tools:text="张三" />
+
+    <!-- 作者标签 -->
+    <TextView
+        android:id="@+id/tv_comment_item_author_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:background="@drawable/monika_tag_gray_bg"
+        android:paddingStart="6dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="2dp"
+        android:text="作者"
+        android:textColor="@color/text_808080"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_comment_item_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_comment_item_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_comment_item_name"
+        tools:text="作者"
+        tools:visibility="visible" />
+
+    <!-- 评论内容 -->
+    <TextView
+        android:id="@+id/tv_comment_item_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="4dp"
+        android:lineSpacingExtra="2dp"
+        android:text="这是评论内容..."
+        android:textColor="@color/text_000000"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_comment_item_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_comment_item_name"
+        tools:text="这是评论内容，可以显示多行文字。 这是评论内容，可以显示多行文字。 这是评论内容，可以显示多行文字。 这是评论内容，可以显示多行文字。" />
+
+    <!-- 创建时间 -->
+    <TextView
+        android:id="@+id/tv_comment_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="5dp"
+        android:text="1小时前"
+        android:textColor="@color/text_808080"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_comment_item_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_comment_item_content"
+        tools:text="1小时前" />
+
+    <!-- 圆点分隔符 -->
+    <TextView
+        android:id="@+id/tv_comment_item_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:text="·"
+        android:textColor="@color/text_808080"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_comment_item_time"
+        app:layout_constraintStart_toEndOf="@+id/tv_comment_item_time"
+        app:layout_constraintTop_toTopOf="@+id/tv_comment_item_time"
+        tools:text="·" />
+
+    <!-- 回复按钮 -->
+    <TextView
+        android:id="@+id/tv_comment_item_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="回复"
+        android:textColor="@color/text_808080"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_comment_item_time"
+        app:layout_constraintStart_toEndOf="@+id/tv_comment_item_dot"
+        app:layout_constraintTop_toTopOf="@+id/tv_comment_item_time"
+        tools:text="回复" />
+
+    <!-- 点赞视图（图标 + 数量） -->
+    <com.otto.monika.common.views.MonikaCommonOptionView
+        android:id="@+id/like_view_comment_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:iconSelected="@drawable/monika_post_detail_like_icon_selected"
+        app:iconUnselected="@drawable/monika_post_detail_like_icon_unselected"
+        app:iconSize="@dimen/dimen_20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_comment_item_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_comment_item_time" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

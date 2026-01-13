@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_creator_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- 创作者样式：左侧文字+数字 + 分割线 + 右侧文字+数字 -->
+        <com.otto.monika.home.fragment.mine.views.AccountHeadCreatorView
+            android:id="@+id/view_creator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:id="@+id/view_account_info_creator_owner_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:background="@drawable/monika_corner15_stroke1"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dimen_15dp">
+
+            <com.otto.monika.home.fragment.mine.views.AccountHeadOptionView
+                android:id="@+id/view_subscription_plans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.otto.monika.home.fragment.mine.views.AccountHeadOptionView
+                android:id="@+id/view_works_uploaded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- 非创作者样式：图标+文字+数字+箭头 -->
+    <com.otto.monika.home.fragment.mine.views.AccountHeadNonCreatorView
+        android:id="@+id/view_non_creator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="gone" />
+
+</FrameLayout>
+

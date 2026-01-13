@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- 圆角灰色背景的信息框 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_user_favorite_creator_info_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/monika_corner_15_gary_f7f7f7_bg"
+        android:padding="@dimen/dimen_15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 圆形头像 -->
+        <ImageView
+            android:id="@+id/iv_user_favorite_creator_avatar"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/generic_avatar_default" />
+
+        <!-- 标题（头像右边） -->
+        <TextView
+            android:id="@+id/tv_user_favorite_creator_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="创作者标题"
+            android:textColor="@color/text_000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btn_user_favorite_creator_subscribe"
+            app:layout_constraintStart_toEndOf="@id/iv_user_favorite_creator_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_user_favorite_creator_avatar"
+            tools:text="创作者标题" />
+
+        <!-- 内容（标题下面） -->
+        <TextView
+            android:id="@+id/tv_user_favorite_creator_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="2"
+            android:text="这是创作者的内容描述"
+            android:textColor="@color/text_808080"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_user_favorite_creator_subscribe"
+            app:layout_constraintStart_toEndOf="@id/iv_user_favorite_creator_avatar"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_favorite_creator_title"
+            tools:text="这是创作者的内容描述，可以包含多行文字，展示创作者的详细信息。" />
+
+        <!-- 订阅按钮（最右边） -->
+        <TextView
+            android:id="@+id/btn_user_favorite_creator_subscribe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/monika_tag_black_bg"
+            android:text="订阅"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="订阅" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

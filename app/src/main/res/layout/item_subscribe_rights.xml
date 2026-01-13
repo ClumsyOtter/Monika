@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/monika_corner_15_white_bg"
+    android:paddingStart="@dimen/dimen_15dp"
+    android:paddingTop="@dimen/dimen_20dp"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:paddingBottom="@dimen/dimen_20dp">
+
+    <!-- 左边图片 -->
+    <ImageView
+        android:id="@+id/iv_rights_item_avatar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 右边上面：title -->
+    <TextView
+        android:id="@+id/tv_rights_item_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/text_000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/btn_rights_item_add"
+        app:layout_constraintStart_toEndOf="@id/iv_rights_item_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="权益标题" />
+
+    <!-- 右边中间：描述 -->
+    <TextView
+        android:id="@+id/tv_rights_item_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/text_999999"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@id/btn_rights_item_add"
+        app:layout_constraintStart_toEndOf="@id/iv_rights_item_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_rights_item_title"
+        tools:text="权益描述内容" />
+
+    <!-- 最右边：添加按钮 -->
+    <TextView
+        android:id="@+id/btn_rights_item_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@drawable/monika_tag_black_bg"
+        android:paddingStart="@dimen/dimen_20dp"
+        android:paddingTop="@dimen/dimen_8dp"
+        android:paddingEnd="@dimen/dimen_20dp"
+        android:paddingBottom="@dimen/dimen_8dp"
+        android:text="添加"
+        android:textColor="@color/color_C2FE00"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_account_income_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/cycb_account_income_submit"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginEnd="@dimen/dimen_8dp"
+            android:orientation="vertical">
+
+            <!-- 收入信息部分 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_account_income_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shape_rounded_corner_white_bg">
+
+                <!-- 第一行：收入内容文字 -->
+                <ImageView
+                    android:id="@+id/tv_account_income_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:src="@drawable/monika_wallet_income_title_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 第二行：分割线 -->
+                <View
+                    android:id="@+id/v_account_income_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/bg_f5f5f5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_account_income_title" />
+
+                <!-- 第三行：左中右三个部分 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_account_income_stats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:layout_marginEnd="@dimen/dimen_15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_account_income_divider">
+
+                    <!-- 左边：总收入 -->
+                    <com.otto.monika.account.income.views.IncomeItemView
+                        android:id="@+id/income_item_total_income"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:incomeItemAmount="0.00"
+                        app:incomeItemIcon="@drawable/monika_wallet_zsr_icon"
+                        app:incomeItemLabel="总收入"
+                        app:layout_constraintEnd_toStartOf="@id/v_account_income_vertical_divider"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- 中间：分隔线 -->
+                    <View
+                        android:id="@+id/v_account_income_vertical_divider"
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        android:background="@color/bg_f5f5f5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/income_item_unsettled_income"
+                        app:layout_constraintStart_toEndOf="@id/income_item_total_income"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- 右边：未结算收入 -->
+                    <com.otto.monika.account.income.views.IncomeItemView
+                        android:id="@+id/income_item_unsettled_income"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_15dp"
+                        app:incomeItemAmount="0.00"
+                        app:incomeItemIcon="@drawable/monika_wallet_wjs_icon"
+                        app:incomeItemLabel="未结算收入"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/v_account_income_vertical_divider"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- 第四行：已完成结算收入（圆角背景） -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_account_income_settled_income"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:background="@drawable/monika_corner_15_gray_bg"
+                    android:padding="@dimen/dimen_20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_account_income_stats">
+
+                    <TextView
+                        android:id="@+id/tv_account_income_settled_income_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已完成结算收入"
+                        android:textColor="@color/font_dark"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.otto.monika.account.income.views.AmountWithUnitView
+                        android:id="@+id/amount_with_unit_settled_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:amountWithUnitAmount="0.00"
+                        app:amountWithUnitWithdraw="元"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 已提现金额布局部分 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_account_income_withdrawn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/shape_rounded_corner_white_bg"
+                android:padding="@dimen/dimen_20dp">
+
+                <!-- 第一行：已提现金额 -->
+                <LinearLayout
+                    android:id="@+id/ll_account_income_withdrawn_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_account_income_withdrawn_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/monika_wallet_ytx_icon"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tv_account_income_withdrawn_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:text="已提现金额"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <com.otto.monika.account.income.views.AmountWithUnitView
+                        android:id="@+id/tv_account_income_withdrawn_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:amountWithUnitAmount="0.00"
+                        app:amountWithUnitWithdraw="元"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
+                <!-- 第二行：水平分隔线 -->
+                <View
+                    android:id="@+id/v_account_income_withdrawn_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/bg_f5f5f5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_account_income_withdrawn_title" />
+
+                <!-- 第三行：当前可提现额度 -->
+                <TextView
+                    android:id="@+id/tv_account_income_withdrawable_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="当前可提现额度：0元"
+                    android:textColor="@color/text_808080"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_account_income_withdrawn_divider"
+                    tools:text="当前可提现额度：222元" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 提交按钮 -->
+    <com.otto.monika.common.views.MonikaCustomButton
+        android:id="@+id/cycb_account_income_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dimen_8dp"
+        android:layout_marginBottom="@dimen/dimen_30dp"
+        app:monikaImage="@drawable/monika_custom_btn_empty_gray"
+        app:monikaImageTint="@color/color_E6E6E6"
+        app:monikaTitle="发起提现"
+        app:monikaTitleFontSize="14sp"
+        app:monikaTitleTextColor="@color/text_999999"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sv_account_income_content"
+        app:whRatio="5.9433962264" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

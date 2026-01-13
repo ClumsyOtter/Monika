@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 顶部行：左侧弧形 + 验证码文字 + *A* + 发送验证码按钮/输入框 + 右侧弧形 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!-- 左侧弧形图片 -->
+    <View
+        android:id="@+id/left_arc_view"
+        android:layout_width="@dimen/dimen_15dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:background="@drawable/monika_login_huohao_left_unselected" />
+
+    <!-- 验证码文字 -->
+    <TextView
+        android:id="@+id/code_label_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:gravity="center"
+        android:text="验证码"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- *A* 文字 -->
+    <TextView
+        android:id="@+id/asterisk_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:gravity="center"
+        android:text="*ﾟ∇ﾟ"
+        android:textColor="@color/gray_99"
+        android:textSize="16sp" />
+
+    <!-- 发送验证码按钮和输入框重叠容器 -->
+    <android.widget.FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_weight="1">
+
+        <!-- 发送验证码按钮 -->
+        <TextView
+            android:id="@+id/send_code_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:paddingEnd="8dp"
+            android:text="发送验证码"
+            android:textColor="@color/gray_99"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <!-- 验证码输入框 -->
+        <EditText
+            android:id="@+id/verify_code_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center|end"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingTop="@dimen/padding_15"
+            android:paddingBottom="@dimen/dimen_15dp"
+            android:textColor="@color/text_000000"
+            android:textColorHint="@color/text_808080"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </android.widget.FrameLayout>
+
+    <!-- 右侧弧形图片 -->
+    <View
+        android:id="@+id/right_arc_view"
+        android:layout_width="@dimen/dimen_15dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:background="@drawable/monika_login_huohao_right_unselected" />
+</LinearLayout>
+
+

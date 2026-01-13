@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/dimen_8dp"
+    android:paddingEnd="@dimen/dimen_8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rank_list_item_bg"
+        android:elevation="1dp"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_15dp">
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tv_plan_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="订阅方案标题" />
+
+        <!-- 用户信息 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- 用户头像 -->
+            <ImageView
+                android:id="@+id/iv_plan_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="用户头像"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/generic_avatar_default" />
+
+            <!-- 用户名称 -->
+            <TextView
+                android:id="@+id/tv_plan_author_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:textColor="@color/text_000000"
+                android:textSize="14sp"
+                tools:text="用户名" />
+
+        </LinearLayout>
+
+        <!-- 内容 -->
+        <TextView
+            android:id="@+id/tv_plan_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:lineSpacingExtra="4dp"
+            android:textColor="@color/text_808080"
+            android:textSize="14sp"
+            tools:text="订阅内容描述" />
+
+        <!-- 分割线 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:background="@color/gray_ee" />
+
+        <!-- 价格区域 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp">
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订阅价格："
+                android:textColor="@color/text_808080"
+                android:textSize="14sp" />
+
+            <com.otto.monika.subscribe.support.views.MonikaPriceView
+                android:id="@+id/view_plan_price"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:priceColor="@color/red"
+                app:priceSuffix="/月"
+                app:priceSuffixSize="@dimen/sp_14"
+                app:priceSuffixVisible="true"
+                app:priceSymbol="¥"
+                app:priceSymbolSize="14sp"
+                app:priceText="99"
+                app:priceTextSize="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</LinearLayout>
+

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <!-- 手机号登录UI容器 -->
+    <LinearLayout
+        android:id="@+id/phone_login_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 手机号登录标题 -->
+        <TextView
+            android:id="@+id/phone_login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingTop="40dp"
+            android:paddingBottom="8dp"
+            android:text="手机号登录"
+            android:textColor="@color/text_000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <!-- 提示文字 -->
+        <TextView
+            android:id="@+id/phone_login_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="未注册手机号将自动创建账号"
+            android:textColor="@color/text_808080"
+            android:textSize="12sp" />
+
+        <!-- 手机号输入框 -->
+        <com.otto.monika.login.views.PhoneInputView
+            android:id="@+id/phone_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/transparent" />
+
+        <!-- 验证码输入框 -->
+        <com.otto.monika.login.views.CodeInputView
+            android:id="@+id/code_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@android:color/transparent" />
+
+        <!-- 登录按钮 -->
+        <com.otto.monika.common.views.MonikaCustomButton
+            android:id="@+id/phone_login_submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            app:monikaImage="@drawable/monika_custom_btn_empty_gray"
+            app:monikaTitle="&gt;-&lt; 登录"
+            app:monikaTitleFontSize="14sp"
+            app:monikaTitleTextColor="@color/gray_99"
+            app:whRatio="5.9433962264" />
+    </LinearLayout>
+
+    <!-- 底部功能区域（仅Login来源显示） -->
+    <LinearLayout
+        android:id="@+id/bottom_function_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <!-- 游客登录 -->
+        <com.otto.monika.common.views.MonikaCustomButton
+            android:id="@+id/guest_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            app:monikaImage="@drawable/monika_custom_btn_empty_gray"
+            app:monikaTitle="游客登录"
+            app:monikaTitleFontSize="14sp"
+            app:monikaTitleTextColor="@color/black"
+            app:whRatio="5.9433962264" />
+
+        <!-- 微信登录 -->
+        <com.otto.monika.common.views.MonikaCustomButton
+            android:id="@+id/wechat_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            app:monikaImage="@drawable/monika_custom_btn_empty_gray_stroke"
+            app:monikaTitle="微信登录"
+            app:monikaTitleDrawablePadding="@dimen/dimen_10dp"
+            app:monikaTitleFontSize="14sp"
+            app:monikaTitleLeftDrawable="@drawable/mine_page_share_wx_normal"
+            app:monikaTitleTextColor="@color/black"
+            app:whRatio="5.9433962264" />
+
+        <!-- 用户协议同意选项 -->
+        <com.otto.monika.login.views.UserPrivacyView
+            android:id="@+id/bottom_privacy_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
