@@ -1,6 +1,7 @@
 package com.otto.monika.api.client
 
 import com.otto.monika.api.MonikaApi
+import com.otto.monika.api.network.MonikaNetwork
 
 
 object MonikaClient {
@@ -8,6 +9,6 @@ object MonikaClient {
         get() = ApiHolder.monikaApi
 
     private object ApiHolder {
-        val monikaApi: MonikaApi = MonikaData.create(MonikaApi::class.java)
+        val monikaApi: MonikaApi = MonikaNetwork.create(MonikaApi::class.java)
     }
 }

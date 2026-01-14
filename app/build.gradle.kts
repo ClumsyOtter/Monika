@@ -36,7 +36,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlin {
-        compilerOptions  {
+        compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.gson)
     implementation(libs.glide)
+    implementation(libs.retrofit.converter.gson)
     implementation(libs.openimage)
     implementation(libs.eventbus)
     implementation(libs.androidx.viewpager2)
