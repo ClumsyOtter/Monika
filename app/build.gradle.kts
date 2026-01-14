@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-parcelize")
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0"
 }
 
 android {
@@ -14,8 +15,8 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.otto.monika"
-        minSdk = 21
+        applicationId = "com.ciya.club"
+        minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"

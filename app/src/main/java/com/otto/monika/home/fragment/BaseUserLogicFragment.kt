@@ -1,5 +1,10 @@
 package com.otto.monika.home.fragment
+
 import android.graphics.Color
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.otto.monika.common.utils.MonikaBottomSheetBehavior
@@ -14,7 +19,7 @@ import kotlin.math.abs
  */
 abstract class BaseUserLogicFragment : BaseHomeFragment() {
 
-    protected lateinit var mDataBinding: FragmentMyPageBinding
+    protected lateinit var myPageBinding: FragmentMyPageBinding
 
     private var transViewHeight: Int = 0
     private var alphaChangeHeight: Int = 0
@@ -24,12 +29,21 @@ abstract class BaseUserLogicFragment : BaseHomeFragment() {
      */
     private var lastOffset: Int = 0
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        myPageBinding = FragmentMyPageBinding.inflate(inflater)
+        return myPageBinding.root
+    }
+
 
     fun updatePeekHeight(hasActionBar: Boolean = false) {
         val coordinatorViewPadding = getCoordinatorViewPadding(hasActionBar)
-        val behavior = BottomSheetBehavior.from(mDataBinding.bottomSheet)
+        val behavior = BottomSheetBehavior.from(myPageBinding.bottomSheet)
         // headerView高度
-        val headerViewHeight = mDataBinding.viewAccountHead.getAccountHeadDropDownViewHeight()
+        val headerViewHeight = myPageBinding.viewAccountHead.getAccountHeadDropDownViewHeight()
         // 设置 peekHeight（折叠状态时显示的高度 = TextView高度 + Header高度）
         val peekHeight = transViewHeight + headerViewHeight + coordinatorViewPadding
         behavior.peekHeight = peekHeight
@@ -51,25 +65,25 @@ abstract class BaseUserLogicFragment : BaseHomeFragment() {
      * 注意：需要在 View 布局完成后调用，所以使用 post
      */
     fun initBottomSheetBehavior(hasActionBar: Boolean = false) {
-        val behavior = BottomSheetBehavior.from(mDataBinding.bottomSheet)
+        val behavior = BottomSheetBehavior.from(myPageBinding.bottomSheet)
         //没有actionBar的情况下才需要去计算statusBar和导航栏
         val coordinatorViewPadding = getCoordinatorViewPadding(hasActionBar)
-        mDataBinding.navBarMaskView.layoutParams?.let {
+        myPageBinding.navBarMaskView.layoutParams?.let {
             it.height = coordinatorViewPadding
         }
-        mDataBinding.innerCoordinatorLayout.updatePadding(top = coordinatorViewPadding)
+        myPageBinding.innerCoordinatorLayout.updatePadding(top = coordinatorViewPadding)
         transViewHeight = DipUtils.dpToPx(80)
         //设置透明占位view的高度
-        mDataBinding.transView.layoutParams?.let {
+        myPageBinding.transView.layoutParams?.let {
             it.height = transViewHeight
-            mDataBinding.transView.layoutParams = it
+            myPageBinding.transView.layoutParams = it
         }
         updatePeekHeight(hasActionBar)
         behavior.isHideable = false
         behavior.skipCollapsed = false
         // 注意：初始状态在 CtyBottomSheetBehavior 构造函数中已设置为 STATE_EXPANDED
         // 这样在 onLayoutChild 时会直接设置位置，不会有动画效果
-        mDataBinding.appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+        myPageBinding.appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (behavior is MonikaBottomSheetBehavior) {
                 behavior.setVerticalOffset(verticalOffset * 1.0f)
             }
@@ -106,8 +120,8 @@ abstract class BaseUserLogicFragment : BaseHomeFragment() {
             }
 
             override fun onSlide(bottomSheet: android.view.View, slideOffset: Float) {
-                mDataBinding.accountBackdropWall.setOverlayAlpha(slideOffset)
-                mDataBinding.viewAccountHead.updateDropDownState(slideOffset == 0f)
+                myPageBinding.accountBackdropWall.setOverlayAlpha(slideOffset)
+                myPageBinding.viewAccountHead.updateDropDownState(slideOffset == 0f)
             }
         })
     }
@@ -118,15 +132,15 @@ abstract class BaseUserLogicFragment : BaseHomeFragment() {
      * BottomSheet 默认状态为 STATE_EXPANDED
      */
     private fun scrollToExpanded() {
-        mDataBinding.bottomSheet.post {
-            val behavior = BottomSheetBehavior.from(mDataBinding.bottomSheet)
+        myPageBinding.bottomSheet.post {
+            val behavior = BottomSheetBehavior.from(myPageBinding.bottomSheet)
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
     }
 
     override fun onNavBarAlphaChange(value: Float) {
         super.onNavBarAlphaChange(value)
-        mDataBinding.navBarMaskView.setBackgroundColor(
+        myPageBinding.navBarMaskView.setBackgroundColor(
             Color.argb(
                 (value * 255).toInt(),
                 255,

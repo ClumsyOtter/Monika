@@ -28,7 +28,7 @@ internal class SignInterceptor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val host = originalRequest.url.host
-        val hostInfo: HostInfo? = Hosts.dynamicOriginalHostMap.get(host)
+        val hostInfo: HostInfo? = Hosts.dynamicOriginalHostMap[host]
         var needSystemParam: Boolean
         var signMethod = -1
         if (hostInfo != null) {

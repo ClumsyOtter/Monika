@@ -22,12 +22,12 @@ object PermissionHelper {
      */
     fun applyPermission(
         context: Context,
-        callBack: CheckMultiPermissionCallBack,
-        vararg permissions: String
+        permissions: MutableList<String>,
+        callBack: CheckMultiPermissionCallBack
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             if (permissions.isNotEmpty()) {
-                val sdkSmall: ArrayList<Permission> = ArrayList()
+                val sdkSmall: MutableList<Permission> = mutableListOf()
                 for (permission in permissions) {
                     sdkSmall.add(Permission(permission, false, false))
                 }
@@ -35,7 +35,8 @@ object PermissionHelper {
             }
             return
         }
-        PermissionManager.applyPermissionListener(callBack, permissions)
+        PermissionManager.applyPermissions(permissions)
+        PermissionManager.multiPermissionCallBack = callBack
         if (context is Activity) {
             context.startActivity(Intent(context, SimpleApplyMultiPermissionActivity::class.java))
         } else {
@@ -43,21 +44,6 @@ object PermissionHelper {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
-    }
-
-    /**
-     * 数组全选申请
-     * 一次返回（数组形式）
-     * @param context
-     * @param permissions
-     * @param callBack
-     */
-    fun applyPermission(
-        context: Context,
-        permissions: Array<String>,
-        callBack: CheckMultiPermissionCallBack
-    ) {
-        applyPermission(context, callBack, *permissions)
     }
 
 
@@ -71,7 +57,8 @@ object PermissionHelper {
             callBack.granted(Permission(Manifest.permission.SYSTEM_ALERT_WINDOW, false))
             return
         }
-        PermissionManager.applyPermissionListener(callBack, Manifest.permission.SYSTEM_ALERT_WINDOW)
+        PermissionManager.checkPermissionCallBack = callBack
+        PermissionManager.applyPermissions(Manifest.permission.SYSTEM_ALERT_WINDOW)
         if (context is Activity) {
             context.startActivity(Intent(context, SimpleApplyPermissionActivity::class.java))
         } else {
@@ -91,11 +78,12 @@ object PermissionHelper {
             callBack.granted(Permission(Manifest.permission.WRITE_SETTINGS, false))
             return
         }
-        PermissionManager.applyPermissionListener(callBack, Manifest.permission.WRITE_SETTINGS)
+        PermissionManager.checkPermissionCallBack = callBack
+        PermissionManager.applyPermissions(Manifest.permission.WRITE_SETTINGS)
         if (context is Activity) {
             context.startActivity(Intent(context, SimpleApplyPermissionActivity::class.java))
         } else {
-            val intent: Intent = Intent(context, SimpleApplyPermissionActivity::class.java)
+            val intent = Intent(context, SimpleApplyPermissionActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
@@ -109,42 +97,38 @@ object PermissionHelper {
      */
     fun checkSelfPermission(
         context: Context,
-        permissions: Array<String?>?,
+        permissions: MutableList<String>,
         callBack: CheckSelfPermissionCallBack
     ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            if (permissions != null && permissions.size != 0) {
-                val sdkSmall = ArrayList<String?>()
+            if (permissions.isNotEmpty()) {
+                val noPermissions = mutableListOf<String>()
                 for (permission in permissions) {
-                    sdkSmall.add(permission)
+                    noPermissions.add(permission)
                 }
-                val noPermissions = sdkSmall.toTypedArray<String?>()
                 callBack.granted(noPermissions)
             }
             return
         }
-        PermissionManager.applyPermissionListener(callBack, permissions)
+        PermissionManager.selfPermissionCallBack = callBack
+        PermissionManager.applyPermissions(permissions)
         PermissionManager.checkPermission(context)
     }
 
 
-    /**
-     * 不新开activity，手动回调部分************************************************************************************************************
-     * 不新开activity，手动回调部分************************************************************************************************************
-     */
     /**
      * 多个权限申请
      * @param permissions
      */
     fun applyManualMultiPermission(
         context: Activity,
-        permissions: Array<String>,
+        permissions: MutableList<String>,
         callBack: CheckMultiPermissionCallBack
     ) {
         if (context is FragmentActivity) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 if (permissions.isNotEmpty()) {
-                    val sdkSmall: MutableList<Permission> =mutableListOf()
+                    val sdkSmall: MutableList<Permission> = mutableListOf()
                     for (permission in permissions) {
                         sdkSmall.add(Permission(permission, false, false))
                     }
@@ -152,7 +136,8 @@ object PermissionHelper {
                 }
                 return
             }
-            PermissionManager.applyPermissionListener(callBack, permissions)
+            PermissionManager.applyPermissions(permissions)
+            PermissionManager.multiPermissionCallBack = callBack
             PermissionManager.applyMultiPermission(context)
         }
     }
@@ -172,16 +157,19 @@ object PermissionHelper {
             callBack.granted(Permission(permission, false, false))
             return
         }
-        PermissionManager.applyPermissionListener(callBack, permission)
+        PermissionManager.checkPermissionCallBack = callBack
+        PermissionManager.applyPermissions(permission)
         PermissionManager.applyPermission(context)
     }
 
 
     fun onRequestPermissionsResult(
-        context: Activity?, Code: Int,
-        permissions: Array<String?>?, grantResults: IntArray?
+        context: Activity,
+        code: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
     ) {
-        PermissionManager.onRequestPermissionsResult(context, Code, permissions, grantResults)
+        PermissionManager.onRequestPermissionsResult(context, code, permissions, grantResults)
     }
 
 }

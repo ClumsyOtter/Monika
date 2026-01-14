@@ -2,6 +2,9 @@ package com.otto.monika.home.fragment.subscribe
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -53,6 +56,7 @@ class UserSubscribeListFragment : MonikaBaseFragment(), TabCountListener {
     private val viewModel: UserSubscribeViewModel by viewModels()
     private var subscribeAdapter: UserSubscribeAdapter? = null
     var quickAdapterHelper: QuickAdapterHelper? = null
+
     // 分页相关状态
     private var currentPage = 0
     private var totalCount = 0
@@ -74,8 +78,14 @@ class UserSubscribeListFragment : MonikaBaseFragment(), TabCountListener {
         loadFirstPage()
     }
 
-    override fun getContentViewId(): Int {
-        return R.layout.fragment_user_subscribe_list
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentUserSubscribeListBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -173,7 +183,7 @@ class UserSubscribeListFragment : MonikaBaseFragment(), TabCountListener {
     /**
      * BaseQuickAdapter 分页加载回调
      */
-     fun onLoadMoreRequested() {
+    fun onLoadMoreRequested() {
         currentPage++
         viewModel.loadData(currentPage, uid)
     }

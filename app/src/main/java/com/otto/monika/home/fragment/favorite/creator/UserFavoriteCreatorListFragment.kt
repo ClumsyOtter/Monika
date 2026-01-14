@@ -1,11 +1,12 @@
 package com.otto.monika.home.fragment.favorite.creator
 
 import android.os.Bundle
-import androidx.core.view.updatePadding
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
@@ -50,7 +51,7 @@ class UserFavoriteCreatorListFragment : MonikaBaseFragment(), TabCountListener {
         }
     }
 
-    private lateinit var binding: FragmentUserFavoriteCreatorListBinding
+    private lateinit var userFavoriteCreatorListBinding: FragmentUserFavoriteCreatorListBinding
     private val viewModel: UserFavoriteCreatorViewModel by viewModels()
     private var creatorAdapter: UserFavoriteCreatorAdapter? = null
     var quickAdapterHelper: QuickAdapterHelper? = null
@@ -86,8 +87,13 @@ class UserFavoriteCreatorListFragment : MonikaBaseFragment(), TabCountListener {
     }
 
 
-    override fun getContentViewId(): Int {
-        return R.layout.fragment_user_favorite_creator_list
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        userFavoriteCreatorListBinding = FragmentUserFavoriteCreatorListBinding.inflate(inflater)
+        return userFavoriteCreatorListBinding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,10 +121,11 @@ class UserFavoriteCreatorListFragment : MonikaBaseFragment(), TabCountListener {
                 }
 
             }).build()
-        binding.baseList.layoutManager = LinearLayoutManager(requireContext())
-        binding.baseList.adapter = quickAdapterHelper?.adapter
+        userFavoriteCreatorListBinding.baseList.layoutManager =
+            LinearLayoutManager(requireContext())
+        userFavoriteCreatorListBinding.baseList.adapter = quickAdapterHelper?.adapter
         // 添加 item 间距装饰器（8dp）
-        binding.baseList.addItemDecoration(VerticalSpacingItemDecoration(8))
+        userFavoriteCreatorListBinding.baseList.addItemDecoration(VerticalSpacingItemDecoration(8))
 
         creatorAdapter?.stateView = MonikaEmptyView(requireContext()).apply {
             setEmptyText("暂无订阅者(｡･ω･｡)")

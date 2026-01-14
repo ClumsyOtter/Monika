@@ -3,6 +3,7 @@ package com.otto.monika.post.publish
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.ViewGroup
@@ -25,6 +26,8 @@ import com.otto.monika.common.decoration.HorizontalSpacingItemDecoration
 import com.otto.monika.common.dialog.CommonBottomSheet
 import com.otto.monika.common.dialog.model.CommonBottomSheetData
 import com.otto.monika.common.dialog.model.CommonBottomSheetItem
+import com.otto.monika.common.utils.file.IPhotoUploader
+import com.otto.monika.common.utils.file.PhotoUploader
 import com.otto.monika.common.utils.getView
 import com.otto.monika.common.views.MonikaCommonOptionView
 import com.otto.monika.common.views.MonikaCustomButton
@@ -141,9 +144,7 @@ class MonikaPublishPostActivity : MonikaBaseActivity() {
 
     private fun recoverPostItem() {
         postItem?.let {
-            val imageList = it.images.map { url ->
-                FileObject().apply { localUrl = url }
-            }
+            val imageList = it.images
             imageAdapter.setData(imageList)
             it.tags?.let { tags ->
                 val tagsItem = tags.map { tag ->
@@ -270,18 +271,26 @@ class MonikaPublishPostActivity : MonikaBaseActivity() {
         }
 
         // 直接打开相册选择图片
-        photoUploader?.selectGallery({ filePath, uri ->
-            // 检查文件大小
-            val file = File(filePath)
-            val fileSizeMB = file.length() / 1024.0 / 1024.0
-            if (fileSizeMB > 30) {
-                Toast.makeText(this, "图片大小不能超过30M", Toast.LENGTH_SHORT).show()
-                return@selectGallery
-            }
+        photoUploader?.selectGallery(photoListener = object : IPhotoUploader.PhotoListener {
+            override fun onReceive(filePath: String?, uri: Uri?) {
+                filePath?.let {
+                    // 检查文件大小
+                    val file = File(filePath)
+                    val fileSizeMB = file.length() / 1024.0 / 1024.0
+                    if (fileSizeMB > 30) {
+                        Toast.makeText(
+                            this@MonikaPublishPostActivity,
+                            "图片大小不能超过30M",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return
+                    }
+                    // 添加到适配器
+                    imageAdapter.addImage(filePath)
+                    updatePublishButtonState()
+                }
 
-            // 添加到适配器
-            imageAdapter.addImage(filePath)
-            updatePublishButtonState()
+            }
         }, false) // false 表示不裁剪
     }
 
@@ -305,18 +314,26 @@ class MonikaPublishPostActivity : MonikaBaseActivity() {
         if (hasContent) {
             // 有内容：黑色按钮
             btnPublish.btnImageView.setImageDrawable(
-                ResourcesCompat.getDrawable(resources, R.drawable.monika_custom_btn_empty_black, null)
+                ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.monika_custom_btn_empty_black,
+                    null
+                )
             )
             btnPublish.btnTitleView.setTextColor(
-                resources.getColor(R.color.text_c4ff05, null)
+                ResourcesCompat.getColor(resources, R.color.text_c4ff05, null)
             )
         } else {
             // 无内容：灰色按钮
             btnPublish.btnImageView.setImageDrawable(
-                ResourcesCompat.getDrawable(resources, R.drawable.monika_custom_btn_empty_gray, null)
+                ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.monika_custom_btn_empty_gray,
+                    null
+                )
             )
             btnPublish.btnTitleView.setTextColor(
-                resources.getColor(R.color.text_999999, null)
+                ResourcesCompat.getColor(resources, R.color.text_999999, null)
             )
         }
     }
@@ -368,7 +385,7 @@ class MonikaPublishPostActivity : MonikaBaseActivity() {
             val textView = TextView(this).apply {
                 text = tag.content
                 textSize = 16f
-                setTextColor(resources.getColor(R.color.color_0056A8, null))
+                setTextColor(ResourcesCompat.getColor(resources,R.color.color_0056A8, null))
             }
             val layoutParams = FlexboxLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -409,7 +426,7 @@ class MonikaPublishPostActivity : MonikaBaseActivity() {
     private data class PublishData(
         val title: String,
         val content: String,
-        val images: MutableList<FileObject>,
+        val images: MutableList<String>,
         val tags: String?,
         val visibleType: Int,
         val topic: String? = null
@@ -426,7 +443,6 @@ class MonikaPublishPostActivity : MonikaBaseActivity() {
 
         val images = imageAdapter.imageList
         if (images.isEmpty()) {
-            ToastUtils.showLong("请选择图片")
             return null
         }
         val tags = viewModel.tagState.value.getDataOrNull()?.itemList?.filter { it.isSelected }
@@ -473,32 +489,8 @@ class MonikaPublishPostActivity : MonikaBaseActivity() {
      * 上传图片
      * @return 图片URL列表（逗号分隔），失败返回空字符串
      */
-    private suspend fun uploadImages(images: MutableList<FileObject>): String {
-        return suspendCancellableCoroutine { continuation ->
-            // 在协程作用域中调用 suspend 函数
-            kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main + kotlinx.coroutines.SupervisorJob())
-                .launch {
-                    try {
-                        FileUploadModel().uploadFile(
-                            files = images,
-                            callback = object : UploadCallback {
-                                override fun onSuccess(files: List<FileObject>) {
-                                    val imageUrls = files.mapNotNull { it.serverUrl }
-                                        .filter { it.isNotEmpty() }
-                                        .joinToString(",")
-                                    continuation.resume(imageUrls)
-                                }
-
-                                override fun onError(files: List<FileObject>, error: String) {
-                                    continuation.resume("")
-                                }
-                            }
-                        )
-                    } catch (e: Exception) {
-                        continuation.resume("")
-                    }
-                }
-        }
+    private fun uploadImages(images: MutableList<String>): String {
+        return images.toString()
     }
 
     /**

@@ -1,21 +1,24 @@
 package com.otto.monika.common.utils.file
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
+import com.otto.monika.common.permission.PermissionDialog
+import com.otto.monika.common.permission.SimplePermResult
 import com.otto.monika.common.utils.FileUri
 import com.yalantis.ucrop.UCrop
 import java.io.File
 
 
-class PhotoUploader : FileUploader, IPhotoUploader {
+class PhotoUploader : IPhotoUploader {
     private val mActivity: Activity
     private var mPhotoUri: Uri? = null
     private var mPhotoListener: IPhotoUploader.PhotoListener? = null
     private var isCrop = false
-    private var mPhotoDisposer: IPhotoDisposer? = null
     private var aspectX = 1.0f
     private var aspectY = 1.0f
     private var isPlaceCrop = false
@@ -26,20 +29,12 @@ class PhotoUploader : FileUploader, IPhotoUploader {
             activity,
             "请先同意相机权限和存储权限, 才能使用该功能.",
             "相机权限, 存储权限",
-            arrayOf<String>(
+            mutableListOf<String>(
                 android.Manifest.permission.CAMERA,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ),
-            object : SimplePermResult() {
-                public override fun granted() {
-                    super.granted()
-                }
-
-                public override fun rejected() {
-                    super.rejected()
-                }
-            })
+            )
+        )
     }
 
     constructor(
@@ -50,15 +45,7 @@ class PhotoUploader : FileUploader, IPhotoUploader {
         mActivity = activity
         this.aspectX = aspectX.toFloat()
         this.aspectY = aspectY.toFloat()
-        PermissionDialog.requestCamera(activity, object : SimplePermResult() {
-            public override fun granted() {
-                super.granted()
-            }
-
-            public override fun rejected() {
-                super.rejected()
-            }
-        })
+        PermissionDialog.requestCamera(activity)
     }
 
     constructor(
@@ -71,29 +58,17 @@ class PhotoUploader : FileUploader, IPhotoUploader {
         this.aspectX = aspectX.toFloat()
         this.aspectY = aspectY.toFloat()
         this.isPlaceCrop = isPlaceCrop
-        PermissionDialog.requestCamera(activity, object : SimplePermResult() {
-            public override fun granted() {
-                super.granted()
-            }
-
-            public override fun rejected() {
-                super.rejected()
-            }
-        })
-    }
-
-    override fun setPhotoDisposer(photoDisposer: IPhotoDisposer?) {
-        this.mPhotoDisposer = photoDisposer
+        PermissionDialog.requestCamera(activity)
     }
 
     override fun selectTakePhoto(photoListener: IPhotoUploader.PhotoListener?, crop: Boolean) {
         PermissionDialog.requestStorage(mActivity, object : SimplePermResult() {
-            public override fun granted() {
+            override fun granted() {
                 isCrop = crop
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 var mTmpFile: File? = null
                 try {
-                    mTmpFile = FileUtils.createTmpFile(mActivity)
+                    mTmpFile = createTmpFile(mActivity)
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                 }
@@ -113,9 +88,22 @@ class PhotoUploader : FileUploader, IPhotoUploader {
         })
     }
 
+    fun createTmpFile(context: Context): File? {
+        val dir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        try {
+            return File.createTempFile(
+                "IMG_",
+                ".jpg",
+                dir
+            )
+        } catch (ignored: java.lang.Exception) {
+        }
+        return null
+    }
+
     override fun selectGallery(photoListener: IPhotoUploader.PhotoListener?, crop: Boolean) {
         PermissionDialog.requestStorage(mActivity, object : SimplePermResult() {
-            public override fun granted() {
+            override fun granted() {
                 mPhotoListener = photoListener
                 isCrop = crop
                 val resultCode = if (isCrop) {
@@ -134,24 +122,32 @@ class PhotoUploader : FileUploader, IPhotoUploader {
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
-        data: Intent
+        data: Intent?
     ) {
         when (requestCode) {
-            IPhotoUploader.CROP -> startCropPhoto(data.data)
+            IPhotoUploader.CROP -> startCropPhoto(data?.data)
             IPhotoUploader.PHOTO_RESULT -> if (resultCode == Activity.RESULT_OK) {
-                val output: Uri? = UCrop.getOutput(data)
+                val output: Uri? = data?.let { UCrop.getOutput(it) }
                 setResult(output)
             } else if (resultCode == UCrop.RESULT_ERROR) {
-                Toast.makeText(mActivity, UCrop.getError(data)?.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    mActivity,
+                    data?.let { UCrop.getError(it) }?.message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
-            IPhotoUploader.GALLERY -> setResult(data.data)
+            IPhotoUploader.GALLERY -> setResult(data?.data)
             IPhotoUploader.TAKE_PHOTO -> gotTheImage(mPhotoUri)
             UCrop.REQUEST_CROP -> if (resultCode == Activity.RESULT_OK) {
-                val resultUri: Uri? = UCrop.getOutput(data)
+                val resultUri: Uri? = data?.let { UCrop.getOutput(it) }
                 setResult(resultUri)
             } else if (resultCode == UCrop.RESULT_ERROR) {
-                Toast.makeText(mActivity, UCrop.getError(data)?.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    mActivity,
+                    data?.let { UCrop.getError(it) }?.message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             UCrop.RESULT_ERROR -> {}
@@ -170,7 +166,7 @@ class PhotoUploader : FileUploader, IPhotoUploader {
     private fun setResult(uri: Uri?) {
         try {
             mPhotoListener?.onReceive(FileUri.getFileAbsolutePath(mActivity, uri), uri)
-        } catch (e: java.lang.Exception) {
+        } catch (e: Exception) {
         }
     }
 
@@ -189,8 +185,12 @@ class PhotoUploader : FileUploader, IPhotoUploader {
         if (isPlaceCrop) {
             //裁剪后保存到文件中
             checkDir()
-            val destinationUri =
-                Uri.fromFile(File(KeyConstant.BASE_DIR, "SampleCropImage.jpeg"))
+            val destinationUri = Uri.fromFile(
+                File(
+                    mActivity.externalCacheDir?.absolutePath + "/SuperJK",
+                    "SampleCropImage.jpeg"
+                )
+            )
             val options: UCrop.Options = UCrop.Options()
             options.setHideBottomControls(true)
             UCrop.of(uri, destinationUri)
@@ -211,7 +211,7 @@ class PhotoUploader : FileUploader, IPhotoUploader {
     }
 
     private fun checkDir() {
-        val file: File = java.io.File(KeyConstant.BASE_DIR)
+        val file = File(mActivity.externalCacheDir?.absolutePath + "/SuperJK")
         if (!file.exists()) {
             file.mkdirs()
         }

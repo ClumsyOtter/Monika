@@ -18,12 +18,15 @@ import com.otto.monika.R
  * 内容从上到下：标题、内容、取消和确定按钮
  * 使用 Dialog 而不是 DialogFragment 实现
  */
-class MonikaAgreementBottomDialog(context: Context) : Dialog(context, R.style.BottomDialog) {
+class MonikaAgreementBottomDialog(context: Context, themeResId: Int = R.style.BottomDialog) :
+    Dialog(context, themeResId) {
 
     private lateinit var titleText: TextView
     private lateinit var contentText: TextView
     private lateinit var cancelBtn: TextView
     private lateinit var confirmBtn: TextView
+
+    private var gravity: Int = Gravity.BOTTOM
 
     private var title: String = ""
     private var content: String = ""
@@ -80,6 +83,12 @@ class MonikaAgreementBottomDialog(context: Context) : Dialog(context, R.style.Bo
         return this
     }
 
+
+    fun setGravity(gravity: Int) {
+        this.gravity = gravity
+    }
+
+
     /**
      * 设置确定按钮点击监听
      */
@@ -90,10 +99,10 @@ class MonikaAgreementBottomDialog(context: Context) : Dialog(context, R.style.Bo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_agreement_bottom, null)
         setContentView(view)
-        
+
         initViews(view)
         setupListeners()
     }
@@ -103,7 +112,7 @@ class MonikaAgreementBottomDialog(context: Context) : Dialog(context, R.style.Bo
         // 设置对话框位置和宽度
         window?.let { window ->
             val params = window.attributes
-            params.gravity = Gravity.BOTTOM
+            params.gravity = gravity
 
             // 获取屏幕宽度
             val displayMetrics = context.resources.displayMetrics
@@ -128,21 +137,21 @@ class MonikaAgreementBottomDialog(context: Context) : Dialog(context, R.style.Bo
         contentText = view.findViewById(R.id.tv_agreement_dialog_content)
         cancelBtn = view.findViewById(R.id.btn_agreement_dialog_cancel)
         confirmBtn = view.findViewById(R.id.btn_agreement_dialog_confirm)
-        
+
         if (title.isNotEmpty()) {
             titleText.text = title
         }
-        
+
         // 设置文本内容
         if (content.isNotEmpty()) {
             contentText.text = content
         }
-        
+
         cancelBtn.apply {
             isVisible = cancelText?.isNotEmpty() == true
             text = cancelText
         }
-        
+
         confirmBtn.apply {
             text = confirmText
             isVisible = confirmText?.isNotEmpty() == true

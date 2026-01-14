@@ -8,7 +8,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Settings
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
+import com.otto.monika.api.network.utils.AndroidUtils
+import com.otto.monika.common.dialog.MonikaAgreementBottomDialog
 import com.otto.monika.common.permission.listener.CheckMultiPermissionCallBack
 import com.otto.monika.common.permission.model.Permission
 
@@ -29,47 +30,45 @@ open class SimplePermResult : OnPermResult {
 
 object PermissionDialog {
 
-    const val REQUEST_CODE_SETTING = 2255
-
-    fun requestCamera(ctx: Activity?, cb: OnPermResult?) {
+    fun requestCamera(ctx: Activity?, onPermResult: OnPermResult? = null) {
         request(
             ctx, "请先同意相机权限, 才能使用该功能.",
             "相机权限",
-            arrayOf(Manifest.permission.CAMERA),
-            cb
+            mutableListOf(Manifest.permission.CAMERA),
+            onPermResult
         )
     }
 
-    fun requestStorageAndCamera(ctx: Activity?, cb: OnPermResult?) {
+    fun requestStorageAndCamera(ctx: Activity?, onPermResult: OnPermResult? = null) {
         request(
             ctx, "请先同意读取权限, 才能使用该功能.",
             "存储权限",
-            arrayOf(
+            mutableListOf(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ),
-            cb
+            onPermResult
         )
     }
 
-    fun requestStorage(ctx: Activity?, cb: OnPermResult?) {
+    fun requestStorage(ctx: Activity?, onPermResult: OnPermResult? = null) {
         request(
             ctx, "请先同意读取权限, 才能使用该功能.",
             "存储权限",
-            arrayOf(
+            mutableListOf(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ),
-            cb
+            onPermResult
         )
     }
 
-    fun requestContact(ctx: Activity?, cb: OnPermResult?) {
+    fun requestContact(ctx: Activity?, onPermResult: OnPermResult? = null) {
         request(
             ctx, "请先同意读取通讯录权限, 才能使用该功能.",
             "通讯录权限",
-            arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS),
-            cb
+            mutableListOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS),
+            onPermResult
         )
     }
 
@@ -77,103 +76,86 @@ object PermissionDialog {
         ctx: Activity?,
         info: String,
         permissionText: String,
-        permissions: Array<String>,
-        cb: OnPermResult?
+        permissions: MutableList<String>,
+        onPermResult: OnPermResult? = null
     ) {
         if (ctx == null) return
-        if (cb == null) return
         permissions.filter { per ->
             ContextCompat.checkSelfPermission(ctx, per) != PackageManager.PERMISSION_GRANTED
         }.takeIf { it.isNotEmpty() }?.let { needRequestPermission ->
-            val commonDialog = CommonBaseDialog.newInstance()
-            commonDialog.setTopLineGone()
-            commonDialog.setContent(info)
-            commonDialog.setTitle("温馨提示")
-            commonDialog.setRightBtnText("好")
-            commonDialog.setLeftBtnText("不允许")
-            commonDialog.setListener(object : CommonBaseDialog.CommonDialogListener {
-                override fun commonDialogBtnOkListener(
-                    dialogFragment: DialogFragment,
-                    type: Int,
-                    position: Int
-                ) {
-                    PermissionHelper.applyPermission(
-                        ctx, needRequestPermission.toTypedArray(),
-                        object :
-                            CheckMultiPermissionCallBack {
+            val monikaAgreementBottomDialog = MonikaAgreementBottomDialog(ctx)
+            monikaAgreementBottomDialog.setTitle("温馨提示")
+            monikaAgreementBottomDialog.setCancelText("好")
+            monikaAgreementBottomDialog.setConfirmText("不允许")
+            monikaAgreementBottomDialog.setOnConfirmClickListener {
+                PermissionHelper.applyPermission(
+                    ctx, needRequestPermission.toMutableList(),
+                    object : CheckMultiPermissionCallBack {
 
-                            override fun granted(p0: MutableList<Permission>) {
-                                cb.granted()
-                            }
+                        override fun granted(permissions: MutableList<Permission>) {
+                            onPermResult?.granted()
+                        }
 
-                            override fun deniedJustShow(p0: MutableList<Permission>) {
-                                val builder = AlertDialog.Builder(ctx)
-                                builder.setCancelable(false)
-                                builder.setTitle(String.format("请允许获取%s", permissionText))
-                                builder.setMessage(
-                                    String.format(
-                                        "我们需要获取%s,否则您将无法正常使用。",
-                                        permissionText
-                                    )
+                        override fun deniedJustShow(permissions: MutableList<Permission>) {
+                            val builder = AlertDialog.Builder(ctx)
+                            builder.setCancelable(false)
+                            builder.setTitle(String.format("请允许获取%s", permissionText))
+                            builder.setMessage(
+                                String.format(
+                                    "我们需要获取%s,否则您将无法正常使用。",
+                                    permissionText
                                 )
-                                builder.setNegativeButton("取消") { _, _ -> cb.rejected() }
-                                builder.setPositiveButton("去授权") { _, _ ->
-                                    request(
-                                        ctx,
-                                        info,
-                                        permissionText,
-                                        needRequestPermission.toTypedArray(),
-                                        cb
-                                    )
-                                }
-                                val dialog = builder.create()
-                                dialog.show()
-                            }
-
-                            override fun deniedNeverShow(p0: MutableList<Permission>) {
-                                val builder = AlertDialog.Builder(ctx)
-                                builder.setCancelable(false)
-                                builder.setTitle(String.format("请允许获取%s", permissionText))
-                                builder.setMessage(
-                                    String.format(
-                                        "由于%s无法获取%s，不能正常运行，请开启权限后再使用。\n设置路径：系统设置->%s->权限",
-                                        SystemInfo.getAppName(ctx),
-                                        permissionText,
-                                        SystemInfo.getAppName(ctx),
-                                    )
+                            )
+                            builder.setNegativeButton("取消") { _, _ -> onPermResult?.rejected() }
+                            builder.setPositiveButton("去授权") { _, _ ->
+                                request(
+                                    ctx,
+                                    info,
+                                    permissionText,
+                                    needRequestPermission.toMutableList(),
+                                    onPermResult
                                 )
-                                builder.setNegativeButton("拒绝") { _, _ -> cb.rejected() }
-                                builder.setPositiveButton("去设置") { _, _ ->
-                                    val intent =
-                                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                    intent.data = Uri.fromParts("package", ctx.packageName, null)
-                                    ctx.startActivity(intent)
-                                }
-                                val dialog = builder.create()
-                                dialog.show()
                             }
+                            val dialog = builder.create()
+                            dialog.show()
+                        }
 
-                            override fun end() {
+                        override fun deniedNeverShow(permissions: MutableList<Permission>) {
+                            val builder = AlertDialog.Builder(ctx)
+                            builder.setCancelable(false)
+                            builder.setTitle(String.format("请允许获取%s", permissionText))
+                            builder.setMessage(
+                                String.format(
+                                    "由于%s无法获取%s，不能正常运行，请开启权限后再使用。\n设置路径：系统设置->%s->权限",
+                                    AndroidUtils.getApp(ctx),
+                                    permissionText,
+                                    AndroidUtils.getApp(ctx),
+                                )
+                            )
+                            builder.setNegativeButton("拒绝") { _, _ -> onPermResult?.rejected() }
+                            builder.setPositiveButton("去设置") { _, _ ->
+                                val intent =
+                                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                intent.data = Uri.fromParts("package", ctx.packageName, null)
+                                ctx.startActivity(intent)
                             }
-                        })
-                }
+                            val dialog = builder.create()
+                            dialog.show()
+                        }
 
-                override fun commonDialogBtnCancelListener(
-                    dialogFragment: DialogFragment,
-                    type: Int,
-                    position: Int
-                ) {
-                }
-            })
-            instance().showDialog(commonDialog, ctx)
-        } ?: cb.granted()
+                        override fun end() {
+                        }
+                    })
+            }
+            monikaAgreementBottomDialog.show()
+        } ?: onPermResult?.granted()
     }
 
     fun requestStorageNoTip(ctx: Activity?, cb: OnPermResult?) {
         requestNoTip(
             ctx,
             "存储权限",
-            arrayOf(
+            mutableListOf(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ),
@@ -185,7 +167,7 @@ object PermissionDialog {
         requestNoTip(
             ctx,
             "通讯录权限",
-            arrayOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS),
+            mutableListOf(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS),
             cb
         )
     }
@@ -193,23 +175,26 @@ object PermissionDialog {
     fun requestNoTip(
         ctx: Activity?,
         permissionText: String,
-        permissions: Array<String>,
+        permissions: MutableList<String>,
         cb: OnPermResult?
     ) {
         if (ctx == null) return
         if (cb == null) return
         permissions.filter { per ->
-            ContextCompat.checkSelfPermission(ctx, per) != PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(
+                ctx,
+                per
+            ) != PackageManager.PERMISSION_GRANTED
         }.takeIf { it.isNotEmpty() }?.let { needRequestPermission ->
             PermissionHelper.applyPermission(
-                ctx, needRequestPermission.toTypedArray(),
+                ctx, needRequestPermission.toMutableList(),
                 object : CheckMultiPermissionCallBack {
 
-                    override fun granted(permissions: MutableList<Permission>?) {
+                    override fun granted(permissions: MutableList<Permission>) {
                         cb.granted()
                     }
 
-                    override fun deniedJustShow(permissions: MutableList<Permission>?) {
+                    override fun deniedJustShow(permissions: MutableList<Permission>) {
                         val builder = AlertDialog.Builder(ctx)
                         builder.setCancelable(false)
                         builder.setTitle(String.format("请允许获取%s", permissionText))
@@ -224,7 +209,7 @@ object PermissionDialog {
                             requestNoTip(
                                 ctx,
                                 permissionText,
-                                needRequestPermission.toTypedArray(),
+                                needRequestPermission.toMutableList(),
                                 cb
                             )
                         }
@@ -232,16 +217,16 @@ object PermissionDialog {
                         dialog.show()
                     }
 
-                    override fun deniedNeverShow(permissions: MutableList<Permission>?) {
+                    override fun deniedNeverShow(permissions: MutableList<Permission>) {
                         val builder = AlertDialog.Builder(ctx)
                         builder.setCancelable(false)
                         builder.setTitle(String.format("请允许获取%s", permissionText))
                         builder.setMessage(
                             String.format(
                                 "由于%s无法获取%s，不能正常运行，请开启权限后再使用。\n设置路径：系统设置->%s->权限",
-                                SystemInfo.getAppName(ctx),
+                                AndroidUtils.getApp(ctx),
                                 permissionText,
-                                SystemInfo.getAppName(ctx)
+                                AndroidUtils.getApp(ctx)
                             )
                         )
                         builder.setNegativeButton("拒绝") { _, _ -> cb.rejected() }

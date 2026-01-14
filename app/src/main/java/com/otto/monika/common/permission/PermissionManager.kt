@@ -17,57 +17,18 @@ import com.otto.monika.common.permission.model.Permission
  * 数据通信部分
  */
 object PermissionManager {
-    private var listener: CheckPermissionCallBack? = null
-    private var listenerMulti: CheckMultiPermissionCallBack? = null
-    private var listenerCheckSelf: CheckSelfPermissionCallBack? = null
+    var checkPermissionCallBack: CheckPermissionCallBack? = null
+    var multiPermissionCallBack: CheckMultiPermissionCallBack? = null
+    var selfPermissionCallBack: CheckSelfPermissionCallBack? = null
     var permissions: MutableList<String> = mutableListOf()
 
-    /**
-     * 设置申请的权限数组及监听回调
-     *
-     * @param listener
-     * @param permission
-     */
-    fun applyPermissionListener(listener: CheckPermissionCallBack, vararg permission: String) {
-        this.listener = listener
+    fun applyPermissions(vararg permission: String) {
         permissions.addAll(permission)
     }
 
-    /**
-     * 设置申请的权限数组及监听回调
-     *
-     * @param listener
-     * @param permission
-     */
-    fun applyPermissionListener(
-        listener: CheckMultiPermissionCallBack,
-        vararg permission: String
-    ) {
-        this.listenerMulti = listener
-        permissions.addAll(permission)
+    fun applyPermissions(permissions: MutableList<String>) {
+        this.permissions.addAll(permissions)
     }
-
-    /**
-     * 设置申请的权限数组及监听回调
-     *
-     * @param listener
-     * @param permission
-     */
-    fun applyPermissionListener(listener: CheckSelfPermissionCallBack, vararg permission: String) {
-        this.listenerCheckSelf = listener
-        permissions.addAll(permission)
-    }
-
-
-    fun getListener(): CheckPermissionCallBack? {
-        return listener
-    }
-
-    val multiListener: CheckMultiPermissionCallBack?
-        get() = listenerMulti
-
-    val checkSelfListener: CheckSelfPermissionCallBack?
-        get() = listenerCheckSelf
 
 
     /**
@@ -76,15 +37,15 @@ object PermissionManager {
      * @param permission
      */
     fun granted(permission: Permission?) {
-        if (getListener() != null) getListener()?.granted(permission)
+        checkPermissionCallBack?.granted(permission)
     }
 
     fun deniedJustShow(permission: Permission?) {
-        if (getListener() != null) getListener()?.deniedJustShow(permission)
+        checkPermissionCallBack?.deniedJustShow(permission)
     }
 
     fun deniedNeverShow(permission: Permission?) {
-        if (getListener() != null) getListener()?.deniedNeverShow(permission)
+        checkPermissionCallBack?.deniedNeverShow(permission)
     }
 
 
@@ -93,20 +54,20 @@ object PermissionManager {
      *
      * @param permissions
      */
-    fun multiGranted(permissions: MutableList<Permission>?) {
-        if (this.multiListener != null) this.multiListener?.granted(permissions)
+    fun multiGranted(permissions: MutableList<Permission>) {
+        this.multiPermissionCallBack?.granted(permissions)
     }
 
-    fun multiDeniedJustShow(permissions: MutableList<Permission>?) {
-        if (this.multiListener != null) this.multiListener?.deniedJustShow(permissions)
+    fun multiDeniedJustShow(permissions: MutableList<Permission>) {
+        multiPermissionCallBack?.deniedJustShow(permissions)
     }
 
-    fun multiDeniedNeverShow(permissions: MutableList<Permission>?) {
-        if (this.multiListener != null) this.multiListener?.deniedNeverShow(permissions)
+    fun multiDeniedNeverShow(permissions: MutableList<Permission>) {
+        multiPermissionCallBack?.deniedNeverShow(permissions)
     }
 
     fun multiEnd() {
-        if (this.multiListener != null) this.multiListener?.end()
+        multiPermissionCallBack?.end()
     }
 
     /**
@@ -114,25 +75,25 @@ object PermissionManager {
      *
      * @param permissions
      */
-    fun checkSelfGranted(permissions: Array<String?>?) {
-        if (this.checkSelfListener != null) this.checkSelfListener?.granted(permissions)
+    fun checkSelfGranted(permissions: MutableList<String>) {
+        selfPermissionCallBack?.granted(permissions)
     }
 
-    fun checkSelfShouldRequest(permissions: Array<String?>?) {
-        if (this.checkSelfListener != null) this.checkSelfListener?.shouldRequest(permissions)
+    fun checkSelfShouldRequest(permissions: MutableList<String>) {
+        selfPermissionCallBack?.shouldRequest(permissions)
     }
 
     fun clean() {
-        listener = null
-        listenerMulti = null
-        listenerCheckSelf = null
+        checkPermissionCallBack = null
+        multiPermissionCallBack = null
+        selfPermissionCallBack = null
     }
 
 
     fun checkPermission(context: Context) {
-        val grantedList: MutableList<String?> = ArrayList()
+        val grantedList: MutableList<String> = mutableListOf()
         //已通过的权限
-        val shouldRequest: MutableList<String?> = ArrayList()
+        val shouldRequest: MutableList<String> = mutableListOf()
         //需申请的权限
         val permissions = permissions
         require(!(permissions.isEmpty())) { "list is not null or size 0" }
@@ -147,10 +108,8 @@ object PermissionManager {
                 grantedList.add(permission)
             }
         }
-        val grantedString = grantedList.toTypedArray<String?>()
-        val shouldRequestString = shouldRequest.toTypedArray<String?>()
-        checkSelfGranted(grantedString)
-        checkSelfShouldRequest(shouldRequestString)
+        checkSelfGranted(grantedList)
+        checkSelfShouldRequest(grantedList)
         clean()
     }
 
@@ -261,8 +220,10 @@ object PermissionManager {
      * @param grantResults
      */
     fun onRequestPermissionsResult(
-        context: Activity, Code: Int,
-        permissions: Array<String>, grantResults: IntArray
+        context: Activity,
+        Code: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
     ) {
         if (Code == 1001) {
             if (grantResults.isEmpty()) {

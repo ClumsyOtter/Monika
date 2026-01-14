@@ -1,12 +1,13 @@
 package com.otto.monika.home.fragment.post
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
@@ -74,7 +75,7 @@ class UserPostListFragment : MonikaBaseFragment(), TabCountListener {
         }
     }
 
-    private lateinit var binding: FragmentUserPostListBinding
+    private lateinit var userPostListBinding: FragmentUserPostListBinding
     private val viewModel: UserPostViewModel by viewModels()
     private var postAdapter: UserPostAdapter? = null
     var quickAdapterHelper: QuickAdapterHelper? = null
@@ -106,7 +107,6 @@ class UserPostListFragment : MonikaBaseFragment(), TabCountListener {
         }
     }
 
-    // TabCountListener 相关
     private var onCountChangeListener: ((Int) -> Unit)? = null
     override fun onFinishCreateView() {
         initViews()
@@ -114,8 +114,13 @@ class UserPostListFragment : MonikaBaseFragment(), TabCountListener {
         loadFirstPage()
     }
 
-    override fun getContentViewId(): Int {
-        return R.layout.fragment_user_post_list
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        userPostListBinding = FragmentUserPostListBinding.inflate(inflater)
+        return userPostListBinding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -153,10 +158,15 @@ class UserPostListFragment : MonikaBaseFragment(), TabCountListener {
                 }
 
             }).build()
-        binding.baseList.layoutManager = LinearLayoutManager(requireContext())
-        binding.baseList.adapter = quickAdapterHelper?.adapter
+        userPostListBinding.baseList.layoutManager = LinearLayoutManager(requireContext())
+        userPostListBinding.baseList.adapter = quickAdapterHelper?.adapter
         // 添加分割线装饰器
-        binding.baseList.addItemDecoration(DividerItemDecoration(3, R.color.rank_list_bg))
+        userPostListBinding.baseList.addItemDecoration(
+            DividerItemDecoration(
+                3,
+                R.color.rank_list_bg
+            )
+        )
         // 设置分页加载监听器
         postAdapter?.stateView = MonikaEmptyView(requireContext()).apply {
             setEmptyText("暂无动态(｡･ω･｡)")
@@ -284,7 +294,7 @@ class UserPostListFragment : MonikaBaseFragment(), TabCountListener {
     /**
      * BaseQuickAdapter 分页加载回调
      */
-     fun onLoadMoreRequested() {
+    fun onLoadMoreRequested() {
         // 加载下一页
         currentPage++
         viewModel.loadData(currentPage, uid, sourceFrom)

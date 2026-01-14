@@ -1,12 +1,13 @@
 package com.otto.monika.home.fragment.artwork
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
@@ -45,7 +46,8 @@ class UserArtworkListFragment : MonikaBaseFragment(), TabCountListener {
         }
     }
 
-    private lateinit var binding: FragmentUserArtworkListBinding
+    private lateinit var userArtworkListBinding: FragmentUserArtworkListBinding
+
     private val viewModel: UserArtworkViewModel by viewModels()
     var quickAdapterHelper: QuickAdapterHelper? = null
     private var artworkAdapter: UserArtworkAdapter? = null
@@ -64,10 +66,6 @@ class UserArtworkListFragment : MonikaBaseFragment(), TabCountListener {
         loadFirstPage()
     }
 
-    override fun getContentViewId(): Int {
-        return R.layout.fragment_user_artwork_list
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -75,7 +73,14 @@ class UserArtworkListFragment : MonikaBaseFragment(), TabCountListener {
         }
     }
 
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        userArtworkListBinding = FragmentUserArtworkListBinding.inflate(inflater)
+        return userArtworkListBinding.root
+    }
     /**
      * 初始化视图
      */
@@ -94,10 +99,10 @@ class UserArtworkListFragment : MonikaBaseFragment(), TabCountListener {
                 }
 
             }).build()
-        binding.baseList.layoutManager = LinearLayoutManager(requireContext())
-        binding.baseList.adapter = quickAdapterHelper!!.adapter
+        userArtworkListBinding.baseList.layoutManager = LinearLayoutManager(requireContext())
+        userArtworkListBinding.baseList.adapter = quickAdapterHelper!!.adapter
         // 添加 item 间距装饰器（20dp）
-        binding.baseList.addItemDecoration(VerticalSpacingItemDecoration(20))
+        userArtworkListBinding.baseList.addItemDecoration(VerticalSpacingItemDecoration(20))
         // 设置分页加载监听器
         artworkAdapter?.stateView = MonikaEmptyView(requireContext()).apply {
             setEmptyText("暂无作品(｡･ω･｡)")

@@ -149,15 +149,11 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
         return arguments?.getBoolean(ARG_ACTION_BAR)
     }
 
-    override fun getContentViewId(): Int {
-        return R.layout.fragment_my_page
-    }
-
     private fun onTabSelected(position: Int, pageChange: Boolean = false) {
         tabList.forEachIndexed { index, monikaTabItem ->
             monikaTabItem.setSelected(position == index)
             if (pageChange) {
-                mDataBinding.viewPager.setCurrentItem(position, true)
+                myPageBinding.viewPager.setCurrentItem(position, true)
             }
         }
         fragments.forEachIndexed { index, fragment ->
@@ -167,21 +163,21 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
 
     private fun initListener() {
         initAccountInfoListener()
-        mDataBinding.accountCreatorOptionSetting.onOptionClickListener = {
+        myPageBinding.accountCreatorOptionSetting.onOptionClickListener = {
             Toast.makeText(requireActivity(), "设置", Toast.LENGTH_SHORT).show()
             MonikaSettingActivity.enter(requireActivity())
         }
 
         // 发动态悬浮按钮点击事件
-        mDataBinding.ivAccountAddPost.setOnClickListener {
+        myPageBinding.ivAccountAddPost.setOnClickListener {
             handlePublishDynamicClick()
         }
         // 收藏/取消收藏点击事件
-        mDataBinding.monikaAccountBottomBar.onCollectionClick = { userInfo ->
+        myPageBinding.monikaAccountBottomBar.onCollectionClick = { userInfo ->
             // 根据用户收藏状态触发收藏或取消收藏
             handleUserCollect(userInfo)
         }
-        mDataBinding.monikaAccountBottomBar.onSubscribeClick = { userInfo ->
+        myPageBinding.monikaAccountBottomBar.onSubscribeClick = { userInfo ->
             // 使用 Activity Result API 启动订阅支持页面
             val intent = SubscriptionSupportActivity.getIntent(requireContext(), userInfo?.uid)
             subscriptionSupportLauncher.launch(intent)
@@ -196,7 +192,7 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
     }
 
     private fun initAccountInfoListener() {
-        mDataBinding.viewAccountHead.setAccountHeadListener(object : AccountHeadListener() {
+        myPageBinding.viewAccountHead.setAccountHeadListener(object : AccountHeadListener() {
             override fun onApplyToCreatorClick(profileResponse: MonikaUserInfoModel) {
                 applyToCreatorLauncher.launch(
                     ApplyToCreatorActivity.getIntent(
@@ -262,7 +258,7 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
         if (isSelected) {
             runCatching {
                 //用户重新进入之后，向子fragment传递选中信息
-                val position = mDataBinding.viewPager.currentItem
+                val position = myPageBinding.viewPager.currentItem
                 fragments.forEachIndexed { index, fragment ->
                     (fragment as? TabSelectListener)?.onFragmentSelected(index == position)
                 }
@@ -271,7 +267,7 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
     }
 
     fun initBottomSheetBehavior() {
-        mDataBinding.dropFrameView.post {
+        myPageBinding.dropFrameView.post {
             initBottomSheetBehavior(hasActionBar = showActionbar() ?: false)
         }
     }
@@ -280,9 +276,9 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
         super.onNavBarAlphaChange(value)
         if (showActionbar() == true) {
             if (value.toInt() == 0) {
-                mDataBinding.monikaAccountActionBar.fullShow(false)
+                myPageBinding.monikaAccountActionBar.fullShow(false)
             } else {
-                mDataBinding.monikaAccountActionBar.fullShow(true)
+                myPageBinding.monikaAccountActionBar.fullShow(true)
             }
         }
     }
@@ -291,11 +287,11 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
      * 设置ActionBar的WindowInsets，向下padding状态栏高度
      */
     private fun setupActionBarWindowInsets() {
-        mDataBinding.monikaAccountActionBar.isVisible = showActionbar() ?: false
-        mDataBinding.monikaAccountActionBar.onBackClickListener = {
+        this@MonikaMinePageFragment.myPageBinding.monikaAccountActionBar.isVisible = showActionbar() ?: false
+        myPageBinding.monikaAccountActionBar.onBackClickListener = {
             requireActivity().finish()
         }
-        ViewCompat.setOnApplyWindowInsetsListener(mDataBinding.monikaAccountActionBar) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(myPageBinding.monikaAccountActionBar) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             // 获取状态栏高度
             val statusBarHeight = systemBars.top
@@ -330,19 +326,19 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
                 onSuccess = { data ->
                     hideLoadingDialog()
                     if (data != null) {
-                        mDataBinding.ivAccountAddPost.isVisible = data.isSelf() && data.isCreator()
-                        mDataBinding.monikaAccountBottomBar.setCyUserInfoModel(data)
-                        mDataBinding.accountCreatorOption.isVisible = data.isSelf()
-                        mDataBinding.monikaAccountActionBar.setAvatar(data.avatar)
-                        mDataBinding.monikaAccountActionBar.setName(data.nickname)
-                        mDataBinding.viewAccountHead.setProfileResponse(data)
+                        myPageBinding.ivAccountAddPost.isVisible = data.isSelf() && data.isCreator()
+                        myPageBinding.monikaAccountBottomBar.setCyUserInfoModel(data)
+                        myPageBinding.accountCreatorOption.isVisible = data.isSelf()
+                        myPageBinding.monikaAccountActionBar.setAvatar(data.avatar)
+                        myPageBinding.monikaAccountActionBar.setName(data.nickname)
+                        myPageBinding.viewAccountHead.setProfileResponse(data)
                         // 根据用户属性动态生成 Tab 和 Fragment（仅在用户类型改变时重新生成）
                         setupTabsAndFragments(data)
-                        mDataBinding.accountBackdropWall.apply {
+                        myPageBinding.accountBackdropWall.apply {
                             setImageList(data.collectBg)
                         }
                         //数据更新之后高度会变化，所以做适当延迟更新peekHeight
-                        mDataBinding.dropFrameView.postDelayed({
+                        myPageBinding.dropFrameView.postDelayed({
                             updatePeekHeight(hasActionBar = showActionbar() ?: false)
                         }, 100)
                     }
@@ -386,7 +382,7 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
                             } else {
                                 currentCollectNum + 1
                             }
-                            mDataBinding.monikaAccountBottomBar.setCyUserInfoModel(userInfoModel)
+                            myPageBinding.monikaAccountBottomBar.setCyUserInfoModel(userInfoModel)
                             //发送消息通知
                             EventBus.getDefault().post(
                                 CollectCreatorEvent(
@@ -429,10 +425,10 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
             )
         }
         // 清空现有的 Tab
-        mDataBinding.llAccountTabsContainer.removeAllViews()
+        myPageBinding.llAccountTabsContainer.removeAllViews()
         tabList.clear()
         // 隐藏 Tab 容器（如果没有 tab 配置）
-        (mDataBinding.llAccountTabsContainer.parent as? android.view.View)?.isVisible =
+        (myPageBinding.llAccountTabsContainer.parent as? android.view.View)?.isVisible =
             tabConfigs?.isNotEmpty() == true
         // 创建 Fragment 列表
         fragments.clear()
@@ -443,7 +439,7 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
             // 动态创建 Tab
             tabConfigs?.forEachIndexed { index, tabConfig ->
                 val tabItem = generateTabItem(index, tabConfig)
-                mDataBinding.llAccountTabsContainer.addView(tabItem)
+                myPageBinding.llAccountTabsContainer.addView(tabItem)
                 tabList.add(tabItem)
                 // 保存原始标题
                 tabOriginalTitles[index] = tabConfig.title
@@ -462,11 +458,11 @@ class MonikaMinePageFragment : BaseUserLogicFragment() {
         }
         // 设置 ViewPager 适配器
         val pageAdapter = ContentPageAdapter(childFragmentManager, lifecycle, fragments)
-        mDataBinding.viewPager.adapter = pageAdapter
-        mDataBinding.viewPager.offscreenPageLimit = fragments.size.coerceAtMost(4)
+        myPageBinding.viewPager.adapter = pageAdapter
+        myPageBinding.viewPager.offscreenPageLimit = fragments.size.coerceAtMost(4)
         // 设置 ViewPager 页面改变监听（仅在有 tab 时）
         if (tabConfigs?.isNotEmpty() == true) {
-            mDataBinding.viewPager.registerOnPageChangeCallback(object :
+            myPageBinding.viewPager.registerOnPageChangeCallback(object :
                 ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(p0: Int) {
                     onTabSelected(p0)

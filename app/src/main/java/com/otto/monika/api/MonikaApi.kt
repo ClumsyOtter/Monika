@@ -47,6 +47,7 @@ import com.otto.monika.api.model.user.request.EditUserRequest
 import com.otto.monika.api.model.user.request.UserProfileRequest
 import com.otto.monika.api.model.user.response.MonikaUserInfoModel
 import com.otto.monika.api.model.user.response.UserIncomeResponse
+import com.otto.monika.api.network.host.HOST
 import com.otto.monika.home.model.MonikaBannerData
 import com.otto.monika.home.model.MonikaIntroduceData
 import com.otto.monika.home.model.MonikaPostData
@@ -66,6 +67,7 @@ import retrofit2.http.POST
  * 2. 支持协程（suspend fun）和回调（Call）两种方式
  * 3. 使用 ApiResponse 进行结果处理
  */
+@HOST(releaseUrl = "https://service.ciya.club", testUrl = "https://service-test.ciya.club")
 interface MonikaApi {
 
     @POST("/app/login/asVisitor")

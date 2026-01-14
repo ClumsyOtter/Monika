@@ -3,6 +3,9 @@ package com.otto.monika.home.fragment.favorite
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -52,15 +55,19 @@ class UserFavoriteListFragment : MonikaBaseFragment() {
         initViews()
     }
 
-    override fun getContentViewId(): Int {
-        return R.layout.fragment_user_favorite_list
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             uid = it.getString(ARG_UID)
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     /**

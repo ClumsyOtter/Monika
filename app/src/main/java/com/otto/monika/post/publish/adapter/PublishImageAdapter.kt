@@ -13,7 +13,7 @@ import com.otto.monika.R
  * 发布动态图片列表适配器
  */
 class PublishImageAdapter() : RecyclerView.Adapter<PublishImageAdapter.ViewHolder>() {
-    val imageList: MutableList<FileObject> = mutableListOf()
+    val imageList: MutableList<String> = mutableListOf()
 
     // 添加按钮点击回调
     var onAddImageClickListener: (() -> Unit)? = null
@@ -32,7 +32,7 @@ class PublishImageAdapter() : RecyclerView.Adapter<PublishImageAdapter.ViewHolde
         }
     }
 
-    fun setData(images: List<FileObject>) {
+    fun setData(images: List<String>) {
         imageList.clear()
         imageList.addAll(images)
         notifyDataSetChanged()
@@ -62,7 +62,7 @@ class PublishImageAdapter() : RecyclerView.Adapter<PublishImageAdapter.ViewHolde
             holder.ivDelete.isVisible = true
             holder.ivAdd.isVisible = false
             val imageIndex = position - 1 // 因为Add按钮在position 0，所以图片索引需要减1
-            val imagePath = imageList[imageIndex].localUrl
+            val imagePath = imageList[imageIndex]
             Glide.with(holder.itemView.context).load(imagePath).into(holder.ivImage)
             holder.ivDelete.setOnClickListener {
                 onDeleteClickListener?.invoke(imageIndex) // 传递实际图片索引
@@ -90,7 +90,7 @@ class PublishImageAdapter() : RecyclerView.Adapter<PublishImageAdapter.ViewHolde
             return
         }
         // 插入到第一个位置（Add按钮后面），这样用户可以看到刚刚添加的图片
-        imageList.add(FileObject().apply { localUrl = imagePath })
+        imageList.add(imagePath)
         notifyDataSetChanged()
     }
 

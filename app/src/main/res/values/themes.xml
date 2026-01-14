@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.Monika" parent="android:Theme.Material.Light.NoActionBar" />
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Monika" parent="android:Theme.Material.Light.NoActionBar" >
+        <!--系统颜色-->
+        <!--这里颜色的值本来可以使用形如?attr/clColorPrimary的方式, 但是在Android 10以下, 并不支持套娃-->
+        <item name="colorPrimary">#FFFFFFFF</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">#FFD500</item>
+        <!--windowBackground在10以下只能用引用的方式, 否则会获取不到颜色-->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+    </style>
 </resources>

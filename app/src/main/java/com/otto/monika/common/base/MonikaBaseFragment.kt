@@ -21,7 +21,7 @@ abstract class MonikaBaseFragment : Fragment(), TabSelectListener {
 
     private var loadingDialog: Dialog? = null
 
-    public override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,7 +65,9 @@ abstract class MonikaBaseFragment : Fragment(), TabSelectListener {
 
     abstract fun onFinishCreateView()
 
-    abstract fun getContentViewId(): Int
+    open fun getContentViewId(): Int {
+        return 0
+    }
 
 
     fun <T : View?> findViewById(@IdRes id: Int): T? {
