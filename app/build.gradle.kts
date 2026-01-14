@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.otto.monika"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.androidx.datastore)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.ucrop)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.openimage)
     implementation(libs.eventbus)

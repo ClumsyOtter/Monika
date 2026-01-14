@@ -1,4 +1,0 @@
-app/src/main/res/drawable-xhdpi/pm_photo_place_holder.webp
-app/src/main/res/drawable/pm_svg_icon_arrow_right_gray.xml
-app/src/main/res/drawable/pm_svg_icon_checked.xml
-app/src/main/res/drawable/pm_svg_icon_unchecked.xml

@@ -20,6 +20,7 @@ gson_version = "2.13.2"
 glide_version = "5.0.5"
 baseRecyclerViewAdapterHelper_version = "4.3.2"
 swiperefreshlayout = "1.2.0"
+ucrop = "2.2.11"
 viewpager2 = "1.1.0"
 material = "1.13.0"
 openimage = "2.4.8"
@@ -61,6 +62,7 @@ google-material = { group = "com.google.android.material", name = "material", ve
 openimage = { module = "io.github.flyjingfish:openimage-glide", version.ref = "openimage" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

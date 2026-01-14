@@ -13,6 +13,7 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.text.TextUtils
+import androidx.annotation.RequiresApi
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -20,6 +21,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
+import androidx.core.net.toUri
 
 object FileUri {
     /**
@@ -28,7 +30,6 @@ object FileUri {
      * @param context
      * @param imageUri
      */
-    @Suppress("DEPRECATION")
     fun getFileAbsolutePath(context: Context?, imageUri: Uri?): String? {
         if (context == null || imageUri == null) {
             return null
@@ -56,7 +57,7 @@ object FileUri {
             } else if (isDownloadsDocument(imageUri)) {
                 val id = DocumentsContract.getDocumentId(imageUri)
                 val contentUri = ContentUris.withAppendedId(
-                    Uri.parse("content://downloads/public_downloads"),
+                    "content://downloads/public_downloads".toUri(),
                     id.toLong()
                 )
                 return getDataColumn(context, contentUri, null, null)
@@ -147,7 +148,6 @@ object FileUri {
         return "com.android.providers.downloads.documents" == uri.getAuthority()
     }
 
-    @Suppress("DEPRECATION")
     private fun getDataColumn(
         context: Context,
         uri: Uri,
@@ -192,12 +192,13 @@ object FileUri {
      * @param uri
      * @return
      */
+    @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("Range")
     private fun uriToFileApiQ(context: Context, uri: Uri): String {
         var file: File? = null
         //android10以上转换
         if (uri.scheme == ContentResolver.SCHEME_FILE) {
-            file = File(uri.getPath())
+            file = File(uri.path)
         } else if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
             //把文件复制到沙盒目录
             val contentResolver = context.contentResolver
@@ -214,7 +215,7 @@ object FileUri {
                     if (!file1.exists()) {
                         file1.mkdir()
                     }
-                    val cache = File(file1.getPath(), displayName)
+                    val cache = File(file1.path, displayName)
                     val fos = FileOutputStream(cache)
                     FileUtils.copy(inputStream!!, fos)
                     file = cache
@@ -233,12 +234,12 @@ object FileUri {
         if (!TextUtils.isEmpty(realFilePath)) {
             return realFilePath
         }
-        val filesDir = context.getApplicationContext().getFilesDir()
+        val filesDir = context.applicationContext.filesDir
         val fileName = getFileName(uri)
         if (!TextUtils.isEmpty(fileName)) {
             val copyFile1 = File(filesDir.toString() + File.separator + fileName)
             copyFile(context, uri, copyFile1)
-            return copyFile1.getAbsolutePath()
+            return copyFile1.absolutePath
         }
         return null
     }
