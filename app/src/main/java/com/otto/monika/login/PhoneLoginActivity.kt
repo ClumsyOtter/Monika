@@ -14,7 +14,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import com.otto.monika.R
 import com.otto.monika.api.common.collectSimple
+import com.otto.monika.common.datastore.TokenDataStore
 import com.otto.monika.common.dialog.MonikaConfirmBottomDialog
+import com.otto.monika.common.utils.MD5Utils
 import com.otto.monika.common.utils.disableButton
 import com.otto.monika.common.utils.enableButton
 import com.otto.monika.common.utils.getView
@@ -416,7 +418,11 @@ class PhoneLoginActivity : BaseLoginActivity() {
                     // 保存 token（data 可能为 null，需要安全处理）
                     val token = it?.token
                     if (token != null) {
-                        PreferencesFactory.getUserPref().saveAcToKen(token)
+                        lifecycleScope.launch {
+                            this@PhoneLoginActivity.TokenDataStore.updateData {
+                                it.copy(token = token)
+                            }
+                        }
                         // 跳转到主页
                         openHomePage()
                     } else {

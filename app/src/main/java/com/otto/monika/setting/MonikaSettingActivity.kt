@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.otto.monika.R
 import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseActivity
+import com.otto.monika.common.datastore.TokenDataStore
 import com.otto.monika.common.dialog.MonikaConfirmBottomDialog
 import com.otto.monika.login.LoginActivity
 import com.otto.monika.setting.viewmodel.MonikaSettingViewModel
@@ -121,9 +122,11 @@ class MonikaSettingActivity : MonikaBaseActivity() {
                     // 可以显示加载状态
                 },
                 onSuccess = { _ ->
-                    // 退出登录成功，清空 activity 栈并跳转到登录页面
-                    //清除token
-                    PreferencesFactory.getUserPref().clearAcToken()
+                    lifecycleScope.launch {
+                        this@MonikaSettingActivity.TokenDataStore.updateData {
+                            it.copy(token = null)
+                        }
+                    }
                     navigateToLogin()
                 },
                 onFailure = { message ->

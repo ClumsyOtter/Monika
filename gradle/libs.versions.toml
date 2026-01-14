@@ -23,6 +23,9 @@ swiperefreshlayout = "1.2.0"
 viewpager2 = "1.1.0"
 material = "1.13.0"
 openimage = "2.4.8"
+datastore = "1.2.0"
+kotlinxSerializationJson = "1.9.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
@@ -56,6 +59,8 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 baseRecyclerViewAdapterHelper = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version.ref = "baseRecyclerViewAdapterHelper_version" }
 google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 openimage = { module = "io.github.flyjingfish:openimage-glide", version.ref = "openimage" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

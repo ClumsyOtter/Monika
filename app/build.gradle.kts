@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.gson)
     implementation(libs.glide)
+    implementation(libs.androidx.datastore)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.openimage)
     implementation(libs.eventbus)
