@@ -15,8 +15,6 @@ import com.otto.monika.api.common.collectSimple
 import com.otto.monika.home.model.MonikaSubscribeData
 import com.otto.monika.home.viewmodel.MonikaViewModel
 import com.otto.monika.common.base.MonikaBaseFragment
-import com.otto.monika.common.utils.DipUtils
-import com.otto.monika.common.utils.StatusBarUtil
 import com.otto.monika.databinding.FragMonikaViewBinding
 import com.otto.monika.home.adapter.adapter.HomeBannerAdapter
 import kotlinx.coroutines.async
@@ -50,11 +48,6 @@ open class MonikaHomeFragment : MonikaBaseFragment() {
     }
 
     override fun onFinishCreateView() {
-        val marginTop = StatusBarUtil.getStatusBarHeight(requireContext()) + DipUtils.dpToPx(57)
-        (fragMonikaViewBinding.ptrListRefresh.layoutParams as ConstraintLayout.LayoutParams).let {
-            it.topMargin = marginTop
-            fragMonikaViewBinding.ptrListRefresh.layoutParams = it
-        }
         fragMonikaViewBinding.baseList.clipChildren = false
         fragMonikaViewBinding.baseList.itemAnimator = null
         fragMonikaViewBinding.baseList.layoutManager = LinearLayoutManager(activity)

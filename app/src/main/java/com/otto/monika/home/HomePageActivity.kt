@@ -4,31 +4,23 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.forEach
-import androidx.core.view.isVisible
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.otto.monika.R
-import com.otto.monika.common.base.MonikaBaseFragment
-import com.otto.monika.common.views.MonikaTabItem
-import com.otto.monika.home.fragment.MonikaHomeFragment
-import com.otto.monika.home.fragment.mine.MonikaMinePageFragment
-import com.otto.monika.home.fragment.mine.listener.TabSelectListener
-import com.otto.monika.post.publish.MonikaPublishPostActivity
 import com.otto.monika.common.base.MonikaBaseActivity
 import com.otto.monika.common.utils.getView
-import com.otto.monika.common.utils.DipUtils
-import com.otto.monika.common.utils.StatusBarUtil
+import com.otto.monika.home.fragment.MonikaHomeFragment
+import com.otto.monika.home.fragment.mine.MonikaMinePageFragment
 
 class HomePageActivity : MonikaBaseActivity() {
+
+    private val bottomNav by getView<BottomNavigationView>(R.id.bnv_home_nav_bar)
+
+    private var currentFragment: Fragment? = null
+
+    // Fragment 实例，使用 lazy 延迟初始化
+    private val homeFragment by lazy { MonikaHomeFragment.newInstance() }
+    private val mineFragment by lazy { MonikaMinePageFragment.newInstance() }
 
     override fun getContentViewId(): Int {
         return R.layout.activity_main_new
@@ -62,16 +54,8 @@ class HomePageActivity : MonikaBaseActivity() {
         }
     }
 
-    private val navBarLayout: LinearLayout by getView(R.id.nav_bar_layout)
-    private val tabLayout: ConstraintLayout by getView(R.id.home_tab_layout)
-    private val viewPager: ViewPager2 by getView(R.id.view_pager)
-
-    private val tabList = mutableListOf<MonikaTabItem?>()
-    private val fragments = mutableListOf<MonikaBaseFragment>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val statusBarHeight = StatusBarUtil.getStatusBarHeight(this) + DipUtils.dpToPx(10)
-        navBarLayout.updatePadding(top = statusBarHeight)
     }
 
     override fun isActionBarVisible(): Boolean {
@@ -79,64 +63,45 @@ class HomePageActivity : MonikaBaseActivity() {
     }
 
     override fun onFinishCreateView() {
-        navBarLayout.setOnClickListener {
+        // 设置默认选中首页
+        bottomNav.selectedItemId = R.id.navigation_home
 
-        }
-        tabList.clear()
-        tabLayout.forEach { child ->
-            if (child.isVisible) {
-                tabList.add(child as? MonikaTabItem)
+        // 监听底部导航栏点击事件
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    switchFragment(homeFragment)
+                    true
+                }
+                R.id.navigation_mine -> {
+                    switchFragment(mineFragment)
+                    true
+                }
+                else -> false
             }
         }
-
-        fragments.clear()
-        fragments.add(MonikaHomeFragment.newInstance())
-        fragments.add(MonikaMinePageFragment.newInstance())
-        val pageAdapter = ContentPageAdapter(supportFragmentManager, lifecycle, fragments)
-        viewPager.adapter = pageAdapter
-        viewPager.offscreenPageLimit = 4
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(p0: Int) {
-                onTabSelected(p0)
-            }
-        })
-
-        tabList.forEachIndexed { index, cyTabItem ->
-            cyTabItem?.setOnClickListener {
-                onTabSelected(index, true)
-            }
-        }
-
-        onTabSelected(0, true)
+        // 默认显示首页 Fragment
+        switchFragment(homeFragment)
     }
 
-    private fun onTabSelected(position: Int, pageChange: Boolean = false) {
-        tabList.forEachIndexed { index, cyTabItem ->
-            cyTabItem?.setSelected(position == index)
-            if (pageChange) {
-                viewPager.setCurrentItem(position, true)
+    /**
+     * 切换 Fragment
+     */
+    private fun switchFragment(fragment: Fragment) {
+        if (fragment !== currentFragment) {
+            val transaction = supportFragmentManager.beginTransaction()
+            currentFragment?.let {
+                transaction.hide(it)
             }
-        }
-        fragments.forEachIndexed { index, fragment ->
-            (fragment as? TabSelectListener)?.onFragmentSelected(index == position)
-        }
-    }
-
-
-    class ContentPageAdapter(
-        fm: FragmentManager,
-        lifecycle: Lifecycle,
-        private val data: List<MonikaBaseFragment>
-    ) : FragmentStateAdapter(fm, lifecycle) {
-
-        override fun createFragment(position: Int): Fragment {
-            return data[position]
-        }
-
-        override fun getItemCount(): Int {
-            return data.size
+            fragment.let {
+                if (!it.isAdded) {
+                    transaction.add(R.id.fg_home_container, it)
+                } else {
+                    transaction.show(it)
+                }
+            }
+            transaction.commit()
+            currentFragment = fragment
         }
     }
-
-
 }

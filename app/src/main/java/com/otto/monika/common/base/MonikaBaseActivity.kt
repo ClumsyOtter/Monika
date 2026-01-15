@@ -29,13 +29,15 @@ abstract class MonikaBaseActivity : FragmentActivity() {
         setContentView(R.layout.activity_base)
         // 获取内容容器
         val container = findViewById<FrameLayout>(R.id.sub_activity_content)
-
         // 获取 ActionBar（可选）
         val actionBar = findViewById<FrameLayout>(R.id.custom_bar_container)
-
         // 如果启用了 WindowInsets，设置 ActionBar 的 insets
-        if (enableWindowInsets() && actionBar != null) {
-            setupActionBarWindowInsets(actionBar)
+        if (enableWindowInsets()) {
+            if (isActionBarVisible()) {
+                setupActionBarWindowInsets(actionBar)
+            } else {
+                setupActionBarWindowInsets(container)
+            }
         }
         // 将子类的 layout 添加到容器中
         contentView = LayoutInflater.from(this).inflate(getContentViewId(), container, false)
