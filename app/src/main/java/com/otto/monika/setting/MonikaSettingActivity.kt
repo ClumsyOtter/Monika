@@ -15,6 +15,7 @@ import com.otto.monika.common.dialog.MonikaConfirmBottomDialog
 import com.otto.monika.login.LoginActivity
 import com.otto.monika.setting.viewmodel.MonikaSettingViewModel
 import com.otto.monika.common.dialog.MonikaDownloadBottomDialog
+import com.otto.monika.common.token.TokenManager
 import com.otto.monika.common.utils.getView
 import com.otto.monika.common.views.MonikaCustomButton
 import kotlinx.coroutines.launch
@@ -122,6 +123,7 @@ class MonikaSettingActivity : MonikaBaseActivity() {
                     // 可以显示加载状态
                 },
                 onSuccess = { _ ->
+                    TokenManager.token = null
                     lifecycleScope.launch {
                         this@MonikaSettingActivity.TokenDataStore.updateData {
                             it.copy(token = null)

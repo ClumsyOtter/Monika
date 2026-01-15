@@ -5,10 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import androidx.activity.enableEdgeToEdge
+import androidx.lifecycle.lifecycleScope
 import com.otto.monika.R
 import com.otto.monika.application.MonikaApplication
 import com.otto.monika.login.LoginActivity
 import com.otto.monika.common.base.MonikaBaseActivity
+import com.otto.monika.common.datastore.TokenDataStore
+import com.otto.monika.common.token.TokenManager
+import kotlinx.coroutines.launch
 
 class MonikaSplashActivity : MonikaBaseActivity() {
 
@@ -59,17 +64,17 @@ class MonikaSplashActivity : MonikaBaseActivity() {
         openMainActivity()
     }
 
-
-
     private fun openMainActivity() {
-        //todo
-        //val acToken = PreferencesFactory.getUserPref().acToken
-        val acToken = null
-        if (acToken == null) {
-            LoginActivity.enter(this)
-        } else {
-            HomePageActivity.enter(this)
+        lifecycleScope.launch {
+            this@MonikaSplashActivity.TokenDataStore.data.collect { acToken ->
+                if (acToken.token == null) {
+                    LoginActivity.enter(this@MonikaSplashActivity)
+                } else {
+                    TokenManager.token = acToken.token
+                    HomePageActivity.enter(this@MonikaSplashActivity)
+                }
+                finish()
+            }
         }
-        finish()
     }
 }

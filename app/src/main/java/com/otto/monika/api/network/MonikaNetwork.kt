@@ -10,6 +10,7 @@ import com.otto.monika.api.network.interceptor.EncryptInterceptor
 import com.otto.monika.api.network.interceptor.HostInterceptor
 import com.otto.monika.api.network.interceptor.SignInterceptor
 import com.otto.monika.api.network.interceptor.TimeoutInterceptor
+import com.otto.monika.api.network.interceptor.TokenInterceptor
 import com.otto.monika.api.network.utils.RSAHelper
 import okhttp3.Dispatcher
 import okhttp3.HttpUrl
@@ -24,7 +25,7 @@ object MonikaNetwork {
     private var retrofitBuilder: Retrofit.Builder? = null
     var isInit: Boolean = false //是否初始化了,需要先请求接口下发
         private set
-    private var env = 0 //接口环境
+    private var env = 2 //接口环境
 
     fun init(context: Context) {
         init(NetworkConfiguration.Builder().context(context).build())
@@ -89,6 +90,7 @@ object MonikaNetwork {
                 clientBuilder.addInterceptor(configuration.interceptors[i])
             }
         }
+        clientBuilder.addInterceptor(TokenInterceptor())
         //统一加密处理
         var rsaHelper: RSAHelper? = null
         if (configuration.rsaCertificateAssetFileName != null) {

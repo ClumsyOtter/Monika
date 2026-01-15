@@ -67,7 +67,8 @@ class UserFavoriteListFragment : MonikaBaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentUserFavoriteListBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     /**

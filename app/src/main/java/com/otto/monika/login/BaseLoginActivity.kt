@@ -8,10 +8,10 @@ import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseActivity
 import com.otto.monika.common.datastore.TokenDataStore
 import com.otto.monika.common.dialog.MonikaAgreementBottomDialog
+import com.otto.monika.common.token.TokenManager
 import com.otto.monika.home.HomePageActivity
 import com.otto.monika.login.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
-import java.util.prefs.PreferencesFactory
 
 abstract class BaseLoginActivity : MonikaBaseActivity() {
 
@@ -32,6 +32,7 @@ abstract class BaseLoginActivity : MonikaBaseActivity() {
         lifecycleScope.launch {
             this@BaseLoginActivity.TokenDataStore.data.collect { token ->
                 if (token.token?.isNotEmpty() == true) {
+                    TokenManager.token = token.token
                     openHomePage()
                 } else {
                     viewModel.asVisitorFlow().collectSimple(onLoading = {
@@ -42,6 +43,7 @@ abstract class BaseLoginActivity : MonikaBaseActivity() {
                         // 处理成功逻辑（data 可能为 null，需要安全处理）
                         val tokenInfo = it?.token
                         if (tokenInfo != null) {
+                            TokenManager.token = tokenInfo
                             lifecycleScope.launch {
                                 this@BaseLoginActivity.TokenDataStore.updateData { token ->
                                     token.copy(token = tokenInfo)

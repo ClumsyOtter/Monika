@@ -3,7 +3,6 @@ package com.otto.monika.api.network.interceptor
 import android.os.Build
 import com.otto.monika.api.network.MonikaNetwork
 import com.otto.monika.api.network.constant.ApiConstant
-import com.otto.monika.api.network.host.HOST
 import com.otto.monika.api.network.host.HostInfo
 import com.otto.monika.api.network.host.Hosts
 import com.otto.monika.api.network.utils.AndroidUtils

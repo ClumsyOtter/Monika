@@ -74,6 +74,10 @@ class HomePageActivity : MonikaBaseActivity() {
         navBarLayout.updatePadding(top = statusBarHeight)
     }
 
+    override fun isActionBarVisible(): Boolean {
+        return false
+    }
+
     override fun onFinishCreateView() {
         navBarLayout.setOnClickListener {
 
@@ -117,6 +121,7 @@ class HomePageActivity : MonikaBaseActivity() {
             (fragment as? TabSelectListener)?.onFragmentSelected(index == position)
         }
     }
+
 
     class ContentPageAdapter(
         fm: FragmentManager,
