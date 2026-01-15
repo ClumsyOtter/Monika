@@ -10,7 +10,7 @@
     <!-- 评论项内容 View -->
     <com.otto.monika.post.detail.views.CommentItemView
         android:id="@+id/view_comment_item"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginStart="45dp"
+        android:layout_marginStart="@dimen/padding_20"
         android:nestedScrollingEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/view_comment_item"

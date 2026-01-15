@@ -4,23 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.otto.monika.R
-import com.otto.monika.api.common.ApiResponse
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.carousel.CarouselLayoutManager
+import com.google.android.material.carousel.MultiBrowseCarouselStrategy
 import com.otto.monika.api.common.collectSimple
-import com.otto.monika.home.model.MonikaSubscribeData
+import com.otto.monika.api.common.transform
+import com.otto.monika.api.model.post.response.PostItem
 import com.otto.monika.home.viewmodel.MonikaViewModel
 import com.otto.monika.common.base.MonikaBaseFragment
+import com.otto.monika.common.decoration.GridSpacingItemDecoration
+import com.otto.monika.common.utils.DipUtils
 import com.otto.monika.databinding.FragMonikaViewBinding
-import com.otto.monika.home.adapter.adapter.HomeBannerAdapter
+import com.otto.monika.home.adapter.adapter.BannerRecyclerAdapter
+import com.otto.monika.home.adapter.adapter.RecommendAdapter
+import com.otto.monika.post.detail.MonikaPostDetailActivity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.launch
 
 open class MonikaHomeFragment : MonikaBaseFragment() {
@@ -34,9 +38,8 @@ open class MonikaHomeFragment : MonikaBaseFragment() {
     private lateinit var fragMonikaViewBinding: FragMonikaViewBinding
 
     private val viewModel: MonikaViewModel by viewModels()
-    private val subscribeModel: MonikaSubscribeData = MonikaSubscribeData()
-
-    private var homeBannerAdapter: HomeBannerAdapter? = null
+    private var homeBannerAdapter: BannerRecyclerAdapter? = null
+    private var homeRecommendAdapter: RecommendAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,53 +51,92 @@ open class MonikaHomeFragment : MonikaBaseFragment() {
     }
 
     override fun onFinishCreateView() {
-        fragMonikaViewBinding.baseList.clipChildren = false
-        fragMonikaViewBinding.baseList.itemAnimator = null
-        fragMonikaViewBinding.baseList.layoutManager = LinearLayoutManager(activity)
-        val concatAdapter = ConcatAdapter()
-        homeBannerAdapter = HomeBannerAdapter()
-        concatAdapter.addAdapter(homeBannerAdapter!!)
-        fragMonikaViewBinding.baseList.adapter = concatAdapter
+        //initHomeBanner()
+        initRecommend()
         fragMonikaViewBinding.ptrListRefresh.setOnRefreshListener {
             getInitData()
         }
         getInitData()
     }
 
+    fun initRecommend() {
+        fragMonikaViewBinding.recommendBaseList.itemAnimator = null
+        homeRecommendAdapter = RecommendAdapter()
+        homeRecommendAdapter?.onItemClickListener = object : RecommendAdapter.OnItemClickListener {
+            override fun onItemClick(
+                position: Int,
+                item: PostItem?
+            ) {
+                MonikaPostDetailActivity.enter(requireActivity(), item?.id)
+            }
+        }
+        val layoutManager = GridLayoutManager(context, 2)
+        fragMonikaViewBinding.recommendBaseList.layoutManager = layoutManager
+        fragMonikaViewBinding.recommendBaseList.addItemDecoration(
+            GridSpacingItemDecoration(
+                2,
+                DipUtils.dpToPx(10),
+                false
+            )
+        )
+        fragMonikaViewBinding.recommendBaseList.adapter = homeRecommendAdapter
+    }
+
+//    fun initHomeBanner() {
+//        fragMonikaViewBinding.bannerBaseList.clipChildren = false
+//        fragMonikaViewBinding.bannerBaseList.itemAnimator = null
+//        homeBannerAdapter = BannerRecyclerAdapter()
+//        val layoutManager =
+//            CarouselLayoutManager(MultiBrowseCarouselStrategy(), RecyclerView.HORIZONTAL)
+//        fragMonikaViewBinding.bannerBaseList.layoutManager = layoutManager
+//        fragMonikaViewBinding.bannerBaseList.adapter = homeBannerAdapter
+//        // 滚动到中间位置，让中间卡片居中显示
+//        fragMonikaViewBinding.bannerBaseList.post {
+//            if (homeBannerAdapter?.items?.isNotEmpty() == true) {
+//                val centerPosition = homeBannerAdapter!!.itemCount / 2
+//                // 使用 smoothScrollToPosition 让滚动更平滑
+//                fragMonikaViewBinding.bannerBaseList.smoothScrollToPosition(centerPosition)
+//            }
+//        }
+//    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun getInitData() {
         lifecycleScope.launch {
+            showLoadingDialog()
             // 并行执行三个 API 请求，跳过 Loading 状态，只获取实际结果
             val bannerDeferred = async {
                 viewModel.homeBannerList()
                     .collectSimple(onLoading = {
-
                     }, onSuccess = {
-                        homeBannerAdapter?.bannerData = it
+                        homeBannerAdapter?.submitList(it?.list)
                     }, onFailure = {
 
                     })
             }
 
             val subscribeDeferred = async {
-                viewModel.subscribePostList(1, 10)
-                    .filter { it !is ApiResponse.Loading && it !is ApiResponse.Initial }
-                    .first()
-                    .let { response ->
-                        when (response) {
-                            is ApiResponse.Success -> {
-                                response.data?.let { data ->
-                                    subscribeModel.list = data.list
-                                }
-                            }
-
-                            else -> {
-                                // 可以在这里处理错误
-                            }
+                viewModel.homeRecommendList()
+                    .flatMapConcat { response ->
+                        response.transform { data ->
+                            // 从 homeRecommendList 返回的数据中提取 id 列表
+                            val ids =
+                                data?.list?.filter { it.value != "0" }?.mapNotNull { it.value }
+                                    ?.toMutableList() ?: mutableListOf()
+                            // 使用 id 列表调用第二个 API
+                            viewModel.getListByIds(ids)
                         }
                     }
+                    .collectSimple(
+                        onLoading = {
+                        }, onSuccess = {
+                            homeRecommendAdapter?.submitList(it?.list)
+                        }, onFailure = {}
+                    )
             }
             // 等待所有请求完成
             awaitAll(bannerDeferred, subscribeDeferred)
+            hideLoadingDialog()
             fragMonikaViewBinding.ptrListRefresh.isRefreshing = false
         }
     }

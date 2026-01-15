@@ -77,8 +77,7 @@ class CommentAdapter : BaseQuickAdapter<CommentItem, CommentAdapter.CommentViewH
                     expandSubCommentsParams.page,
                     total
                 )
-                val footViewAdapter =
-                    recyclerViewAdapters.adapters.find { it is FootViewAdapter } as? FootViewAdapter
+                val footViewAdapter = recyclerViewAdapters.adapters.find { it is FootViewAdapter } as? FootViewAdapter
                 footViewAdapter?.setItem(subCommentAdapter.getSubCommentFoot(), null)
             } else {
                 notifyItemChanged(parentPosition)

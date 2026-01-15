@@ -1,12 +1,15 @@
 package com.otto.monika.api.common
 
+import com.otto.monika.api.common.ApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import javax.xml.transform.Transformer
 
 
 /**
@@ -76,21 +79,21 @@ interface SimpleApiListener<T> {
 
 /**
  * 简化的 collect 方法，只关注 loading、success、fail 三种状态
- * 
+ *
  * @param listener 状态监听器，包含三个回调方法
- * 
+ *
  * 使用示例：
  * ```kotlin
  * viewModel.getSmsCodeFlow(phone).collectSimple(object : SimpleApiListener<Unit> {
  *     override fun onLoading() {
  *         showLoading()
  *     }
- *     
+ *
  *     override fun onSuccess(data: Unit?) {
  *         hideLoading()
  *         // 处理成功逻辑
  *     }
- *     
+ *
  *     override fun onFail(message: String) {
  *         hideLoading()
  *         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -104,15 +107,19 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(listener: SimpleApiListener<T
             is ApiResponse.Loading -> {
                 listener.onLoading()
             }
+
             is ApiResponse.Success -> {
                 listener.onSuccess(response.data)
             }
+
             is ApiResponse.BusinessError -> {
                 listener.onFail(response.message)
             }
+
             is ApiResponse.NetworkError -> {
                 listener.onFail("网络错误: ${response.throwable.message ?: "未知错误"}")
             }
+
             is ApiResponse.Initial -> {
                 // 初始状态，不做处理
             }
@@ -122,20 +129,20 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(listener: SimpleApiListener<T
 
 /**
  * 简化的 collect 方法，只关注 loading、success、fail 三种状态
- * 
+ *
  * @param onLoading 加载中回调（可选）
  * @param onSuccess 成功回调，接收数据
  * @param onFail 失败回调，接收错误消息
- * 
+ *
  * 使用示例：
  * ```kotlin
  * viewModel.getSmsCodeFlow(phone).collectSimple(
  *     onLoading = { showLoading() },
- *     onSuccess = { data -> 
+ *     onSuccess = { data ->
  *         hideLoading()
  *         // 处理成功逻辑
  *     },
- *     onFail = { message -> 
+ *     onFail = { message ->
  *         hideLoading()
  *         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
  *     }
@@ -152,15 +159,19 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(
             is ApiResponse.Loading -> {
                 onLoading?.invoke()
             }
+
             is ApiResponse.Success -> {
                 onSuccess(response.data)
             }
+
             is ApiResponse.BusinessError -> {
                 onFailure(response.message)
             }
+
             is ApiResponse.NetworkError -> {
                 onFailure("网络错误: ${response.throwable.message ?: "未知错误"}")
             }
+
             is ApiResponse.Initial -> {
                 // 初始状态，不做处理
             }
@@ -168,13 +179,37 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(
     }
 }
 
+fun <T, R> ApiResponse<T>.transform(transformer: (T?) -> Flow<ApiResponse<R>>): Flow<ApiResponse<R>> {
+    return when (this@transform) {
+        is ApiResponse.Loading -> {
+            flowOf(ApiResponse.Loading())
+        }
+
+        is ApiResponse.Success -> {
+            transformer.invoke(this@transform.data)
+        }
+
+        is ApiResponse.BusinessError -> {
+            flowOf(ApiResponse.BusinessError(this@transform.code, this@transform.message))
+        }
+
+        is ApiResponse.NetworkError -> {
+            flowOf(ApiResponse.NetworkError(this@transform.throwable))
+        }
+
+        is ApiResponse.Initial -> {
+            flowOf(ApiResponse.Initial)
+        }
+    }
+}
+
 /**
  * 顺序执行多个 API 请求，自动处理 Loading 和错误状态
  * 每个 API 会等待前一个 API 完成后再执行，失败时立即停止后续执行
- * 
+ *
  * @param apiCalls 要顺序执行的 API 调用列表
  * @return Flow，按顺序发送每个 API 的结果
- * 
+ *
  * 使用示例：
  * ```kotlin
  * // 在 ViewModel 中使用
@@ -185,7 +220,7 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(
  *         suspend { api.getThirdData() }
  *     )
  * }
- * 
+ *
  * // 在 Activity/Fragment 中收集
  * lifecycleScope.launch {
  *     viewModel.loadDataSequentially().collect { response ->
@@ -213,14 +248,14 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(
 /**
  * 顺序执行多个 API 请求，使用 flatMapConcat 连接
  * 适用于需要根据前一个 API 的结果来决定下一个 API 的场景
- * 
+ *
  * 使用示例：
  * ```kotlin
  * // 方式1：使用 flatMapConcat 顺序执行
  * fun loadDataWithFlatMap(): Flow<ApiResponse<*>> {
  *     return flowOf(Unit)
- *         .flatMapConcat { 
- *             suspend { api.getFirstData() }.asFlow() 
+ *         .flatMapConcat {
+ *             suspend { api.getFirstData() }.asFlow()
  *         }
  *         .flatMapConcat { firstResponse ->
  *             // 根据第一个 API 的结果调用第二个 API
@@ -231,11 +266,11 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(
  *             }
  *         }
  * }
- * 
+ *
  * // 方式2：在 flow 构建器中顺序调用
  * fun loadDataInFlow(): Flow<ApiResponse<*>> = flow {
  *     emit(ApiResponse.Loading())
- *     
+ *
  *     // 第一个 API
  *     val firstResponse = try {
  *         api.getFirstData()
@@ -245,7 +280,7 @@ suspend fun <T> Flow<ApiResponse<T>>.collectSimple(
  *     }
  *     val firstApiResponse = firstResponse.toApiResponse()
  *     emit(firstApiResponse)
- *     
+ *
  *     // 如果第一个成功，调用第二个 API
  *     if (firstApiResponse is ApiResponse.Success) {
  *         val firstData = firstApiResponse.data

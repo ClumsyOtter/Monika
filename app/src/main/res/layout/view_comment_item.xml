@@ -121,10 +121,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_10"
         app:iconSelected="@drawable/monika_post_detail_like_icon_selected"
-        app:iconUnselected="@drawable/monika_post_detail_like_icon_unselected"
         app:iconSize="@dimen/dimen_20dp"
+        app:iconUnselected="@drawable/monika_post_detail_like_icon_unselected"
         app:layout_constraintBottom_toBottomOf="@+id/tv_comment_item_time"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_comment_item_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

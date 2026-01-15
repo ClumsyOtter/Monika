@@ -27,7 +27,7 @@ class NetworkConfiguration private constructor(builder: Builder) {
 
     class Builder {
         var context: Context? = null
-        var env = 0
+        var env = 2
         var interceptors: MutableList<Interceptor>? = null
         var networkInterceptors: MutableList<Interceptor>? = null
         var gsonBuilder: GsonBuilder? = null

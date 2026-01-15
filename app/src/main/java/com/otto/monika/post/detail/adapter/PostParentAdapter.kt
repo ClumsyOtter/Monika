@@ -57,21 +57,19 @@ class PostParentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), INest
             childRecyclerView?.setLayoutParams(
                 ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
+                    ViewGroup.LayoutParams.WRAP_CONTENT
                 )
             )
+            childRecyclerView?.setLayoutManager(LinearLayoutManager(viewGroup.context))
+            childRecyclerView?.addItemDecoration(VerticalSpacingItemDecoration(10))
             childRecyclerView?.setPadding(viewGroup.resources.getDimensionPixelSize(R.dimen.padding_15))
+            childRecyclerView?.setAdapter(quickAdapterHelper.adapter)
         } else {
             (childRecyclerView?.parent as? ViewGroup)?.removeView(childRecyclerView)
         }
         childRecyclerViewAdapter.stateView = MonikaEmptyView(viewGroup.context).apply {
             setEmptyText("暂无评论(｡･ω･｡)")
         }
-        childRecyclerView?.setLayoutManager(
-            LinearLayoutManager(viewGroup.context)
-        )
-        childRecyclerView?.setAdapter(quickAdapterHelper.adapter)
-        childRecyclerView?.addItemDecoration(VerticalSpacingItemDecoration(10))
         return object : RecyclerView.ViewHolder(childRecyclerView!!) {
         }
     }
@@ -87,23 +85,6 @@ class PostParentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), INest
         }
     }
 
-    fun updateCommentRecyclerView(haveComment: Boolean) {
-        if (haveComment) {
-            childRecyclerView?.setLayoutParams(
-                ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-            )
-        } else {
-            childRecyclerView?.setLayoutParams(
-                ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            )
-        }
-    }
 
     override fun getItemCount(): Int {
         return dataList.size + 1

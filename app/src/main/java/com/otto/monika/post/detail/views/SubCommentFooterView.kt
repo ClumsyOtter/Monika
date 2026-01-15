@@ -26,20 +26,12 @@ class SubCommentFooterView @JvmOverloads constructor(
         // 创建 TextView
         textView = TextView(context).apply {
             layoutParams = LayoutParams(
-                LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT
             )
-            // 设置 padding
-            val paddingStart = resources.getDimensionPixelSize(R.dimen.dimen_10dp)
-            val paddingTop = resources.getDimensionPixelSize(R.dimen.dimen_5dp)
-            val paddingEnd = resources.getDimensionPixelSize(R.dimen.dimen_5dp)
-            val paddingBottom = resources.getDimensionPixelSize(R.dimen.dimen_5dp)
-            setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
             text = "展开"
             setTextColor(0xFF8EB21C.toInt())
             textSize = 14f
-            isClickable = true
-            isFocusable = true
         }
         addView(textView)
     }

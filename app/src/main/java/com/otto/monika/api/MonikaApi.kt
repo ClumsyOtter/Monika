@@ -159,7 +159,7 @@ interface MonikaApi {
      */
     @POST("app/post/getListByIds")
     @FormUrlEncoded
-    suspend fun getListByIds(@Field("postIds") postIds: String): Response<ApiResult<MonikaPostData>>
+    suspend fun getListByIds(@Field("postIds") postIds: String): Response<ApiResult<PostListResponse>>
 
     /**
      * 首页 Banner 数据

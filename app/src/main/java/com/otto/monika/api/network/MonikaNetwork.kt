@@ -1,6 +1,7 @@
 package com.otto.monika.api.network
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
 import com.otto.monika.api.network.host.HOST
 import com.otto.monika.api.network.host.HostInfo

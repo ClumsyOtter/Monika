@@ -1,6 +1,7 @@
 package com.otto.monika.post.detail.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -24,7 +25,6 @@ class SubCommentAdapter(val parentId: String?) :
     private var isExpanded: Boolean = false
     private var currentPage: Int = 0
     private var totalCommentCount: Int = 0
-    private var footerView: SubCommentFooterView? = null
 
     var onExpandListener: ((String?, Int, Int) -> Unit)? = null
     var onCollapseListener: (() -> Unit)? = null
@@ -94,8 +94,12 @@ class SubCommentAdapter(val parentId: String?) :
     }
 
 
-    fun getSubCommentFoot(): SubCommentFoot{
-        return SubCommentFoot(isExpanded = isExpanded, hasMore = hasMore(), emptyComment = items.isEmpty())
+    fun getSubCommentFoot(): SubCommentFoot {
+        return SubCommentFoot(
+            isExpanded = isExpanded,
+            hasMore = hasMore(),
+            emptyComment = items.isEmpty()
+        )
     }
 
     fun handleFooterClick() {
@@ -129,7 +133,6 @@ class SubCommentAdapter(val parentId: String?) :
             onItemClickListener: ((CommentActionParams) -> Unit)?
         ) {
             commentItemView.bindCommentItem(item)
-
             val currentPosition = bindingAdapterPosition
             commentItemView.onReplyClickListener = { commentItem ->
                 onReplyClickListener?.invoke(CommentActionParams(commentItem, currentPosition))

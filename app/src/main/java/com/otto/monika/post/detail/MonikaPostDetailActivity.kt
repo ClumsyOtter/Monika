@@ -268,6 +268,7 @@ class MonikaPostDetailActivity : MonikaBaseActivity() {
                     showLoadingDialog()
                 },
                 onSuccess = { postItem ->
+                    hideLoadingDialog()
                     updatePostViews(postItem)
                     // 帖子加载成功后，加载第一页评论
                     loadComments()
