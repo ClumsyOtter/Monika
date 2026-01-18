@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.otto.monika.R
-import com.otto.monika.api.model.user.response.MonikaUserInfoModel
-import com.otto.monika.api.model.user.response.isCreator
-import com.otto.monika.api.model.user.response.isSelf
 import com.otto.monika.common.views.MonikaCommonOptionView
+import com.otto.network.model.user.response.MonikaUserInfoModel
+import com.otto.network.model.user.response.isCreator
+import com.otto.network.model.user.response.isSelf
 
 /**
  * 账户底部操作栏 View

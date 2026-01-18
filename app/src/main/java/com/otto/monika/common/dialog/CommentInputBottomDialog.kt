@@ -9,9 +9,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
+import com.otto.common.utils.FirstCharacterNoSpaceFilter
 import com.otto.monika.R
-import com.otto.monika.common.utils.FirstCharacterNoSpaceFilter
-import com.otto.monika.common.utils.addInputFilter
+import com.otto.monika.common.ext.addInputFilter
 
 
 /**

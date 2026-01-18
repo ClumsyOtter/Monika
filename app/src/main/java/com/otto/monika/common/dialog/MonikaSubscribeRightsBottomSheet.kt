@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.otto.monika.R
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.dialog.adapter.SubscribeRightsAdapter
-import com.otto.monika.common.dialog.model.SubscribeRights
+import com.otto.network.model.creator.response.SubscribeRights
 
 class MonikaSubscribeRightsBottomSheet : BottomSheetDialogFragment() {
     private var subscribeRights: List<SubscribeRights>? = null

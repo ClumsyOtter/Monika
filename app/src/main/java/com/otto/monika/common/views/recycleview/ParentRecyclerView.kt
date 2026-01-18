@@ -1,4 +1,4 @@
-package com.otto.monika.common.views.recycleview
+package com.otto.ui.views.recycleview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,7 +6,7 @@ import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.ViewConfiguration
 import androidx.recyclerview.widget.RecyclerView
-import com.otto.monika.common.views.recycleview.NestedOverScroller.invokeCurrentVelocity
+import com.otto.ui.views.recycleview.NestedOverScroller.invokeCurrentVelocity
 import kotlin.math.abs
 
 /**

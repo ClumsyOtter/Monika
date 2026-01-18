@@ -2,13 +2,13 @@ package com.otto.monika.post.publish.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.otto.monika.api.client.MonikaClient
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.common.asFlow
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.dialog.model.CommonBottomSheetData
 import com.otto.monika.common.dialog.model.CommonBottomSheetItem
-import com.otto.monika.home.model.MonikaRankData
+import com.otto.network.client.MonikaClient
+import com.otto.network.common.ApiResponse
+import com.otto.network.common.asFlow
+import com.otto.network.common.collectSimple
+import com.otto.network.model.home.MonikaRankData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

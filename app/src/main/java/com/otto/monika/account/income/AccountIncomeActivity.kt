@@ -7,13 +7,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.otto.common.utils.getView
 import com.otto.monika.R
 import com.otto.monika.account.income.viewmodel.AccountIncomeViewModel
 import com.otto.monika.account.income.views.AmountWithUnitView
 import com.otto.monika.account.income.views.IncomeItemView
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.utils.getView
+import com.otto.network.common.collectSimple
 import kotlinx.coroutines.launch
 
 

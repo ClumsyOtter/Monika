@@ -1,18 +1,18 @@
 package com.otto.monika.login.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.otto.monika.api.client.MonikaClient
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.common.asFlow
-import com.otto.monika.api.model.login.request.NvsLoginRequest
-import com.otto.monika.api.model.login.request.PhoneBindRequest
-import com.otto.monika.api.model.login.request.PhoneLoginRequest
-import com.otto.monika.api.model.login.request.PhoneVerifyRequest
-import com.otto.monika.api.model.login.request.SmsCodeRequest
-import com.otto.monika.api.model.login.request.WechatLoginRequest
-import com.otto.monika.api.model.login.responese.PhoneLoginResponse
-import com.otto.monika.api.model.login.responese.PhoneVerifyResponse
-import com.otto.monika.api.model.login.responese.VisitorResponse
+import com.otto.network.client.MonikaClient
+import com.otto.network.common.ApiResponse
+import com.otto.network.common.asFlow
+import com.otto.network.model.login.request.NvsLoginRequest
+import com.otto.network.model.login.request.PhoneBindRequest
+import com.otto.network.model.login.request.PhoneLoginRequest
+import com.otto.network.model.login.request.PhoneVerifyRequest
+import com.otto.network.model.login.request.SmsCodeRequest
+import com.otto.network.model.login.request.WechatLoginRequest
+import com.otto.network.model.login.responese.PhoneLoginResponse
+import com.otto.network.model.login.responese.PhoneVerifyResponse
+import com.otto.network.model.login.responese.VisitorResponse
 import kotlinx.coroutines.flow.Flow
 
 class LoginViewModel : ViewModel() {

@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.otto.monika.R
-import com.otto.monika.api.model.comment.response.CommentItem
-import com.otto.monika.api.model.comment.response.addSubComment
-import com.otto.monika.api.model.comment.response.clearSubComments
-import com.otto.monika.api.model.comment.response.getSubComments
-import com.otto.monika.api.model.comment.response.removeSubComment
-import com.otto.monika.api.model.comment.response.updateLikeState
-import com.otto.monika.api.model.comment.response.updateSubComments
 import com.otto.monika.post.detail.views.CommentItemView
+import com.otto.network.model.comment.response.CommentItem
+import com.otto.network.model.comment.response.addSubComment
+import com.otto.network.model.comment.response.clearSubComments
+import com.otto.network.model.comment.response.getSubComments
+import com.otto.network.model.comment.response.removeSubComment
+import com.otto.network.model.comment.response.updateLikeState
+import com.otto.network.model.comment.response.updateSubComments
 
 /**
  * 评论列表适配器（统一处理父评论和子评论）

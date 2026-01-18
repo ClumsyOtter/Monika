@@ -7,17 +7,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.otto.common.token.TokenManager
+import com.otto.common.utils.getView
+import com.otto.datastore.TokenDataStore
 import com.otto.monika.R
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.datastore.TokenDataStore
 import com.otto.monika.common.dialog.MonikaConfirmBottomDialog
 import com.otto.monika.login.LoginActivity
 import com.otto.monika.setting.viewmodel.MonikaSettingViewModel
 import com.otto.monika.common.dialog.MonikaDownloadBottomDialog
-import com.otto.monika.common.token.TokenManager
-import com.otto.monika.common.utils.getView
 import com.otto.monika.common.views.MonikaCustomButton
+import com.otto.network.common.collectSimple
 import kotlinx.coroutines.launch
 
 /**

@@ -13,9 +13,9 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.otto.monika.R
-import com.otto.monika.api.model.comment.response.CommentItem
-import com.otto.monika.api.model.comment.response.updateLikeState
 import com.otto.monika.common.views.MonikaCommonOptionView
+import com.otto.network.model.comment.response.CommentItem
+import com.otto.network.model.comment.response.updateLikeState
 
 /**
  * 评论项自定义 View
@@ -143,7 +143,7 @@ class CommentItemView @JvmOverloads constructor(
             // 设置用户名和冒号为灰色（不包括"回复"）
             val replyPrefix = "回复 "
             val replyPrefixEnd = replyPrefix.length
-            val userNameEnd = replyPrefixEnd + replyToName.length + 1 // +1 是冒号
+            val userNameEnd = replyPrefixEnd + (replyToName?.length ?: 0) + 1 // +1 是冒号
             spannableString.setSpan(
                 ForegroundColorSpan(grayColor),
                 replyPrefixEnd,

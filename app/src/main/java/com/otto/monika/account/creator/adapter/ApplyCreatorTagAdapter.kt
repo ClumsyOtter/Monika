@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.otto.monika.R
-import com.otto.monika.api.model.creator.response.CreatorMetadataItem
+import com.otto.network.model.creator.response.CreatorMetadataItem
 
 /**
  * 申请创作者标签列表 Adapter

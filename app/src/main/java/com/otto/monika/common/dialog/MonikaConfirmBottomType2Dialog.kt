@@ -12,8 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.common.utils.getView
 
 class MonikaConfirmBottomType2Dialog : DialogFragment() {
 

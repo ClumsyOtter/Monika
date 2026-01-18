@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.otto.monika.R
-import com.otto.monika.api.model.subscribe.response.SubscribeUserItem
+import com.otto.network.model.subscribe.response.SubscribeUserItem
 
 /**
  * 账户订阅排行榜适配器

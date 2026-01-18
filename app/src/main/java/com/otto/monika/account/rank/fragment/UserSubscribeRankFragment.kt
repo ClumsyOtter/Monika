@@ -1,13 +1,10 @@
 package com.otto.monika.account.rank.fragment
 
 import android.os.Bundle
-import android.util.Log
-import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
@@ -15,13 +12,13 @@ import com.otto.monika.R
 import com.otto.monika.account.home.AccountHomeActivity
 import com.otto.monika.account.rank.fragment.adapter.UserSubscribeRankAdapter
 import com.otto.monika.account.rank.fragment.viewmodel.UserSubscribeRankViewModel
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.subscribe.response.SubscribeUserItem
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.model.MonikaFragmentRefreshState
 import com.otto.monika.common.views.MonikaEmptyView
 import com.otto.monika.subscribe.support.model.SubscribeSuccessEvent
+import com.otto.network.common.collectSimple
+import com.otto.network.model.subscribe.response.SubscribeUserItem
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.Subscribe
 

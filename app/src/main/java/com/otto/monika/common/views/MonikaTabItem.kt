@@ -1,6 +1,5 @@
 package com.otto.monika.common.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
@@ -11,9 +10,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.updatePadding
-import com.otto.monika.R
 import androidx.core.content.withStyledAttributes
-import com.otto.monika.common.utils.DipUtils
+import com.otto.common.utils.DipUtils
+import com.otto.monika.R
 
 class MonikaTabItem @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

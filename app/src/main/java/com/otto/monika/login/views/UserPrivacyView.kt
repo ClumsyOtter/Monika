@@ -14,8 +14,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.common.utils.getView
 
 /**
  * 用户协议同意选项View

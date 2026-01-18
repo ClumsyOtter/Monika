@@ -1,15 +1,12 @@
 package com.otto.monika.home.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.otto.monika.api.client.MonikaClient
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.common.asFlow
-import com.otto.monika.api.model.post.response.PostListResponse
-import com.otto.monika.home.model.MonikaBannerData
-import com.otto.monika.home.model.MonikaIntroduceData
-import com.otto.monika.home.model.MonikaPostData
-import com.otto.monika.home.model.MonikaRankData
-import com.otto.monika.home.model.MonikaSubscribeData
+import com.otto.network.client.MonikaClient
+import com.otto.network.common.ApiResponse
+import com.otto.network.common.asFlow
+import com.otto.network.model.home.MonikaBannerData
+import com.otto.network.model.home.MonikaIntroduceData
+import com.otto.network.model.post.response.PostListResponse
 import kotlinx.coroutines.flow.Flow
 
 class MonikaViewModel : ViewModel() {

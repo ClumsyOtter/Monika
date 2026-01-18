@@ -1,18 +1,15 @@
 package com.otto.monika.post.detail.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.otto.monika.R
-import com.otto.monika.api.model.comment.response.CommentItem
-import com.otto.monika.api.model.comment.response.SubCommentItem
 import com.otto.monika.post.detail.model.SubCommentFoot
 import com.otto.monika.post.detail.views.CommentItemView
-import com.otto.monika.post.detail.views.SubCommentFooterView
+import com.otto.network.model.comment.response.CommentItem
+import com.otto.network.model.comment.response.SubCommentItem
 
 /**
  * 子评论适配器
@@ -71,7 +68,10 @@ class SubCommentAdapter(val parentId: String?) :
         this.isExpanded = true
     }
 
-    fun recoverSubComments(subCommentItem: SubCommentItem, replyCount: Int) {
+    fun recoverSubComments(
+        subCommentItem: SubCommentItem,
+        replyCount: Int
+    ) {
         submitList(subCommentItem.subCommentList.toMutableList())
         this.currentPage = subCommentItem.currentPage
         this.totalCommentCount = replyCount

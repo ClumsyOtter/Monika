@@ -1,6 +1,7 @@
 package com.otto.monika.home.fragment.mine.listener
 
-import com.otto.monika.api.model.user.response.MonikaUserInfoModel
+import com.otto.network.model.user.response.MonikaUserInfoModel
+
 
 abstract class AccountHeadListener {
     //点击订阅方案

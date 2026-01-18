@@ -11,19 +11,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.lifecycleScope
 import android.widget.Toast
+import com.otto.common.utils.getView
 import com.otto.monika.R
 import com.otto.monika.account.creator.adapter.ApplyCreatorTagAdapter
 import com.otto.monika.account.creator.viewmodel.ApplyToCreatorViewModel
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.creator.request.ApplyCreatorRequest
-import com.otto.monika.api.model.user.response.MonikaUserInfoModel
 import kotlinx.coroutines.launch
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.utils.getView
-import com.otto.monika.common.utils.disableButton
-import com.otto.monika.common.utils.enableButton
+import com.otto.monika.common.ext.disableButton
+import com.otto.monika.common.ext.enableButton
 import com.otto.monika.common.views.MonikaCustomButton
 import com.otto.monika.subscribe.support.adapter.PaymentMethodAdapter
+import com.otto.network.common.collectSimple
+import com.otto.network.model.creator.request.ApplyCreatorRequest
+import com.otto.network.model.user.response.MonikaUserInfoModel
+import kotlin.collections.isNotEmpty
+import kotlin.collections.map
 
 /**
  * 申请成为创作者页面

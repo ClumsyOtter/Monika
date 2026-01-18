@@ -1,6 +1,7 @@
 package com.otto.monika.subscribe.support.model
 
-import com.otto.monika.subscribe.plan.model.SubscribePlan
+import com.otto.network.model.subscribe.response.SubscribePlan
+
 
 /**
  * 订阅方案（合并 SubscribePlan 和 MonikaUserInfoModel 的数据）

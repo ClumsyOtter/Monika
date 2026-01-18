@@ -2,10 +2,10 @@ package com.otto.monika.account.income.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.otto.monika.api.client.MonikaClient
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.common.asFlow
-import com.otto.monika.api.model.user.response.UserIncomeResponse
+import com.otto.network.client.MonikaClient
+import com.otto.network.common.ApiResponse
+import com.otto.network.common.asFlow
+import com.otto.network.model.user.response.UserIncomeResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

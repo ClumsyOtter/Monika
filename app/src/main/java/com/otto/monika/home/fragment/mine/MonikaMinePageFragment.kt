@@ -20,11 +20,6 @@ import com.otto.monika.account.edit.AccountEditActivity
 import com.otto.monika.account.income.AccountIncomeActivity
 import com.otto.monika.account.rank.AccountSubscribeRankActivity
 import com.otto.monika.account.rank.fragment.RankSource
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.user.response.MonikaUserInfoModel
-import com.otto.monika.api.model.user.response.getAccountType
-import com.otto.monika.api.model.user.response.isCreator
-import com.otto.monika.api.model.user.response.isSelf
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.views.MonikaTabItem
 import com.otto.monika.home.fragment.BaseUserLogicFragment
@@ -32,7 +27,6 @@ import com.otto.monika.home.fragment.EmptyContentFragment
 import com.otto.monika.home.fragment.mine.listener.AccountHeadListener
 import com.otto.monika.home.fragment.mine.listener.TabCountListener
 import com.otto.monika.home.fragment.mine.listener.TabSelectListener
-import com.otto.monika.home.fragment.mine.model.AccountType
 import com.otto.monika.home.fragment.mine.model.CollectCreatorEvent
 import com.otto.monika.home.fragment.mine.model.TabConfig
 import com.otto.monika.home.fragment.mine.model.TabConfigManager
@@ -42,6 +36,12 @@ import com.otto.monika.post.publish.MonikaPublishPostActivity
 import com.otto.monika.setting.MonikaSettingActivity
 import com.otto.monika.subscribe.plan.SubscribePlanActivity
 import com.otto.monika.subscribe.support.SubscriptionSupportActivity
+import com.otto.network.common.collectSimple
+import com.otto.network.model.user.response.AccountType
+import com.otto.network.model.user.response.MonikaUserInfoModel
+import com.otto.network.model.user.response.getAccountType
+import com.otto.network.model.user.response.isCreator
+import com.otto.network.model.user.response.isSelf
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import kotlin.math.max

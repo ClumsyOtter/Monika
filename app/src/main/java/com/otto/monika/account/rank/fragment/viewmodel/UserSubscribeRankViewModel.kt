@@ -2,11 +2,11 @@ package com.otto.monika.account.rank.fragment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.otto.monika.api.client.MonikaClient
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.common.asFlow
-import com.otto.monika.api.model.subscribe.request.SubscribeUserListRequest
-import com.otto.monika.api.model.subscribe.response.SubscribeUserListResponse
+import com.otto.network.client.MonikaClient
+import com.otto.network.common.ApiResponse
+import com.otto.network.common.asFlow
+import com.otto.network.model.subscribe.request.SubscribeUserListRequest
+import com.otto.network.model.subscribe.response.SubscribeUserListResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

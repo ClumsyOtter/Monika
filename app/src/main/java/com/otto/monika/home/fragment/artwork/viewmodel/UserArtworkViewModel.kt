@@ -2,9 +2,9 @@ package com.otto.monika.home.fragment.artwork.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.model.artwork.ArtworkResponse
-import com.otto.monika.home.fragment.artwork.model.UserArtworkModel
+import com.otto.network.common.ApiResponse
+import com.otto.network.model.artwork.ArtworkResponse
+import com.otto.network.model.artwork.UserArtworkModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

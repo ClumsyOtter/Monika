@@ -6,8 +6,8 @@ import android.graphics.Rect
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.otto.common.utils.DipUtils
 import com.otto.monika.R
-import com.otto.monika.common.utils.DipUtils
 
 /**
  * 分割线装饰器

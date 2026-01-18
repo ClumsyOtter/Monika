@@ -6,9 +6,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.otto.common.utils.getView
 import com.otto.monika.R
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.utils.getView
 import com.otto.monika.home.fragment.MonikaHomeFragment
 import com.otto.monika.home.fragment.mine.MonikaMinePageFragment
 

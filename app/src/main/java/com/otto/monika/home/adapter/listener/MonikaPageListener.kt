@@ -1,8 +1,8 @@
 package com.otto.monika.home.adapter.listener
 
-import com.otto.monika.home.model.MonikaBannerItem
-import com.otto.monika.home.model.SubscribeModel
-import com.otto.monika.subscribe.rank.model.RankModel
+import com.otto.network.model.home.MonikaBannerItem
+import com.otto.network.model.home.RankModel
+import com.otto.network.model.home.SubscribeModel
 
 abstract class MonikaPageListener {
     abstract fun onRankMoreClick()

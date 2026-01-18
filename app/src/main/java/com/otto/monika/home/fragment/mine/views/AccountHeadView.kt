@@ -7,21 +7,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.helper.widget.Flow
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.flexbox.FlexboxLayout
-import com.otto.monika.api.model.user.response.MonikaUserInfoModel
-import com.otto.monika.api.model.user.response.getTags
-import com.otto.monika.api.model.user.response.isSelf
+import com.otto.common.utils.DipUtils
 import com.otto.monika.common.views.TagItemView
 import com.otto.monika.home.fragment.mine.listener.AccountHeadListener
-import com.google.android.material.internal.FlowLayout
 import com.otto.monika.R
-import com.otto.monika.common.utils.DipUtils
 import com.otto.monika.common.views.CircleImageView
+import com.otto.network.model.user.response.MonikaUserInfoModel
+import com.otto.network.model.user.response.getTags
+import com.otto.network.model.user.response.isSelf
 
 /**
  * 用户信息头部 View

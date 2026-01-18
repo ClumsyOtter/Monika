@@ -4,13 +4,13 @@ import android.app.Activity
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.otto.monika.api.common.collectSimple
+import com.otto.common.token.TokenManager
+import com.otto.datastore.TokenDataStore
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.datastore.TokenDataStore
 import com.otto.monika.common.dialog.MonikaAgreementBottomDialog
-import com.otto.monika.common.token.TokenManager
 import com.otto.monika.home.HomePageActivity
 import com.otto.monika.login.viewmodel.LoginViewModel
+import com.otto.network.common.collectSimple
 import kotlinx.coroutines.launch
 
 abstract class BaseLoginActivity : MonikaBaseActivity() {

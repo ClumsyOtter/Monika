@@ -10,8 +10,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.drawable.DrawableCompat
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.common.utils.getView
 
 
 class MonikaCustomButton @JvmOverloads constructor(

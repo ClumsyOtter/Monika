@@ -1,7 +1,7 @@
 package com.otto.monika.application
 
 import android.app.Application
-import com.otto.monika.api.network.MonikaNetwork
+import com.otto.network.network.MonikaNetwork
 
 class MonikaApplication : Application() {
     override fun onCreate() {

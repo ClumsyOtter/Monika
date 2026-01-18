@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.otto.monika.R
-import com.otto.monika.api.model.post.response.UserInfo
+import com.otto.network.model.post.response.UserInfo
 
 /**
  * 用户喜欢的创作者列表适配器

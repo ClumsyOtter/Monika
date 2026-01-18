@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.otto.monika.common.utils.MonikaBottomSheetBehavior
-import com.otto.monika.common.utils.DipUtils
-import com.otto.monika.common.utils.StatusBarUtil
+import com.otto.common.utils.DipUtils
+import com.otto.common.utils.StatusBarUtil
 import com.otto.monika.databinding.FragmentMyPageBinding
+import com.otto.monika.home.fragment.mine.views.MonikaBottomSheetBehavior
 import kotlin.math.abs
 
 /**

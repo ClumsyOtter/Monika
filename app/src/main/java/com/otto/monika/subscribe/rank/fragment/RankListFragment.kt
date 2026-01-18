@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.otto.monika.R
 import com.otto.monika.account.home.AccountHomeActivity
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.dialog.CommonBottomSheet
 import com.otto.monika.common.views.MonikaEmptyView
 import com.otto.monika.subscribe.rank.fragment.adapter.RankListAdapter
-import com.otto.monika.subscribe.rank.model.RankModel
 import com.otto.monika.subscribe.rank.viewmodel.RankViewModel
+import com.otto.network.common.collectSimple
+import com.otto.network.model.home.RankModel
 import kotlinx.coroutines.launch
 
 /**

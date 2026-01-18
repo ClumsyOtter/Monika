@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.otto.monika.R
-import com.otto.monika.api.model.subscribe.response.MyCreatorItem
+import com.otto.network.model.subscribe.response.MyCreatorItem
 import java.text.SimpleDateFormat
 import java.util.*
 

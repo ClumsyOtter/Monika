@@ -17,26 +17,24 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexboxLayout
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.post.response.PostItem
 import com.otto.monika.common.base.MonikaBaseActivity
 import com.otto.monika.common.decoration.HorizontalSpacingItemDecoration
 import com.otto.monika.common.dialog.CommonBottomSheet
 import com.otto.monika.common.dialog.model.CommonBottomSheetData
 import com.otto.monika.common.dialog.model.CommonBottomSheetItem
-import com.otto.monika.common.utils.file.IPhotoUploader
-import com.otto.monika.common.utils.file.PhotoUploader
-import com.otto.monika.common.utils.getView
+import com.otto.monika.common.file.IPhotoUploader
+import com.otto.monika.common.file.PhotoUploader
 import com.otto.monika.common.views.MonikaCommonOptionView
 import com.otto.monika.common.views.MonikaCustomButton
 import com.otto.monika.post.publish.adapter.PublishImageAdapter
 import com.otto.monika.post.publish.viewmodel.MonikaPublishPostViewModel
+import com.otto.network.common.ApiResponse
+import com.otto.network.common.collectSimple
+import com.otto.network.model.post.response.PostItem
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.File
-import kotlin.coroutines.resume
 
 /**
  * 发布动态页面

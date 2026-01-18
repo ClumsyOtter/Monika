@@ -3,7 +3,7 @@ package com.otto.monika.common.decoration
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.otto.monika.common.utils.DipUtils
+import com.otto.common.utils.DipUtils
 
 /**
  * 垂直间距装饰器，用于在垂直滚动的 RecyclerView 中为每个 item 添加底部间距

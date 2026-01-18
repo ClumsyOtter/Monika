@@ -10,7 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import com.otto.monika.R
-import com.otto.monika.home.fragment.mine.model.AccountType
+import com.otto.network.model.user.response.AccountType
+import com.otto.network.model.user.response.AuditStatus
 
 /**
  * 账户头部创作者申请 View
@@ -22,15 +23,6 @@ class AccountHeadNonCreatorView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    /**
-     * 审核状态枚举
-     */
-    enum class AuditStatus {
-        NONE,           // 无审核状态
-        REVIEWING,      // 审核中
-        SUCCESS,      //审核成功
-        FAILED          // 审核失败
-    }
 
     private val iconImage: ImageView
     private val textImage: ImageView

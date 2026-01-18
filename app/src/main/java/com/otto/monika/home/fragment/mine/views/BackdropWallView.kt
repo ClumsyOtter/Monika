@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.otto.common.utils.DipUtils
 import com.otto.monika.R
-import com.otto.monika.common.utils.DipUtils
 import com.otto.monika.common.views.RoundedImageView
 
 /**

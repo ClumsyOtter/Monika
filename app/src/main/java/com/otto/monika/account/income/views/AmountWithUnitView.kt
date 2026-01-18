@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.common.utils.getView
 
 /**
  * 金额带单位自定义View

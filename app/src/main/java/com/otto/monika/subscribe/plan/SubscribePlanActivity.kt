@@ -7,18 +7,18 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseActivity
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.dialog.MonikaConfirmBottomDialog
 import com.otto.monika.common.dialog.MonikaSubscribeRightsBottomSheet
-import com.otto.monika.common.utils.disableButton
-import com.otto.monika.common.utils.enableButton
-import com.otto.monika.common.utils.getView
+import com.otto.monika.common.ext.disableButton
+import com.otto.monika.common.ext.enableButton
 import com.otto.monika.common.views.MonikaCustomButton
 import com.otto.monika.subscribe.plan.adapter.SubscribePlanAdapter
 import com.otto.monika.subscribe.plan.viewmodel.SubscribePlanViewModel
+import com.otto.network.common.collectSimple
 import kotlinx.coroutines.launch
 
 /**
@@ -125,7 +125,7 @@ class SubscribePlanActivity : MonikaBaseActivity() {
             confirmBottomDialog.onConfirmClickListener = {
                 if (plan.id != null) {
                     lifecycleScope.launch {
-                        viewModel.deleteSubscribePlanFlow(plan.id)
+                        viewModel.deleteSubscribePlanFlow(plan.id ?: "")
                             .collectSimple(onLoading = {
                                 showLoadingDialog()
                             }, onSuccess = {

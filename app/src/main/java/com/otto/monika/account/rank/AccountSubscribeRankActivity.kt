@@ -3,8 +3,6 @@ package com.otto.monika.account.rank
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.commit
 import com.otto.monika.R
 import com.otto.monika.account.rank.fragment.RankSource

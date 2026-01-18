@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter4.loadState.LoadState
 import com.flyjingfish.openimagelib.OpenImage
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.comment.response.CommentItem
-import com.otto.monika.api.model.post.response.PostItem
 import com.otto.monika.common.base.MonikaBaseActivity
 import com.otto.monika.common.dialog.CommentActionBottomSheet
 import com.otto.monika.common.dialog.CommentInputBottomDialog
@@ -25,7 +23,6 @@ import com.otto.monika.common.dialog.MonikaConfirmBottomDialog
 import com.otto.monika.common.dialog.model.CommonActionGroup
 import com.otto.monika.common.dialog.model.CommonActionItem
 import com.otto.monika.common.model.OpenImageModel
-import com.otto.monika.common.utils.getView
 import com.otto.monika.common.views.MonikaCommonOptionView
 import com.otto.monika.post.detail.adapter.CommentActionParams
 import com.otto.monika.post.detail.adapter.ExpandSubCommentsParams
@@ -34,6 +31,9 @@ import com.otto.monika.post.detail.viewmodel.PostViewModel
 import com.otto.monika.post.detail.views.MonikaPostActionBarView
 import com.otto.monika.post.detail.views.MonikaPostFakeInputView
 import com.otto.monika.subscribe.support.SubscriptionSupportActivity
+import com.otto.network.common.collectSimple
+import com.otto.network.model.comment.response.CommentItem
+import com.otto.network.model.post.response.PostItem
 
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus

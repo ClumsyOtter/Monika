@@ -1,10 +1,10 @@
 package com.otto.monika.account.edit.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.otto.monika.api.client.MonikaClient
-import com.otto.monika.api.common.ApiResponse
-import com.otto.monika.api.common.asFlow
-import com.otto.monika.api.model.user.request.EditUserRequest
+import com.otto.network.client.MonikaClient
+import com.otto.network.common.ApiResponse
+import com.otto.network.common.asFlow
+import com.otto.network.model.user.request.EditUserRequest
 import kotlinx.coroutines.flow.Flow
 
 /**

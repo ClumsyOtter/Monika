@@ -1,7 +1,7 @@
 package com.otto.monika.post.detail.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.otto.monika.api.model.comment.response.CommentItem
+import com.otto.network.model.comment.response.CommentItem
 
 /**
  * 评论操作参数 Model

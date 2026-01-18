@@ -13,13 +13,13 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.otto.common.utils.ChineseNumberConverter
+import com.otto.common.utils.DecimalDigitsInputFilter
 import com.otto.monika.R
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
-import com.otto.monika.common.utils.ChineseNumberConverter
-import com.otto.monika.common.utils.DecimalDigitsInputFilter
-import com.otto.monika.common.utils.addInputFilter
-import com.otto.monika.common.utils.removeInputFilter
-import com.otto.monika.subscribe.plan.model.SubscribePlan
+import com.otto.monika.common.ext.addInputFilter
+import com.otto.monika.common.ext.removeInputFilter
+import com.otto.network.model.subscribe.response.SubscribePlan
 
 /**
  * 订阅方案列表 Adapter

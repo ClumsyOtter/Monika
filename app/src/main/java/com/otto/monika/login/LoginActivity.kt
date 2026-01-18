@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.common.utils.getView
 import com.otto.monika.login.model.PhoneLogin
 import com.otto.monika.login.views.LoginOptionsView
 import com.otto.monika.login.views.UserPrivacyView

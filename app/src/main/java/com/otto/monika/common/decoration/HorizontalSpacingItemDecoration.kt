@@ -3,7 +3,7 @@ package com.otto.monika.common.decoration
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.otto.monika.common.utils.DipUtils
+import com.otto.common.utils.DipUtils
 
 class HorizontalSpacingItemDecoration(spacingDp: Int = 5) :
     RecyclerView.ItemDecoration() {

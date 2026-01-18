@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.otto.monika.common.views.recycleview.ParentRecyclerView
+    <com.otto.ui.views.recycleview.ParentRecyclerView
         android:id="@+id/rv_post_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"

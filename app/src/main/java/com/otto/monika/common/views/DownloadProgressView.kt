@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.common.utils.getView
 
 /**
  * 自定义下载进度条View

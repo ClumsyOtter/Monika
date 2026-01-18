@@ -1,4 +1,4 @@
-package com.otto.monika.common.views.recycleview
+package com.otto.ui.views.recycleview
 
 /**
  * ParentAdapter 需实现此接口

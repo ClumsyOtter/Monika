@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
 import com.otto.monika.R
-import com.otto.monika.api.model.post.response.PostItem
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.views.MonikaEmptyView
-import com.otto.monika.common.views.recycleview.ChildRecyclerView
-import com.otto.monika.common.views.recycleview.INestedParentAdapter
 import com.otto.monika.post.detail.views.MonikaPostContentView
+import com.otto.network.model.post.response.PostItem
+import com.otto.ui.views.recycleview.ChildRecyclerView
+import com.otto.ui.views.recycleview.INestedParentAdapter
 
 class PostParentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), INestedParentAdapter {
     private val dataList: MutableList<PostItem> = ArrayList()

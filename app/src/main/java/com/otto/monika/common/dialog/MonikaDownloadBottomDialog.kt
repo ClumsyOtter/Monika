@@ -13,9 +13,9 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.otto.common.download.ApkDownloadManager
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.common.download.ApkDownloadManager
-import com.otto.monika.common.utils.getView
 import com.otto.monika.common.views.DownloadProgressView
 
 /**

@@ -10,9 +10,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.otto.monika.R
-import com.otto.monika.api.model.post.response.PostItem
 import com.otto.monika.common.decoration.HorizontalSpacingItemDecoration
 import com.otto.monika.subscribe.rank.fragment.adapter.TagAdapter
+import com.otto.network.model.post.response.PostItem
 
 /**
  * 帖子内容自定义 View

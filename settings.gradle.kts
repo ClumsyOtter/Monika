@@ -58,4 +58,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Monika"
 include(":app")
- 
+include(":core:network")
+include(":core:datastore")
+include(":core:common")
+include(":core:permission")

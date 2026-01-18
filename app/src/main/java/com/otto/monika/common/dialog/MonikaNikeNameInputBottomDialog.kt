@@ -9,8 +9,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.widget.doAfterTextChanged
 import com.otto.monika.R
-import com.otto.monika.common.utils.disableButton
-import com.otto.monika.common.utils.enableButton
+import com.otto.monika.common.ext.disableButton
+import com.otto.monika.common.ext.enableButton
 import com.otto.monika.common.views.MonikaCustomButton
 
 class MonikaNikeNameInputBottomDialog(context: Context) : BaseInputBottomDialog(context) {

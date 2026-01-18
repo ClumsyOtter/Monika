@@ -1,22 +1,16 @@
 package com.otto.monika.home.fragment.subscribe
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
-import com.otto.monika.R
 import com.otto.monika.account.home.AccountHomeActivity
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.subscribe.response.MyCreatorItem
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.model.MonikaFragmentRefreshState
@@ -26,6 +20,8 @@ import com.otto.monika.home.fragment.mine.listener.TabCountListener
 import com.otto.monika.home.fragment.subscribe.adapter.UserSubscribeAdapter
 import com.otto.monika.home.fragment.subscribe.viewmodel.UserSubscribeViewModel
 import com.otto.monika.subscribe.support.model.SubscribeSuccessEvent
+import com.otto.network.common.collectSimple
+import com.otto.network.model.subscribe.response.MyCreatorItem
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.Subscribe
 

@@ -14,19 +14,19 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.otto.common.utils.getView
 import com.otto.monika.R
 import com.otto.monika.account.edit.viewmodel.AccountEditViewModel
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.user.response.MonikaUserInfoModel
 import com.otto.monika.common.base.MonikaBaseActivity
 import com.otto.monika.common.dialog.CommentActionBottomSheet
 import com.otto.monika.common.dialog.MonikaNikeNameInputBottomDialog
 import com.otto.monika.common.dialog.MonikaUserDescInputBottomDialog
 import com.otto.monika.common.dialog.model.CommonActionGroup
 import com.otto.monika.common.dialog.model.CommonActionItem
-import com.otto.monika.common.utils.getView
 import com.otto.monika.login.PhoneLoginActivity
 import com.otto.monika.login.model.PhoneLogin
+import com.otto.network.common.collectSimple
+import com.otto.network.model.user.response.MonikaUserInfoModel
 import kotlinx.coroutines.launch
 
 /**

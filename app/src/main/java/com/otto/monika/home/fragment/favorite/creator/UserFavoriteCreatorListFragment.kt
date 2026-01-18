@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
-import com.otto.monika.R
 import com.otto.monika.account.home.AccountHomeActivity
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.model.MonikaFragmentRefreshState
@@ -24,6 +22,7 @@ import com.otto.monika.home.fragment.mine.listener.TabCountListener
 import com.otto.monika.home.fragment.mine.model.CollectCreatorEvent
 import com.otto.monika.subscribe.support.SubscriptionSupportActivity
 import com.otto.monika.subscribe.support.model.SubscribeSuccessEvent
+import com.otto.network.common.collectSimple
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.Subscribe
 

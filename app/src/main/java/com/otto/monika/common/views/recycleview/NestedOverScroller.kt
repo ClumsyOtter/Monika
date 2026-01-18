@@ -1,4 +1,4 @@
-package com.otto.monika.common.views.recycleview
+package com.otto.ui.views.recycleview
 
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.Field

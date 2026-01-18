@@ -11,16 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
-import com.otto.monika.R
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.decoration.VerticalSpacingItemDecoration
 import com.otto.monika.common.views.MonikaEmptyView
 import com.otto.monika.databinding.FragmentUserArtworkListBinding
 import com.otto.monika.home.fragment.artwork.adapter.UserArtworkAdapter
-import com.otto.monika.home.fragment.artwork.model.UserArtworkModel
 import com.otto.monika.home.fragment.artwork.viewmodel.UserArtworkViewModel
 import com.otto.monika.home.fragment.mine.listener.TabCountListener
+import com.otto.network.common.collectSimple
+import com.otto.network.model.artwork.UserArtworkModel
 import kotlinx.coroutines.launch
 
 /**

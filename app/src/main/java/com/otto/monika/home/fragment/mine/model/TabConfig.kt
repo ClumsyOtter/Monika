@@ -9,6 +9,7 @@ import com.otto.monika.home.fragment.favorite.creator.UserFavoriteCreatorListFra
 import com.otto.monika.home.fragment.post.PostSource
 import com.otto.monika.home.fragment.post.UserPostListFragment
 import com.otto.monika.home.fragment.subscribe.UserSubscribeListFragment
+import com.otto.network.model.user.response.AccountType
 
 /**
  * Tab 配置数据类

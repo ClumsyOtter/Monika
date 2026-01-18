@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.otto.monika.R
 import com.otto.monika.common.decoration.HorizontalSpacingItemDecoration
-import com.otto.monika.subscribe.rank.model.RankModel
+import com.otto.network.model.home.RankModel
 
 /**
  * 榜单列表适配器

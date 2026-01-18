@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.otto.monika.R
-import com.otto.monika.home.fragment.artwork.model.UserArtworkModel
 import com.otto.monika.subscribe.support.views.MonikaPriceView
+import com.otto.network.model.artwork.UserArtworkModel
 
 /**
  * 用户艺术品列表适配器

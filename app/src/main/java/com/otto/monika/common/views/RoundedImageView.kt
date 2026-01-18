@@ -11,7 +11,6 @@ import android.util.AttributeSet
 import android.util.Log
 import androidx.appcompat.widget.AppCompatImageView
 import com.otto.monika.R
-import com.otto.monika.common.views.RoundedImageView
 import androidx.core.content.withStyledAttributes
 
 class RoundedImageView : AppCompatImageView {

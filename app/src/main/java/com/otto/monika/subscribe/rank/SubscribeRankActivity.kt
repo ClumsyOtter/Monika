@@ -11,10 +11,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.otto.common.utils.getView
 import com.otto.monika.R
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.utils.getView
 import com.otto.monika.common.views.MonikaTabItem
 import com.otto.monika.subscribe.rank.fragment.RankListFragment
 

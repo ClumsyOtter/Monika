@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.otto.monika.R
-import com.otto.monika.common.dialog.model.SubscribeRights
+import com.otto.network.model.creator.response.SubscribeRights
 
 /**
  * 订阅权益列表 Adapter

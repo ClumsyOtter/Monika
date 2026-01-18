@@ -8,10 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
+import com.otto.common.utils.DipUtils
 import com.otto.monika.R
 import com.otto.monika.common.decoration.GridSpacingItemDecoration
-import com.otto.monika.common.utils.DipUtils
-import com.otto.monika.subscribe.plan.model.SubscribePlanDiscountRules
+import com.otto.network.model.subscribe.response.SubscribePlanDiscountRules
 
 /**
  * 订阅期限适配器

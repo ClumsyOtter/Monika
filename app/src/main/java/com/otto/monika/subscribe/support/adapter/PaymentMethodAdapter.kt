@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
+import com.otto.common.utils.DipUtils
 import com.otto.monika.R
 import com.otto.monika.common.decoration.GridSpacingItemDecoration
-import com.otto.monika.common.utils.DipUtils
 import com.otto.monika.subscribe.support.model.PaymentMethod
 
 /**

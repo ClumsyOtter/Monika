@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.otto.monika.R
-import com.otto.monika.subscribe.plan.model.SubscribePlanDiscountRules
+import com.otto.network.model.subscribe.response.SubscribePlanDiscountRules
 
 /**
  * 订阅方案折扣规则 Adapter

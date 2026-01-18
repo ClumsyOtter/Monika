@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.otto.monika.R
-import com.otto.monika.home.fragment.mine.model.AccountType
+import com.otto.network.model.user.response.AccountType
 
 /**
  * 账户头部创作者信息 View

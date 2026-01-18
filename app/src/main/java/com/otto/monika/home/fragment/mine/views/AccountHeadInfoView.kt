@@ -7,11 +7,11 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.otto.monika.R
-import com.otto.monika.api.model.user.response.MonikaUserInfoModel
-import com.otto.monika.api.model.user.response.getAccountType
-import com.otto.monika.api.model.user.response.getAuditStatus
 import com.otto.monika.home.fragment.mine.listener.AccountHeadListener
-import com.otto.monika.home.fragment.mine.model.AccountType
+import com.otto.network.model.user.response.AccountType
+import com.otto.network.model.user.response.MonikaUserInfoModel
+import com.otto.network.model.user.response.getAccountType
+import com.otto.network.model.user.response.getAuditStatus
 
 /**
  * 账户头部信息 View

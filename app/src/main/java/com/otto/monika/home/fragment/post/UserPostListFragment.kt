@@ -13,8 +13,6 @@ import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
 import com.flyjingfish.openimagelib.OpenImage
 import com.otto.monika.R
-import com.otto.monika.api.common.collectSimple
-import com.otto.monika.api.model.post.response.PostItem
 import com.otto.monika.common.base.MonikaBaseFragment
 import com.otto.monika.common.decoration.DividerItemDecoration
 import com.otto.monika.common.dialog.MonikaConfirmBottomDialog
@@ -29,6 +27,8 @@ import com.otto.monika.post.detail.MonikaPostDetailActivity
 import com.otto.monika.post.detail.model.ItemChanged
 import com.otto.monika.post.detail.model.PostChangeEvent
 import com.otto.monika.post.publish.MonikaPublishPostActivity
+import com.otto.network.common.collectSimple
+import com.otto.network.model.post.response.PostItem
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

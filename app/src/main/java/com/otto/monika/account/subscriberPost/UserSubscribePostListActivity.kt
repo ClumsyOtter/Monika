@@ -3,7 +3,6 @@ package com.otto.monika.account.subscriberPost
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import androidx.fragment.app.commit
 import com.otto.monika.R
 import com.otto.monika.common.base.MonikaBaseActivity

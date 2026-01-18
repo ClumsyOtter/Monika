@@ -2,7 +2,6 @@ package com.otto.monika.common.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -11,8 +10,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import com.otto.monika.R
 import androidx.core.content.withStyledAttributes
+import com.otto.monika.R
 
 /**
  * 标签按钮 View

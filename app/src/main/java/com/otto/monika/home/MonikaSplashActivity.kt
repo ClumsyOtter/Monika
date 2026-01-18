@@ -3,16 +3,12 @@ package com.otto.monika.home
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Handler
-import android.os.Looper
-import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
+import com.otto.common.token.TokenManager
+import com.otto.datastore.TokenDataStore
 import com.otto.monika.R
-import com.otto.monika.application.MonikaApplication
 import com.otto.monika.login.LoginActivity
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.datastore.TokenDataStore
-import com.otto.monika.common.token.TokenManager
 import kotlinx.coroutines.launch
 
 class MonikaSplashActivity : MonikaBaseActivity() {

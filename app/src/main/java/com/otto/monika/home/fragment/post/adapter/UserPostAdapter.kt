@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.otto.monika.R
-import com.otto.monika.api.model.post.response.PostItem
-import com.otto.monika.common.utils.setEmptyAreaClickListener
+import com.otto.monika.common.ext.setEmptyAreaClickListener
 import com.otto.monika.common.views.MonikaCommonOptionView
 import com.otto.monika.home.fragment.post.PostSource
 import com.otto.monika.home.fragment.post.model.ReviewStatus
 import com.otto.monika.post.detail.model.PostChangeEvent
 import com.otto.monika.subscribe.rank.fragment.adapter.TagAdapter
 import com.otto.monika.subscribe.support.adapter.PaymentMethodAdapter
+import com.otto.network.model.post.response.PostItem
 
 /**
  * 用户帖子列表适配器

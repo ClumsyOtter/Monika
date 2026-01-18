@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.otto.common.utils.DipUtils
 import com.otto.monika.R
 import com.otto.monika.common.dialog.adapter.CommonBottomSheetAdapter
 import com.otto.monika.common.dialog.model.CommonBottomSheetData
 import com.otto.monika.common.dialog.views.MaxHeightRecycleView
-import com.otto.monika.common.utils.DipUtils
 import com.otto.monika.common.views.MonikaCustomButton
 
 /**

@@ -14,10 +14,9 @@ import androidx.viewpager2.widget.ViewPager2
 import kotlinx.coroutines.launch
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.otto.common.utils.getView
 import com.otto.monika.R
-import com.otto.monika.api.common.collectSimple
 import com.otto.monika.common.base.MonikaBaseActivity
-import com.otto.monika.common.utils.getView
 import com.otto.monika.subscribe.support.adapter.PaymentMethodAdapter
 import com.otto.monika.subscribe.support.adapter.SubscriptionPeriodAdapter
 import com.otto.monika.subscribe.support.adapter.SubscriptionPlanViewAdapter
@@ -25,6 +24,7 @@ import com.otto.monika.subscribe.support.model.SubscribeSuccessEvent
 import com.otto.monika.subscribe.support.model.SubscriptionSupportPlan
 import com.otto.monika.subscribe.support.viewmodel.SubscriptionSupportViewModel
 import com.otto.monika.subscribe.support.views.MonikaSubscriptionTabView
+import com.otto.network.common.collectSimple
 import org.greenrobot.eventbus.EventBus
 
 /**
